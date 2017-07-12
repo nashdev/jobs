@@ -1,0 +1,144 @@
+@import 'normalize.css';
+@import 'flexboxgrid.css';
+
+:root {
+  --body-bg: #ececec;
+  --content-bg: #fff;
+  --header-bg: #404040;
+  --header-bg-light: #333333;
+  --heading: rgba(0, 0, 0, .85);
+  --primary: #108ee9;
+  --text: hsla(0, 0%, 100%, .67);
+  --text-hover: #fff;
+  --success: #29b35b;
+  --danger: #b61b17;
+  --info: #31708f;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, .65);
+}
+
+a {
+  color: #108ee9;
+  background: transparent;
+  text-decoration: none;
+  outline: none;
+  cursor: pointer;
+  transition: color .3s ease;
+}
+a:focus {
+  text-decoration: underline;
+}
+a:hover {
+  color: #49a9ee;
+}
+a:active {
+  color: #0e77ca;
+}
+a:active,
+a:hover {
+  outline: 0;
+  text-decoration: none;
+}
+a[disabled] {
+  color: rgba(0, 0, 0, 0.25);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+footer {
+  position: absolute;
+  height: 44px;
+  bottom: 0;
+  padding: 0 30px;
+}
+
+label {
+  display: block;
+  line-height: 1.8;
+}
+
+input[type="radio"] + label,
+input[type="checkbox"] + label {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+form button[type="submit"] {
+  margin-top: 1em;
+}
+
+.list-inline {
+  display: inline-block;
+  padding-left: 0;
+  list-style: none;
+}
+
+.list-inline > li {
+  display: inline-block;
+  padding: 0 5px;
+}
+
+.container {
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
+.text-success {
+  color: var(--success);
+}
+
+.text-danger {
+  color: var(--danger);
+}
+
+.text-info {
+  color: var(--info);
+}
+
+.avatar {
+  margin-right: 5px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+}
+
+header.main {
+  background: var(--header-bg);
+  padding: 0 50px;
+  height: 64px;
+  line-height: 64px;
+}
+
+header.main nav a {
+  display: inline-block;
+  margin: 0 15px;
+}
+
+.logo {
+  width: 120px;
+  height: 31px;
+  background: var(--header-bg-light);
+  border-radius: 6px;
+  margin: 16px 24px 16px 0;
+  float: left;
+  color: #fff;
+  line-height: 32px;
+  text-align: center;
+  font-weight: bold;
+}
