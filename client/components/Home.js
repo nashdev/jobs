@@ -19,6 +19,8 @@ class Home extends React.Component {
             <a href="#" role="button">
               View details
             </a>
+          <h3>Needed to</h3>
+            <h3>pass test</h3>
           </div>
         </div>
       </div>
