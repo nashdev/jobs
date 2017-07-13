@@ -32,6 +32,7 @@ var User = require("./server/models/User");
 
 // Controllers
 var userController = require("./server/controllers/user");
+var companyController = require("./server/controllers/company");
 
 // React and Server-Side Rendering
 var routes = require("./client/routes");
@@ -143,6 +144,9 @@ app.get(
 );
 app.post("/auth/github", wrap(userController.authGithub));
 app.get("/auth/github/callback", userController.authGithubCallback);
+
+app.get("/companies", wrap(companyController.index));
+app.post("/companies", wrap(companyController.create));
 
 // React server rendering
 app.use(function(req, res) {
