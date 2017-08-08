@@ -1,0 +1,33 @@
+version: '3.1'
+
+services:
+  api:
+    build:
+      context: .
+      args:
+        - NODE_ENV=development
+        - PORT=3000
+    command: npm run start:dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/opt/app/client
+      - ./server:/opt/app/server
+      - ./tools:/opt/app/tools
+      - ./dist:/opt/app/dist
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgres://root@db:5432/nashjobs
+    
+  db:
+    image: postgres:9.6.3-alpine
+    volumes:
+      - db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=
+      - POSTGRES_DB=nashjobs
+    ports:
+      - "5432:5432"
+volumes:
+  db:

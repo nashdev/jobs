@@ -1,0 +1,98 @@
+import React from "react";
+import { Link } from "react-router";
+import { connect } from "react-redux";
+import { signup } from "../../actions/auth";
+import { githubLogin } from "../../actions/oauth";
+import Messages from "../Messages";
+
+class Signup extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { name: "", email: "", password: "" };
+  }
+
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
+  handleSignup(event) {
+    event.preventDefault();
+    this.props.dispatch(
+      signup(this.state.name, this.state.email, this.state.password)
+    );
+  }
+
+  handleGithub() {
+    this.props.dispatch(githubLogin());
+  }
+
+  render() {
+    return (
+      <div className="container-fluid">
+        <Messages messages={this.props.messages} />
+        <h1 className="masthead">Create an account</h1>
+        <div className="row">
+          <div className="col-lg-8 col-sm-12">
+            <form onSubmit={this.handleSignup.bind(this)}>
+              <label htmlFor="name">Name</label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Name"
+                value={this.state.name}
+                onChange={this.handleChange.bind(this)}
+                autoFocus
+              />
+              <label htmlFor="email">Email</label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Email"
+                value={this.state.email}
+                onChange={this.handleChange.bind(this)}
+              />
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Password"
+                value={this.state.password}
+                onChange={this.handleChange.bind(this)}
+              />
+              <p className="help-text">
+                By signing up, you agree to the{" "}
+                <Link to="/">Terms of Service</Link>.
+              </p>
+              <button type="submit" className="btn">
+                Create an account
+              </button>
+            </form>
+          </div>
+          <aside className="col-lg-4 col-sm-12">
+            <button onClick={this.handleGithub.bind(this)} className="btn">
+              Sign in with Github
+            </button>
+
+            <p>
+              Already have an account?{" "}
+              <Link to="/login" className="btn">
+                Log in
+              </Link>
+            </p>
+          </aside>
+        </div>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    messages: state.messages
+  };
+};
+
+export default connect(mapStateToProps)(Signup);
