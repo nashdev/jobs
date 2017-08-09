@@ -83,7 +83,7 @@ class CompanyView extends Component {
                 </h4>
               </header>
               <div>
-                Phone: <a href={`tel:{company.phone}`}>{company.phone}</a>
+                Phone: <a href={`tel:${company.phone}`}>{company.phone}</a>
               </div>
               <div>
                 Location: {company.location}
