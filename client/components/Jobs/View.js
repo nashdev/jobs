@@ -121,11 +121,8 @@ class JobView extends Component {
                 </div>}
               {!job.contact_website &&
                 <div>
-                  <a
-                    href={`mailto:${job.contact_email}`}
-                    target="_blank"
-                    className="btn"
-                  >
+                  <br />
+                  <a href={`mailto:${job.contact_email}`} target="_blank" className="btn">
                     E-mail {job.contact_person}
                   </a>
                 </div>}
