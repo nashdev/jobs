@@ -35,7 +35,9 @@ class JobView extends Component {
             className="job-tag job-type"
             title={`${capitalize(job.type)} employment.`}
           >
-            {getType(job.type)} @ ${job.salary_range
+            {getType(job.type)} @ ${job.lower_salary
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")} - ${job.upper_salary
               .toString()
               .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}/yr
           </div>

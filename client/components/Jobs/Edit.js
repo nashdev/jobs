@@ -78,7 +78,8 @@ const mapStateToProps = (state, ownProps) => {
       "contact_website",
       "contact_person",
       "experience_range",
-      "salary_range",
+      "lower_salary",
+      "upper_salary",
       "remote_available"
     ]);
   }

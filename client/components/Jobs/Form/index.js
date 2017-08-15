@@ -101,10 +101,16 @@ export const JobForm = props => {
         <legend>Experience and Compensation</legend>
         <ExperienceField />
         <Field
-          name="salary_range"
+          name="lower_salary"
           component={Input}
           type="number"
-          label="Salary Range"
+          label="Lower Salary Range"
+        />
+        <Field
+          name="upper_salary"
+          component={Input}
+          type="number"
+          label="Upper Salary Range"
         />
       </fieldset>
       <fieldset>
