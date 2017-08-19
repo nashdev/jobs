@@ -71,6 +71,27 @@ export const CompanyForm = () => {
           label="Description"
           help={descHelp()}
         />
+        <Field
+          name="facebook"
+          type="text"
+          component={Input}
+          label="Facebook Page"
+          help={descHelp()}
+        />
+        <Field
+          name="Twitter"
+          type="text"
+          component={Input}
+          label="Twitter Page"
+          help={descHelp()}
+        />
+        <Field
+          name="Company Website"
+          type="text"
+          component={Input}
+          label="Company Website Page"
+          help={descHelp()}
+        />
       </fieldset>
       <fieldset>
         <legend>Profile Images</legend>

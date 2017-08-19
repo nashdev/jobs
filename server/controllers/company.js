@@ -6,6 +6,9 @@ exports.create = async function(req, res, next) {
   req.assert("phone", "Please enter a phone number").notEmpty();
   req.assert("size", "Please enter a company size").isInt();
   req.assert("description", "Please enter a description").notEmpty();
+  req.assert("facebook", "Please enter a Facebook Page").notEmpty();
+  req.assert("twitter", "Please enter a Twitter Page").notEmpty();
+  req.assert("website", "Please enter a Website").notEmpty();
 
   const errors = req.validationErrors();
 
@@ -40,6 +43,9 @@ exports.update = async function(req, res, next) {
   req.assert("phone", "Please enter a phone number").notEmpty();
   req.assert("size", "Please enter a company size").isInt();
   req.assert("description", "Please enter a description").notEmpty();
+  req.assert("facebook", "Please enter a Facebook Page").notEmpty();
+  req.assert("twitter", "Please enter a Twitter Page").notEmpty();
+  req.assert("website", "Please enter a Website").notEmpty();
 
   const errors = req.validationErrors();
 
