@@ -12,10 +12,18 @@ export const TYPE_OPTIONS = [
 ];
 
 export const EXPERIENCE_OPTIONS = [
-  { label: "", value: "" },
+  { value: "",  label: "" },
   { value: 100, label: "Junior (Learner: 1-3 Years)" },
   { value: 200, label: "Midlevel (Producer: 3-5 Years)" },
   { value: 300, label: "Senior (Multiplier: 5+ Years)" }
+];
+
+export const SALARY_OPTIONS = [
+  { value: "", label: "" },
+  { value: 30, label: "$30,000 - $50,000" },
+  { value: 50, label: "$50,000 - $80,000" },
+  { value: 80, label: "$80,000 - $100,000" },
+  { value: 100, label: "$100,000+" }
 ];
 
 function _getValue(options) {
@@ -27,6 +35,7 @@ function _getValue(options) {
 
 export const getType = _getValue(TYPE_OPTIONS);
 export const getExperience = _getValue(EXPERIENCE_OPTIONS);
+export const getSalary = _getValue(SALARY_OPTIONS);
 
 export const CompanyField = props =>
   (<Field
@@ -36,6 +45,7 @@ export const CompanyField = props =>
     label="Company"
     help={companyHelp()}
   />);
+
 export const TypeField = () =>
   (<Field
     name="type"
@@ -51,6 +61,14 @@ export const ExperienceField = () =>
     options={EXPERIENCE_OPTIONS}
     label="Experience Range"
   />);
+
+export const SalaryField = () =>
+(<Field
+  name="salary_range"
+  component={Dropdown}
+  options={SALARY_OPTIONS}
+  label="Salary Range"
+/>);
 
 const descHelp = () =>
   (<span>
@@ -100,18 +118,7 @@ export const JobForm = props => {
       <fieldset>
         <legend>Experience and Compensation</legend>
         <ExperienceField />
-        <Field
-          name="lower_salary"
-          component={Input}
-          type="number"
-          label="Lower Salary Range"
-        />
-        <Field
-          name="upper_salary"
-          component={Input}
-          type="number"
-          label="Upper Salary Range"
-        />
+        <SalaryField />
       </fieldset>
       <fieldset>
         <legend>Contact Information</legend>

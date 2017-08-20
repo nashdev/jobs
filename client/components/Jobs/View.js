@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { connect } from "react-redux";
 import capitalize from "lodash/capitalize";
 import MarkdownViewer from "../Markdown/Viewer";
-import { getExperience, getType } from "./Form";
+import { getExperience, getType, getSalary } from "./Form";
 
 import { getJob } from "../../actions/jobs";
 import Messages from "../Messages";
@@ -35,15 +35,11 @@ class JobView extends Component {
             className="job-tag job-type"
             title={`${capitalize(job.type)} employment.`}
           >
-            {getType(job.type)} @ ${job.lower_salary
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")} - ${job.upper_salary
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}/yr
+            {getType(job.type)} @ {getSalary(job.salary_range)}
           </div>
           <div
             className="job-tag job-experience"
-            title={`${capitalize(getExperience(job.experience))}`}
+            title={`${capitalize(getSalary(job.salary_range))}`}
           >
             XP: {getExperience(job.experience_range)}
           </div>

@@ -2,6 +2,28 @@ var crypto = require("crypto");
 var bcrypt = require("bcrypt-nodejs");
 var Bookshelf = require("../config/bookshelf");
 
+/*
++-----------------------+--------------------------+--------------+
+| Column                | Type                     | Modifiers    |
+|-----------------------+--------------------------+--------------|
+| id                    | integer                  |              |
+| name                  | character varying(255)   |              |
+| email                 | character varying(255)   | unique       |
+| password              | character varying(255)   |              |
+| passwordResetToken    | character varying(255)   |              |
+| passwordResetExpires  | timestamp with time zone |              |
+| gender                | character varying(255)   |              |
+| location              | character varying(255)   |              |
+| website               | character varying(255)   |              |
+| picture               | character varying(255)   |              |
+| facebook              | character varying(255)   |              |
+| github                | character varying(255)   |              |
+| twitter               | character varying(255)   |              |
+| google                | character varying(255)   |              |
+| vk                    | character varying(255)   |              |
++-----------------------+--------------------------+--------------+
+*/
+
 var User = Bookshelf.Model.extend({
   tableName: "users",
   hasTimestamps: true,

@@ -84,6 +84,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(
     initialValues: {
       type: "fulltime",
       experience_range: 100,
+      salary_range: 30,
       remote_available: false,
       recruiter: false,
       description: DESCRIPTION_TEMPLATE
