@@ -32,9 +32,8 @@ exports.create = async function(req, res, next) {
     .assert("experience_range", "Please enter a valid experience range.")
     .isInt();
   req
-    .assert("salary_range", "Salaries Must be at least $30,000.")
+    .assert("salary_range", "Please enter a valid salary range.")
     .isInt()
-    .gte(30000);
   req
     .assert(
       "remote_available",
