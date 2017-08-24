@@ -9,7 +9,7 @@ let User = require("../models/User");
 
 function generateToken(user) {
   let payload = {
-    iss: "my.domain.com",
+    iss: "jobs.nashdev.com",
     sub: user.id,
     iat: moment().unix(),
     exp: moment().add(7, "days").unix()

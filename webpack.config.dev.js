@@ -1,9 +1,9 @@
+require("dotenv").config({ path: ".env" });
+
 import webpack from "webpack";
 import ManifestPlugin from "webpack-manifest-plugin";
 import autoprefixer from "autoprefixer";
 import path from "path";
-import dotenv from "dotenv";
-dotenv.load();
 
 export default {
   resolve: {

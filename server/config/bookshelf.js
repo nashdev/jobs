@@ -1,4 +1,4 @@
-let config = require("../knexfile");
+let config = require("../../knexfile");
 let knex = require("knex")(config);
 let bookshelf = require("bookshelf")(knex);
 let cascadeDelete = require("bookshelf-cascade-delete");
