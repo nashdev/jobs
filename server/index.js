@@ -1,3 +1,5 @@
+require("dotenv").config({ path: "../.env" });
+
 let express = require("express");
 let path = require("path");
 let logger = require("morgan");
@@ -5,13 +7,8 @@ let compression = require("compression");
 let cookieParser = require("cookie-parser");
 let bodyParser = require("body-parser");
 let expressValidator = require("express-validator");
-let dotenv = require("dotenv");
-
 let exphbs = require("express-handlebars");
 let jwt = require("jsonwebtoken");
-
-// Load environment variables from .env file
-dotenv.load();
 
 // Models
 let User = require("./models/User");
