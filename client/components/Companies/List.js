@@ -16,15 +16,14 @@ const sortByKeys = object => {
 };
 
 const getCharacterFilterList = () => {
-  const numbers = Array(10).fill().map((_, i) => {
-    const number = String.fromCharCode("0".charCodeAt(0) + i);
+  const numbers = Array(11).fill().map((_, number) => {
     return (
       <a href={`#${number}`} key={number} className="company-filter-item">
         {number}
       </a>
     );
   });
-  const letters =  Array(26).fill().map((_, i) => {
+  const letters = Array(26).fill().map((_, i) => {
     const letter = String.fromCharCode("A".charCodeAt(0) + i);
     return (
       <a href={`#${letter}`} key={letter} className="company-filter-item">
