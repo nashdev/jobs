@@ -15,15 +15,25 @@ const sortByKeys = object => {
   return fromPairs(map(sortedKeys, key => [key, object[key]]));
 };
 
-const getAlphaList = () => {
-  return Array(26).fill().map((_, i) => {
+const getCharacterFilterList = () => {
+  const numbers = Array(10).fill().map((_, i) => {
+    const number = String.fromCharCode("0".charCodeAt(0) + i);
+    return (
+      <a href={`#${number}`} key={number} className="company-filter-item">
+        {number}
+      </a>
+    );
+  });
+  const letters =  Array(26).fill().map((_, i) => {
     const letter = String.fromCharCode("A".charCodeAt(0) + i);
     return (
-      <a href={`#${letter}`} key={letter} className="alphalist-item">
+      <a href={`#${letter}`} key={letter} className="company-filter-item">
         {letter}
       </a>
     );
   });
+  const allCharacters = letters.concat(numbers);
+  return allCharacters;
 };
 
 class CompanyList extends Component {
@@ -71,8 +81,8 @@ class CompanyList extends Component {
               Add Company
             </Link>
             <h4>Filter</h4>
-            <div className="alphalist-container">
-              {getAlphaList()}
+            <div className="company-filter-container">
+              {getCharacterFilterList()}
             </div>
           </aside>
         </div>

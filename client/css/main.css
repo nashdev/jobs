@@ -194,14 +194,14 @@ main {
   color: rgba(0, 0, 0, .3);
 }
 
-.alphalist-container {
+.company-filter-container {
   padding: 16px;
   border-bottom: 1px solid #e8e8e8;
   display: flex;
   flex-wrap: wrap;
 }
 
-.alphalist-item {
+.company-filter-item {
   font-size: 12px;
   margin: 16px;
 }
