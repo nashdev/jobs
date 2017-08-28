@@ -163,8 +163,8 @@ module.exports = function() {
         :newspaper: *${job.title}* at *${job.company.name}* in _${job.location}_
         ${job.description}
         
-        Added: ${moment(job.created_at).calendar()}
-        Updated: ${moment(job.updated_at).calendar()}
+        Added: ${moment(job.created_at).format('MM/DD/YY [at] h:mm A')}
+        Updated: ${moment(job.updated_at).format('MM/DD/YY [at] h:mm A')}
         ________________________________________________________________________________
         Visit ${process.env.API_URL}/jobs/${job.id} for the full listing.
       `
@@ -177,7 +177,7 @@ module.exports = function() {
       :awesome: *New Job Added* / @${job.contact_slack} (${job.user.name})
       
       *${job.title}* at *${job.company.name}* in _${job.location}_
-      Added: ${moment(job.created_at).calendar()}
+      Added: ${moment(job.created_at).format('MM/DD/YY [at] h:mm A')}
       ________________________________________________________________________________
       Visit ${process.env.API_URL}/jobs/${job.id} for the full listing.
       `;
