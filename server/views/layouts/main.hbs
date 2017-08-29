@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>NashDev Jobs</title>
-  <title>{{title}}</title>
   {{#each assets.css}}
   <link rel="stylesheet" href="{{this}}"> {{/each}}
   <link rel="icon" href="/dist/favicon.ico">
@@ -21,6 +20,26 @@
     ga('create', 'UA-103830543-1', 'auto');
     ga('send', 'pageview');
   </script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": "NashDev Jobs",
+      "alternateName": "NashDev Jobs",
+      "url": "https://jobs.nashdev.com"
+    }
+  </script>
+  <script type="application/ld+json">
+   {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "https://nashdev.com",
+    "logo": "https://s3-us-west-2.amazonaws.com/slack-files2/avatars/2015-05-11/4857250251_5df1f743a374d9e66aeb_132.jpg"
+  }
+  </script>
+
+  
 </head>
 
 <body>
