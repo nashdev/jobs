@@ -2,7 +2,7 @@ import React from "react";
 
 export const Terms = () => {
   return (
-    <div className="container">
+    <div className="container is-fluid">
       <h1 className="masthead">Terms of Service</h1>
       <p>
         We need to draft a Terms of Service page.{" "}
@@ -19,7 +19,7 @@ export const Terms = () => {
 
 export const Conduct = () => {
   return (
-    <div className="container">
+    <div className="container is-fluid">
       <h1 className="masthead">Code of Conduct</h1>
       <p>
         We need to draft a Conduct page.{" "}
@@ -36,7 +36,7 @@ export const Conduct = () => {
 
 export const Privacy = () => {
   return (
-    <div className="container">
+    <div className="container is-fluid">
       <h1 className="masthead">Privacy Policy</h1>
       <p>
         We need to draft a Privacy Policy page.{" "}

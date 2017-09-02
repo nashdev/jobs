@@ -11,104 +11,119 @@ class CompanyView extends Component {
     this.props.getCompany(params.id);
   }
   render() {
-    const { company, jobById } = this.props;
+    const { company, jobById, user } = this.props;
 
     if (!company) {
-      return <div className="loading" />;
+      return <div className="is-loading" />;
     }
 
     const jobs = company.jobs ? company.jobs : [];
 
     return (
-      <div className="container-fluid">
-        <Messages messages={this.props.messages} />
-        <h1 className="masthead">
-          {company.name}
-        </h1>
-        <div className="row">
-          <div className="col-lg-8 col-sm-12">
-            <section className="company-description">
-              <MarkdownViewer markdown={company.description} />
-            </section>
-            <section>
-              <header>
-                <h2>
-                  Jobs ({jobs.length})
-                </h2>
-              </header>
-              {!jobs.length &&
-                <p className="text-info">
-                  Sorry, this company has not posted any jobs yet.
-                </p>}
-
-              {jobs.map(id => {
-                const job = jobById[id];
-
-                return (
-                  <div key={job.id}>
-                    <h5>
-                      <Link to={`/jobs/${job.id}`}>
-                        {job.title}
-                      </Link>
-                    </h5>
-                    <p title={`Updated ${moment(job.updated_at).fromNow()}`}>
-                      Added {moment(job.created_at).fromNow()}
-                    </p>
-                  </div>
-                );
-              })}
-            </section>
-            <section>
-              <header>
-                <h2>People</h2>
-                <p>
-                  This feature has not been added yet. Would you like to{" "}
-                  <a
-                    href="https://github.com/egdelwonk/nashdev-jobs/issues/8"
-                    target="_blank"
-                  >
-                    implement
-                  </a>{" "}
-                  it?{" "}
-                </p>
-              </header>
-            </section>
+      <div>
+        <section className="hero is-medium is-primary is-bold">
+          <div className="hero-body">
+            <div className="container is-fluid">
+              <h1 className="title">{company.name}</h1>
+            </div>
           </div>
+        </section>
+        <section className="section">
+          <div className="container is-fluid">
+            <div className="columns">
+              <div className="column is-three-quarters">
+                <section className="section">
+                  <h2 className="subtitle is-2">Company Details</h2>
+                  <div className="content company-description">
+                    <MarkdownViewer markdown={company.description} />
+                  </div>
+                </section>
 
-          <aside className="col-lg-4 col-sm-12">
-            <section>
-              <header>
-                <h4>
-                  Contact {company.name}
-                </h4>
-              </header>
-              <div>
-                Phone: <a href={`tel:${company.phone}`}>{company.phone}</a>
-              </div>
-              <div>
-                Location: {company.location}
-              </div>
-              <div>
-                Company Size: {company.size}
-              </div>
-            </section>
+                <section className="section">
+                  <h3 className="subtitle is-3">Jobs</h3>
 
-            {this.props.user &&
-              this.props.user.id == company.user_id &&
-              <section>
-                <header>
-                  <h4>Manage</h4>
-                </header>
-                <Link to={`/companies/${company.id}/edit`} className="btn">
-                  Edit
-                </Link>{" "}
-                {" "}
-                <Link to={`/companies/${company.id}/delete`} className="btn">
-                  Delete
-                </Link>
-              </section>}
-          </aside>
-        </div>
+                  {!jobs.length && (
+                    <p className="text-info">
+                      Sorry, this company has not posted any jobs yet.
+                    </p>
+                  )}
+
+                  {jobs.map(id => {
+                    const job = jobById[id];
+
+                    return (
+                      <div key={job.id}>
+                        <h5>
+                          <Link to={`/jobs/${job.id}`}>{job.title}</Link>
+                        </h5>
+                        <p
+                          title={`Updated ${moment(job.updated_at).fromNow()}`}
+                        >
+                          Added {moment(job.created_at).fromNow()}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </section>
+              </div>
+              <aside className="column">
+                <section className="section">
+                  <h4 className="subtitle is-4">Contact Details</h4>
+
+                  {company.phone && (
+                    <dl className="is-capitalized">
+                      <dt>
+                        <strong>Phone:</strong>
+                      </dt>
+                      <dd>
+                        <a href={`tel:${company.phone}`}>{company.phone}</a>
+                      </dd>
+                    </dl>
+                  )}
+                  <dl className="is-capitalized">
+                    <dt>
+                      <strong>Location:</strong>
+                    </dt>
+                    <dd>{company.location}</dd>
+                  </dl>
+                  {company.size && (
+                    <dl className="is-capitalized">
+                      <dt>
+                        <strong>Company Size:</strong>
+                      </dt>
+                      <dd>{company.size}</dd>
+                    </dl>
+                  )}
+                </section>
+                {user &&
+                user.id == company.user_id && (
+                  <section className="section">
+                    <h4 className="subtitle is-4">Manage Company</h4>
+                    <Link
+                      to={`/companies/${company.id}/edit`}
+                      className="button is-small"
+                    >
+                      <span className="icon is-small">
+                        <i className="fa fa-pencil" />
+                      </span>
+                      <span>Edit</span>
+                    </Link>{" "}
+                    {" "}
+                    <Link
+                      to={`/companies/${company.id}/delete`}
+                      className="button is-small is-danger"
+                    >
+                      <span className="icon is-small">
+                        <i className="fa fa-remove" />
+                      </span>
+                      <span>Delete</span>
+                    </Link>
+                  </section>
+                )}
+              </aside>
+            </div>
+          </div>
+        </section>
       </div>
     );
   }

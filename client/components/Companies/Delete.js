@@ -27,15 +27,13 @@ class DeleteCompanyConfirm extends Component {
     const { company } = this.props;
 
     if (!company) {
-      return <div className="loading" />;
+      return <div className="is-loading" />;
     }
 
     return (
       <div className="container-fluid">
         <Messages messages={this.props.messages} />
-        <h1 className="masthead">
-          Delete Company / {company.name}
-        </h1>
+        <h1 className="masthead">Delete Company / {company.name}</h1>
         <Link to="/companies">&larr; Back to Companies</Link>
         <div>
           <p>

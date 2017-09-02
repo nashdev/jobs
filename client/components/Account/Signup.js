@@ -28,62 +28,103 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <div className="container-fluid">
-        <Messages messages={this.props.messages} />
-        <h1 className="masthead">Create an account</h1>
-        <div className="row">
-          <div className="col-lg-8 col-sm-12">
-            <form onSubmit={this.handleSignup.bind(this)}>
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Name"
-                value={this.state.name}
-                onChange={this.handleChange.bind(this)}
-                autoFocus
-              />
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Email"
-                value={this.state.email}
-                onChange={this.handleChange.bind(this)}
-              />
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Password"
-                value={this.state.password}
-                onChange={this.handleChange.bind(this)}
-              />
-              <p className="help-text">
-                By signing up, you agree to the{" "}
-                <Link to="/">Terms of Service</Link>.
-              </p>
-              <button type="submit" className="btn">
-                Create an account
-              </button>
-            </form>
+      <div>
+        <section className="hero is-medium is-primary is-bold">
+          <div className="hero-body">
+            <div className="container is-fluid">
+              <h1 className="title">Create an account.</h1>
+            </div>
           </div>
-          <aside className="col-lg-4 col-sm-12">
-            <button onClick={this.handleGithub.bind(this)} className="btn">
-              Sign in with Github
-            </button>
+        </section>
+        {this.props.messages && <Messages messages={this.props.messages} />}
+        <section className="section">
+          <div className="container is-fluid">
+            <div className="columns">
+              <div className="column">
+                <form onSubmit={this.handleSignup.bind(this)}>
+                  <div className="field">
+                    <label htmlFor="name" className="label">
+                      Name
+                    </label>
+                    <div className="control">
+                      <input
+                        className="input"
+                        type="text"
+                        name="name"
+                        id="name"
+                        value={this.state.name}
+                        onChange={this.handleChange.bind(this)}
+                      />
+                    </div>
+                  </div>
+                  <div className="field">
+                    <label htmlFor="email" className="label">
+                      E-mail
+                    </label>
+                    <div className="control">
+                      <input
+                        className="input"
+                        type="email"
+                        name="email"
+                        id="email"
+                        value={this.state.email}
+                        onChange={this.handleChange.bind(this)}
+                      />
+                    </div>
+                  </div>
+                  <div className="field">
+                    <label htmlFor="password" className="label">
+                      Password
+                    </label>
+                    <div className="control">
+                      <input
+                        className="input"
+                        type="password"
+                        name="password"
+                        id="password"
+                        value={this.state.password}
+                        onChange={this.handleChange.bind(this)}
+                      />
+                    </div>
+                  </div>
 
-            <p>
-              Already have an account?{" "}
-              <Link to="/login" className="btn">
-                Log in
-              </Link>
-            </p>
-          </aside>
-        </div>
+                  <div className="field">
+                    <label htmlFor="password" className="label">
+                      By signing up, you agree to the{" "}
+                      <Link to="/tos">Terms of Service</Link>.
+                    </label>
+                  </div>
+
+                  <div className="field is-grouped">
+                    <div className="control">
+                      <button className="button is-primary" type="submit">
+                        Create an account
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div className="column is-one-quarter">
+                <button
+                  onClick={this.handleGithub.bind(this)}
+                  className="button"
+                >
+                  <span className="icon is-small">
+                    <i className="fa fa-github" />
+                  </span>
+                  <span>Sign in with Github</span>
+                </button>
+                <hr className="divider" />
+                <p>
+                  Already have an account?{" "}
+                  <Link to="/login" className="is-link">
+                    Log in.
+                  </Link>
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     );
   }

@@ -6,9 +6,7 @@ import { Router, browserHistory } from "react-router";
 import { store } from "./store/configureStore";
 import getRoutes from "./routes";
 
-// Will probably replace this out for radium,
-// this will work for now.
-import "./css/main.css";
+import "./css/main.scss";
 import "./favicon.ico";
 
 // Scroll window  to top after route changes

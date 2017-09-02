@@ -9,27 +9,16 @@ export const RenderField = ({
   meta: { touched, error }
 }) => {
   return (
-    <div className="form-field-group">
-      <label>
-        <span className="form-field-label">
-          {label}
-        </span>
-      </label>
-      <div>
+    <div className="field">
+      <label className="label">{label}</label>
+      <div className="control">
         {React.cloneElement(children, {
           ...input,
           placeholder: label,
           type: type
         })}
-        {help &&
-          <span className="form-input-help">
-            {help}
-          </span>}
-        {touched &&
-          error &&
-          <div className="text-danger text-big">
-            {error}
-          </div>}
+        {help && <p className="help">{help}</p>}
+        {touched && error && <p className="help is-danger">{error}</p>}
       </div>
     </div>
   );
@@ -43,48 +32,42 @@ export const RenderCheckbox = ({
   meta: { touched, error }
 }) => {
   return (
-    <div className="form-field-group form-field-checkbox">
-      <label>
+    <div className="field">
+      <label className="checkbox">
         {React.cloneElement(children, {
           ...input,
           placeholder: label,
           type: type
-        })}
-        <span className="form-field-label">
-          {label}
-        </span>
+        })}{" "}
+        {label}
       </label>
-      {help &&
-        <span className="form-input-help">
-          {help}
-        </span>}
-      {touched &&
-        error &&
-        <div className="text-danger text-big">
-          {error}
-        </div>}
+      {help && <p className="help">{help}</p>}
+      {touched && error && <p className="help is-danger">{error}</p>}
     </div>
   );
 };
 
-export const Input = props =>
-  (<RenderField {...props}>
+export const Input = props => (
+  <RenderField {...props}>
+    <input className="input" />
+  </RenderField>
+);
+
+export const Checkbox = props => (
+  <RenderCheckbox {...props}>
     <input />
-  </RenderField>);
+  </RenderCheckbox>
+);
 
-export const Checkbox = props =>
-  (<RenderCheckbox {...props}>
-    <input />
-  </RenderCheckbox>);
+export const Textarea = props => (
+  <RenderField {...props}>
+    <textarea className="textarea" />
+  </RenderField>
+);
 
-export const Textarea = props =>
-  (<RenderField {...props}>
-    <textarea />
-  </RenderField>);
-
-export const Dropdown = props =>
-  (<RenderField {...props}>
-    <select>
+export const Dropdown = props => (
+  <RenderField {...props}>
+    <select className="select">
       {props.options.map(o => {
         return (
           <option value={o.value} key={o.value}>
@@ -93,4 +76,5 @@ export const Dropdown = props =>
         );
       })}
     </select>
-  </RenderField>);
+  </RenderField>
+);

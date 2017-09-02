@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { reduxForm } from "redux-form";
 import { addCompany } from "../../actions/companies";
 import { CompanyForm } from "./Form";
+import Messages from "../Messages";
 
 class AddCompanyForm extends Component {
   render() {
@@ -15,28 +16,23 @@ class AddCompanyForm extends Component {
       addCompany
     } = this.props;
     return (
-      <div className="container-fluid">
-        <h1 className="masthead">Create a new company profile.</h1>
-        <form onSubmit={handleSubmit(addCompany)}>
-          <CompanyForm />
-          {error &&
-            <strong>
-              {error}
-            </strong>}
-          <div>
-            <button type="submit" disabled={submitting} className="btn">
-              Add Company
-            </button>
-            <button
-              type="button"
-              disabled={pristine || submitting}
-              onClick={reset}
-              className="btn"
-            >
-              Clear Values
-            </button>
+      <div>
+        <section className="hero is-primary is-bold is-medium">
+          <div className="hero-body">
+            <div className="container is-fluid">
+              <h1 className="title">Create a new company profile.</h1>
+            </div>
           </div>
-        </form>
+        </section>
+        <Messages messages={this.props.messages} />
+        <section className="section">
+          <div className="container is-fluid">
+            <form onSubmit={handleSubmit(addCompany)}>
+              <CompanyForm {...this.props} label="Add Company" />
+              {error && <p className="is-danger">{error}</p>}
+            </form>
+          </div>
+        </section>
       </div>
     );
   }
