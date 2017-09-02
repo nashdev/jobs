@@ -53,129 +53,208 @@ class Profile extends React.Component {
   }
 
   render() {
-    const githubLinkedAccount = this.props.user.github
-      ? (<a
-          href="#"
-          role="button"
-          className="text-alert btn"
-          onClick={this.handleUnlink.bind(this, "github")}
-        >
-          Unlink your Github account
-        </a>)
-      : (<a
-          href="#"
-          role="button"
-          onClick={this.handleLink.bind(this, "github")}
-          className="btn"
-        >
-          Link your Github account
-        </a>);
+    const githubLinkedAccount = this.props.user.github ? (
+      <a
+        href="#"
+        role="button"
+        className="text-alert btn"
+        onClick={this.handleUnlink.bind(this, "github")}
+      >
+        Unlink your Github account
+      </a>
+    ) : (
+      <a
+        href="#"
+        role="button"
+        onClick={this.handleLink.bind(this, "github")}
+        className="btn"
+      >
+        Link your Github account
+      </a>
+    );
     return (
-      <div className="container-fluid">
-        <Messages messages={this.props.messages} />
-        <h4>Profile Information</h4>
-        <form onSubmit={this.handleProfileUpdate.bind(this)}>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={this.state.email}
-            onChange={this.handleChange.bind(this)}
-          />
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={this.state.name}
-            onChange={this.handleChange.bind(this)}
-          />
-          <label>Gender</label>
-          <input
-            type="radio"
-            name="gender"
-            id="male"
-            value="male"
-            checked={this.state.gender === "male"}
-            onChange={this.handleChange.bind(this)}
-          />
-          <label htmlFor="male">Male</label>
-          <input
-            type="radio"
-            name="gender"
-            id="female"
-            value="female"
-            checked={this.state.gender === "female"}
-            onChange={this.handleChange.bind(this)}
-          />
-          <label htmlFor="female">Female</label>
-          <label htmlFor="location">Location</label>
-          <input
-            type="text"
-            name="location"
-            id="location"
-            value={this.state.location}
-            onChange={this.handleChange.bind(this)}
-          />
-          <label htmlFor="website">Website</label>
-          <input
-            type="text"
-            name="website"
-            id="website"
-            value={this.state.website}
-            onChange={this.handleChange.bind(this)}
-          />
-          <label>Gravatar</label>
-          <img
-            src={this.state.gravatar}
-            className="gravatar"
-            width="100"
-            height="100"
-          />
-          <div>
-            <button type="submit" className="btn">
-              Update Profile
-            </button>
+      <div>
+        <section className="hero is-primary">
+          <div className="hero-body">
+            <div className="container is-fluid">
+              <h1 className="title">Manage Account</h1>
+            </div>
           </div>
-        </form>
-        <h4>Change Password</h4>
-        <form onSubmit={this.handleChangePassword.bind(this)}>
-          <label htmlFor="password">New Password</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            value={this.state.password}
-            onChange={this.handleChange.bind(this)}
-          />
-          <label htmlFor="confirm">Confirm Password</label>
-          <input
-            type="password"
-            name="confirm"
-            id="confirm"
-            value={this.state.confirm}
-            onChange={this.handleChange.bind(this)}
-          />
-          <br />
-          <button type="submit" className="btn">
-            Change Password
-          </button>
-        </form>
-        <h4>Linked Accounts</h4>
-        <p>
-          {githubLinkedAccount}
-        </p>
-        <h4>Delete Account</h4>
-        <form onSubmit={this.handleDeleteAccount.bind(this)}>
-          <p>
-            You can delete your account, but keep in mind this action is
-            irreversible.
-          </p>
-          <button type="submit" className="btn">
-            Delete my account
-          </button>
-        </form>
+        </section>
+        <Messages messages={this.props.messages} />
+        <section className="section">
+          <div className="container is-fluid">
+            <form onSubmit={this.handleProfileUpdate.bind(this)}>
+              <div className="field">
+                <label htmlFor="email" className="label">
+                  E-mail
+                </label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="email"
+                    name="email"
+                    id="email"
+                    value={this.state.email}
+                    onChange={this.handleChange.bind(this)}
+                  />
+                </div>
+              </div>
+
+              <div className="field">
+                <label htmlFor="name" className="label">
+                  Name
+                </label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    name="name"
+                    id="name"
+                    value={this.state.name}
+                    onChange={this.handleChange.bind(this)}
+                  />
+                </div>
+              </div>
+
+              <div className="field">
+                <label htmlFor="Gender" className="label">
+                  Gender
+                </label>
+                <div className="control">
+                  <label className="radio">
+                    <input
+                      type="radio"
+                      name="gender"
+                      value="male"
+                      checked={this.state.gender === "male"}
+                      onChange={this.handleChange.bind(this)}
+                    />
+                    Male
+                  </label>
+                  <label className="radio">
+                    <input
+                      type="radio"
+                      name="gender"
+                      value="female"
+                      checked={this.state.gender === "female"}
+                      onChange={this.handleChange.bind(this)}
+                    />
+                    Female
+                  </label>
+                </div>
+              </div>
+
+              <div className="field">
+                <label htmlFor="location" className="label">
+                  Location
+                </label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    name="location"
+                    id="location"
+                    value={this.state.location}
+                    onChange={this.handleChange.bind(this)}
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label htmlFor="website" className="label">
+                  Website
+                </label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    name="website"
+                    id="website"
+                    value={this.state.website}
+                    onChange={this.handleChange.bind(this)}
+                  />
+                </div>
+              </div>
+
+              <div className="field is-grouped">
+                <div className="control">
+                  <button className="button is-primary">Update Profile</button>
+                </div>
+                <div className="control">
+                  <button className="button is-link">Cancel</button>
+                </div>
+              </div>
+            </form>
+
+            <hr className="divider" />
+
+            <h4 className="title">Change Password</h4>
+            <form onSubmit={this.handleChangePassword.bind(this)}>
+              <div className="field">
+                <label htmlFor="password" className="label">
+                  Password
+                </label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="password"
+                    name="password"
+                    id="password"
+                    value={this.state.password}
+                    onChange={this.handleChange.bind(this)}
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <label htmlFor="name" className="label">
+                  Confirm Passwowrd
+                </label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="password"
+                    name="confirm"
+                    id="confirm"
+                    value={this.state.confirm}
+                    onChange={this.handleChange.bind(this)}
+                  />
+                </div>
+              </div>
+
+              <div className="field is-grouped">
+                <div className="control">
+                  <button className="button is-primary">Change Password</button>
+                </div>
+                <div className="control">
+                  <button className="button is-link">Cancel</button>
+                </div>
+              </div>
+            </form>
+            <hr className="divider" />
+
+            <h4 className="title">Linked Accounts</h4>
+            <p>{githubLinkedAccount}</p>
+
+            <hr className="divider" />
+
+            <h4 className="title">Delete Account</h4>
+            <form onSubmit={this.handleDeleteAccount.bind(this)}>
+              <p className="has-text-danger">
+                You can delete your account, but keep in mind this action is
+                irreversible. Your companies, job postings, and user profile
+                will be lost.
+              </p>
+              <div className="field is-grouped">
+                <div className="control">
+                  <button className="button is-danger">Delete Account</button>
+                </div>
+                <div className="control">
+                  <button className="button is-link">Cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
       </div>
     );
   }

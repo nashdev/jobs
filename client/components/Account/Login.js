@@ -26,52 +26,84 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="container-fluid">
-        <h1 className="masthead">Log In</h1>
-        <Messages messages={this.props.messages} />
-        <div className="row">
-          <div className="col-lg-8 col-sm-12">
-            <form onSubmit={this.handleLogin.bind(this)}>
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Email"
-                value={this.state.email}
-                onChange={this.handleChange.bind(this)}
-                autoFocus
-              />
-              <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Password"
-                value={this.state.password}
-                onChange={this.handleChange.bind(this)}
-              />
-              <p>
-                <Link to="/forgot">Forgot your password?</Link>
-              </p>
-              <button type="submit" className="btn">
-                Log in
-              </button>
-            </form>
+      <div>
+        <section className="hero is-primary is-bold">
+          <div className="hero-body">
+            <div className="container is-fluid">
+              <h1 className="title">Login</h1>
+            </div>
           </div>
-          <aside className="col-lg-4 col-sm-12">
-            <button onClick={this.handleGithub.bind(this)} className="btn">
-              Sign in with Github
-            </button>
-            <br />
-            <p>
-              Don't have an account?{" "}
-              <Link to="/signup" className="btn">
-                Sign up
-              </Link>
-            </p>
-          </aside>
-        </div>
+        </section>
+        {this.props.messages && <Messages messages={this.props.messages} />}
+        <section className="section">
+          <div className="container is-fluid">
+            <div className="columns">
+              <div className="column">
+                <form onSubmit={this.handleLogin.bind(this)}>
+                  <div className="field">
+                    <label className="label">Email</label>
+                    <div className="control">
+                      <input
+                        className="input"
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="Email"
+                        value={this.state.email}
+                        onChange={this.handleChange.bind(this)}
+                        autoFocus
+                      />
+                    </div>
+                  </div>
+                  <div className="field">
+                    <label className="label">Password</label>
+                    <div className="control">
+                      <input
+                        className="input"
+                        type="password"
+                        name="password"
+                        id="password"
+                        placeholder="Password"
+                        value={this.state.password}
+                        onChange={this.handleChange.bind(this)}
+                      />
+                    </div>
+                  </div>
+                  <div className="field is-grouped">
+                    <div className="control">
+                      <button className="button is-primary" type="submit">
+                        Login
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div className="column is-one-quarter">
+                <button
+                  onClick={this.handleGithub.bind(this)}
+                  className="button"
+                >
+                  <span className="icon is-small">
+                    <i className="fa fa-github" />
+                  </span>
+                  <span>Sign in with Github</span>
+                </button>
+                <hr className="divider" />
+                <p className="control">
+                  Need an account?{" "}
+                  <Link to="/signup">
+                    <span>Sign up.</span>
+                  </Link>
+                </p>
+                <p className="control">
+                  <Link to="/forgot">
+                    <span>Forgot your password?</span>
+                  </Link>
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     );
   }

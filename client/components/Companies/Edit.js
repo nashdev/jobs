@@ -24,37 +24,48 @@ class EditCompanyForm extends Component {
     } = this.props;
 
     if (!initialValues) {
-      return <div className="loading" />;
+      return <div className="is-loading" />;
     }
 
     return (
-      <div className="container-fluid">
-        <h1 className="masthead">
-          Edit Company <span className="slash">/</span> {initialValues.name}
-        </h1>
-
-        <Messages messages={messages} />
-        <form onSubmit={handleSubmit(editCompany)}>
-          <div className="row">
-            <div className="col-lg-8 col-sm-12">
-              <CompanyForm />
-              {error &&
-                <strong>
-                  {error}
-                </strong>}
+      <div>
+        <section className="hero is-primary is-bold is-medium">
+          <div className="hero-body">
+            <div className="container is-fluid">
+              <h1 className="title">Edit Company</h1>
+              <h2 className="subtitle"> {initialValues.name}</h2>
             </div>
-            <aside className="col-lg-4 col-sm-12  ">
-              <Link to={`/companies/${initialValues.id}`}>
-                &larr; Back to Company Profile
-              </Link>
-              <div>
-                <button type="submit" disabled={submitting} className="btn">
-                  Edit Company
-                </button>
-              </div>
-            </aside>
           </div>
-        </form>
+        </section>
+        <Messages messages={messages} />
+        <section className="section">
+          <div className="container is-fluid">
+            <form onSubmit={handleSubmit(editCompany)}>
+              <div className="columns">
+                <div className="column is-two-thirds">
+                  <CompanyForm {...this.props} label="Save Changes" />
+                  {error && <strong>{error}</strong>}
+                </div>
+                <aside className="column">
+                  <Link to={`/companies/${initialValues.id}`}>
+                    &larr; Back to Company Profile
+                  </Link>
+                  <div className="field is-grouped">
+                    <div className="control">
+                      <button
+                        type="submit"
+                        disabled={submitting}
+                        className="button is-primary"
+                      >
+                        Save Changes
+                      </button>
+                    </div>
+                  </div>
+                </aside>
+              </div>
+            </form>
+          </div>
+        </section>
       </div>
     );
   }

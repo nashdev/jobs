@@ -27,36 +27,41 @@ class EditJobForm extends Component {
     } = this.props;
 
     if (!initialValues) {
-      return <div className="loading" />;
+      return <div className="is-loading" />;
     }
 
     return (
-      <div className="container-fluid">
-        <Messages messages={messages} />
-        <h1 className="masthead">
-          Edit Job <span className="slash">/</span> {initialValues.title}
-        </h1>
-        <form onSubmit={handleSubmit(editJob)}>
-          <div className="row">
-            <div className="col-lg-8 col-sm-12">
-              <JobForm companies={companies} />
-              {error &&
-                <strong>
-                  {error}
-                </strong>}
+      <div>
+        <section className="hero is-primary is-bold is-medium">
+          <div className="hero-body">
+            <div className="container is-fluid">
+              <h1 className="title">Edit Job</h1>
+              <h2 className="subtitle"> {initialValues.title}</h2>
             </div>
-            <aside className="col-lg-4 col-sm-12 ">
-              <Link to={`/jobs/${initialValues.id}`}>
-                &larr; Back to job listing
-              </Link>
-              <div>
-                <button type="submit" disabled={submitting} className="btn">
-                  Save changes
-                </button>
-              </div>
-            </aside>
           </div>
-        </form>
+        </section>
+        <Messages messages={messages} />
+        <section className="section">
+          <div className="container is-fluid">
+            <form onSubmit={handleSubmit(editJob)}>
+              <div className="columns">
+                <div className="column is-two-thirds">
+                  <JobForm
+                    {...this.props}
+                    label="Save Changes"
+                    companies={companies}
+                  />
+                  {error && <strong>{error}</strong>}
+                </div>
+                <aside className="column">
+                  <Link to={`/jobs/${initialValues.id}`}>
+                    &larr; Back to job listing
+                  </Link>
+                </aside>
+              </div>
+            </form>
+          </div>
+        </section>
       </div>
     );
   }

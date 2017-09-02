@@ -5,8 +5,10 @@ import groupBy from "lodash/groupBy";
 import sortBy from "lodash/sortBy";
 import fromPairs from "lodash/fromPairs";
 import map from "lodash/map";
+import truncate from "lodash/truncate";
 import { getAllCompanies } from "../../actions/companies";
 import Messages from "../Messages";
+import MarkdownViewer from "../Markdown/Viewer";
 
 const sortByKeys = object => {
   const keys = Object.keys(object);
@@ -16,22 +18,26 @@ const sortByKeys = object => {
 };
 
 const getCharacterFilterList = () => {
-  const numbers = Array(11).fill().map((_, number) => {
-    return (
-      <a href={`#${number}`} key={number} className="company-filter-item">
-        {number}
-      </a>
-    );
-  });
-  const letters = Array(26).fill().map((_, i) => {
-    const letter = String.fromCharCode("A".charCodeAt(0) + i);
-    return (
-      <a href={`#${letter}`} key={letter} className="company-filter-item">
-        {letter}
-      </a>
-    );
-  });
-  const allCharacters = letters.concat(numbers);
+  const numbers = Array(11)
+    .fill()
+    .map((_, number) => {
+      return (
+        <a href={`#${number}`} key={number} className="pagination-link">
+          {number}
+        </a>
+      );
+    });
+  const letters = Array(26)
+    .fill()
+    .map((_, i) => {
+      const letter = String.fromCharCode("A".charCodeAt(0) + i);
+      return (
+        <a href={`#${letter}`} key={letter} className="pagination-link">
+          {letter}
+        </a>
+      );
+    });
+  const allCharacters = letters.concat(<br />).concat(numbers);
   return allCharacters;
 };
 
@@ -50,40 +56,77 @@ class CompanyList extends Component {
     );
 
     return (
-      <div className="container-fluid">
-        <Messages messages={this.props.messages} />
-        <h1 className="masthead">Companies</h1>
-        <div className="row">
-          <div className="col-lg-8 col-sm-12">
-            {!this.props.companies.length && <div className="loading" />}
-            {Object.entries(companies).map(([alphaKey, alphaGroup]) => {
-              return (
-                <div key={alphaKey}>
-                  <h5>
-                    {alphaKey} <a name={alphaKey} />
-                  </h5>
-                  {sortBy(alphaGroup, "name").map(company =>
-                    (<div key={company.id}>
-                      <h3>
-                        <Link to={`/companies/${company.id}`}>
-                          {company.name}
-                        </Link>
-                      </h3>
-                    </div>)
-                  )}
-                </div>
-              );
-            })}
-          </div>
-          <aside className="col-lg-4 col-sm-12 ">
-            <Link to="/companies/add" className="btn">
-              Add Company
-            </Link>
-            <h4>Filter</h4>
-            <div className="company-filter-container">
-              {getCharacterFilterList()}
+      <div>
+        <section className="hero is-medium is-primary is-bold">
+          <div className="hero-body">
+            <div className="container is-fluid">
+              <h1 className="title">Companies</h1>
+              <Link to="/companies/add" className="button is-outlined">
+                <span className="icon is-small">
+                  <i className="fa fa-plus-circle" />
+                </span>
+                <span>Add your company</span>
+              </Link>
             </div>
-          </aside>
+          </div>
+        </section>
+        {this.props.messages && <Messages messages={this.props.messages} />}
+        <section className="section">
+          <h4 className="title is-4">Filter</h4>
+          <div className="company-filter-container">
+            {getCharacterFilterList()}
+          </div>
+        </section>
+        <div className="container is-fluid">
+          {!this.props.companies.length && <div className="is-loading" />}
+          {Object.entries(companies).map(([alphaKey, alphaGroup]) => {
+            return (
+              <section className="section" key={alphaKey}>
+                <h5 className="title is-5">
+                  {alphaKey} <a name={alphaKey} />
+                </h5>
+                <div className="columns is-multiline">
+                  {sortBy(alphaGroup, "name").map(company => (
+                    <div className="column is-one-third">
+                      <div key={company.id} className="card">
+                        <header className="card-header">
+                          <p className="card-header-title">
+                            <Link to={`/companies/${company.id}`}>
+                              {company.name}
+                            </Link>
+                          </p>
+                          <a className="card-header-icon">
+                            <span className="icon">
+                              <i className="fa fa-angle-down" />
+                            </span>
+                          </a>
+                        </header>
+                        <div className="card-content">
+                          <div className="content">
+                            <div className="scroll-content">
+                              <MarkdownViewer
+                                markdown={truncate(company.description, {
+                                  length: 900
+                                })}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <footer className="card-footer">
+                          <Link
+                            to={`/companies/${company.id}`}
+                            className="card-footer-item"
+                          >
+                            View Profile
+                          </Link>
+                        </footer>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            );
+          })}
         </div>
       </div>
     );

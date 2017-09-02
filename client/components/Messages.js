@@ -10,30 +10,28 @@ class Messages extends React.Component {
 
     return (
       <div>
-        {success &&
-          <div role="alert" className="text-success">
-            {this.props.messages.success.map((message, index) =>
-              (<div key={index}>
-                {message.msg}
-              </div>)
-            )}
-          </div>}
-        {error &&
-          <div role="alert" className="text-danger">
-            {this.props.messages.error.map((message, index) =>
-              (<div key={index}>
-                {message.msg}
-              </div>)
-            )}
-          </div>}
-        {info &&
-          <div role="alert" className="text-info">
-            {this.props.messages.info.map((message, index) =>
-              (<div key={index}>
-                {message.msg}
-              </div>)
-            )}
-          </div>}
+        {success && (
+          <div role="alert" className="notification is-success">
+            <button className="delete" />
+            {this.props.messages.success.map((message, index) => (
+              <div key={index}>{message.msg}</div>
+            ))}
+          </div>
+        )}
+        {error && (
+          <div role="alert" className="notification is-danger">
+            {this.props.messages.error.map((message, index) => (
+              <div key={index}>{message.msg}</div>
+            ))}
+          </div>
+        )}
+        {info && (
+          <div role="alert" className="notification is-info">
+            {this.props.messages.info.map((message, index) => (
+              <div key={index}>{message.msg}</div>
+            ))}
+          </div>
+        )}
       </div>
     );
   }

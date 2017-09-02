@@ -4,6 +4,7 @@ import { reduxForm } from "redux-form";
 import { addJob } from "../../actions/jobs";
 import { getOwnedCompanies } from "../../actions/companies";
 import { JobForm } from "./Form";
+import Messages from "../Messages";
 
 const DESCRIPTION_TEMPLATE = `
 ### Description
@@ -33,29 +34,24 @@ class AddJobForm extends Component {
       companies
     } = this.props;
     return (
-      <div className="container-fluid">
-        <h1 className="masthead">Create a new job listing.</h1>
-        <form onSubmit={handleSubmit(addJob)}>
-          <JobForm companies={companies} />
-
-          {error &&
-            <strong>
-              {error}
-            </strong>}
-          <div>
-            <button type="submit" disabled={submitting} className="btn">
-              Add Job
-            </button>
-            <button
-              className="btn"
-              type="button"
-              disabled={pristine || submitting}
-              onClick={reset}
-            >
-              Clear Values
-            </button>
+      <div>
+        <section className="hero is-primary is-bold is-medium">
+          <div className="hero-body">
+            <div className="container is-fluid">
+              <h1 className="title">Create a new job listing.</h1>
+            </div>
           </div>
-        </form>
+        </section>
+        <Messages messages={this.props.messages} />
+        <section className="section">
+          <div className="container is-fluid">
+            <form onSubmit={handleSubmit(addJob)}>
+              <JobForm {...this.props} label="Add Job" companies={companies} />
+
+              {error && <p className="is-danger">{error}</p>}
+            </form>
+          </div>
+        </section>
       </div>
     );
   }
