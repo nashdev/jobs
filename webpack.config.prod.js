@@ -81,7 +81,7 @@ export default {
       {
         test: /(\.css|\.scss|\.sass)$/,
         loader: ExtractTextPlugin.extract(
-          "css-loader?sourceMap!postcss-loader!sass-loader?sourceMap"
+          "css-loader?sourceMap!postcss-loader!sass-loader"
         )
       }
     ]
