@@ -1,4 +1,4 @@
-var Bookshelf = require("../config/bookshelf");
+let Bookshelf = require("../config/bookshelf");
 /*
 +------------------+--------------------------+----------------------------------------------------+
 | Column           | Type                     | Modifiers                                          |
@@ -32,9 +32,16 @@ Foreign-key constraints:
     "jobs_user_id_foreign" FOREIGN KEY (user_id) REFERENCES users(id)
 */
 
-var Job = Bookshelf.Model.extend({
+const Job = Bookshelf.Model.extend({
   tableName: "jobs",
   hasTimestamps: true,
+  format: function(attributes) {
+    // Remove @ from slack handle if present
+    if (attributes.contact_slack) {
+      attributes.contact_slack = attributes.contact_slack.replace("@", "");
+    }
+    return attributes;
+  },
   user: function() {
     return this.belongsTo("User");
   },

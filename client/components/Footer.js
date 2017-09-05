@@ -8,11 +8,6 @@ class AppFooter extends React.Component {
         <div className="container is-fluid">
           <div className="content has-text-centered">
             &copy; 2017 NashDev Jobs. All Rights Reserved.
-            <nav>
-              <Link to="/tos">Terms of Service</Link>
-              <Link to="/privacy">Privacy Policy</Link>
-              <Link to="/conduct">Code of Conduct</Link>
-            </nav>
             <p>
               Made with ❤️ by the{" "}
               <a href="http://nashdev.com" target="_blank">
