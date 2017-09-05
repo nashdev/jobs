@@ -36,9 +36,15 @@ const Job = Bookshelf.Model.extend({
   tableName: "jobs",
   hasTimestamps: true,
   format: function(attributes) {
-    // Remove @ from slack handle if present
+    // Remove @ from slack handle if present.
     if (attributes.contact_slack) {
       attributes.contact_slack = attributes.contact_slack.replace("@", "");
+    }
+    // Add default protocol if it is missing.
+    if (attributes.contact_website) {
+      if (!/http(s?)/.test(attributes.contact_website)) {
+        attributes.contact_website = `http://${attributes.contact_website}`;
+      }
     }
     return attributes;
   },
