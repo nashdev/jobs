@@ -14,7 +14,6 @@ class Profile extends React.Component {
     this.state = {
       email: props.user.email,
       name: props.user.name,
-      gender: props.user.gender,
       location: props.user.location,
       website: props.user.website,
       gravatar: props.user.gravatar,
@@ -114,34 +113,6 @@ class Profile extends React.Component {
                     value={this.state.name}
                     onChange={this.handleChange.bind(this)}
                   />
-                </div>
-              </div>
-
-              <div className="field">
-                <label htmlFor="Gender" className="label">
-                  Gender
-                </label>
-                <div className="control">
-                  <label className="radio">
-                    <input
-                      type="radio"
-                      name="gender"
-                      value="male"
-                      checked={this.state.gender === "male"}
-                      onChange={this.handleChange.bind(this)}
-                    />
-                    Male
-                  </label>
-                  <label className="radio">
-                    <input
-                      type="radio"
-                      name="gender"
-                      value="female"
-                      checked={this.state.gender === "female"}
-                      onChange={this.handleChange.bind(this)}
-                    />
-                    Female
-                  </label>
                 </div>
               </div>
 

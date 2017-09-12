@@ -127,7 +127,6 @@ exports.accountPut = function(req, res, next) {
       {
         email: req.body.email,
         name: req.body.name,
-        gender: req.body.gender,
         location: req.body.location,
         website: req.body.website
       },

@@ -12,7 +12,6 @@ var Bookshelf = require("../config/bookshelf");
 | password              | character varying(255)   |              |
 | passwordResetToken    | character varying(255)   |              |
 | passwordResetExpires  | timestamp with time zone |              |
-| gender                | character varying(255)   |              |
 | location              | character varying(255)   |              |
 | website               | character varying(255)   |              |
 | picture               | character varying(255)   |              |

@@ -157,7 +157,6 @@ export function updateProfile(state, token) {
       body: JSON.stringify({
         email: state.email,
         name: state.name,
-        gender: state.gender,
         location: state.location,
         website: state.website
       })
