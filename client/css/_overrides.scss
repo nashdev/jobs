@@ -134,25 +134,40 @@ blockquote {
 }
 
 .columns {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: row wrap;
   flex-flow: row wrap;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
   align-items: stretch;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
   justify-content: flex-start;
 
   .column {
+    -webkit-box-flex: 33%;
+    -ms-flex: 33%;
     flex: 33%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
     align-items: stretch;
+    -webkit-box-flex: 0;
+    -ms-flex-positive: 0;
     flex-grow: 0;
+    -ms-flex-negative: 0;
     flex-shrink: 0;
 
     .card {
       $card-border-color: $grey-darker;
       box-shadow: 0 0 1px $grey-light;
       position: relative;
-      flex: 100%;
-      flex-shrink: 0;
-      flex-grow: 0;
 
       .card-header {
         box-shadow: none;
@@ -160,7 +175,7 @@ blockquote {
       }
 
       .card-footer-offset {
-        min-height: 90px;
+        min-height: 80px;
       }
       .card-footer {
         position: absolute;
@@ -180,12 +195,17 @@ blockquote {
 @media only screen and (max-width: 1024px) {
   .columns {
     .column {
+      -webkit-box-flex: 50%;
+      -ms-flex: 50%;
       flex: 50%;
+      -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
       flex-grow: 0;
+      -ms-flex-negative: 0;
       flex-shrink: 0;
 
       .card-footer-offset {
-        min-height: 50px;
+        min-height: 30px;
       }
     }
   }
@@ -194,10 +214,12 @@ blockquote {
 @media only screen and (max-width: 768px) {
   .columns {
     .column {
+      -webkit-box-flex: 100%;
+      -ms-flex: 100%;
       flex: 100%;
 
       .card-footer-offset {
-        min-height: 10px;
+        min-height: 20px;
       }
     }
   }
