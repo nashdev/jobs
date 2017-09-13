@@ -133,12 +133,72 @@ blockquote {
   }
 }
 
-.card {
-  $card-border-color: $grey-darker;
-  box-shadow: 0 0 1px $grey-light;
+.columns {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: stretch;
+  justify-content: flex-start;
 
-  .card-header {
-    box-shadow: none;
-    border-bottom: 1px solid $grey-lighter;
+  .column {
+    flex: 33%;
+    display: flex;
+    align-items: stretch;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    .card {
+      $card-border-color: $grey-darker;
+      box-shadow: 0 0 1px $grey-light;
+      position: relative;
+      flex: 100%;
+      flex-shrink: 0;
+      flex-grow: 0;
+
+      .card-header {
+        box-shadow: none;
+        border-bottom: 1px solid $grey-lighter;
+      }
+
+      .card-footer-offset {
+        min-height: 90px;
+      }
+      .card-footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.footer .content {
+  font-family: $family-sans-serif;
+  min-height: 4.5em;
+  max-height: 4.5em;
+}
+
+@media only screen and (max-width: 1024px) {
+  .columns {
+    .column {
+      flex: 50%;
+      flex-grow: 0;
+      flex-shrink: 0;
+
+      .card-footer-offset {
+        min-height: 50px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .columns {
+    .column {
+      flex: 100%;
+
+      .card-footer-offset {
+        min-height: 10px;
+      }
+    }
   }
 }

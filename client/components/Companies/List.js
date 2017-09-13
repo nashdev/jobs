@@ -112,6 +112,7 @@ class CompanyList extends Component {
                             </div>
                           </div>
                         </div>
+                        <div className="card-footer-offset"></div>
                         <footer className="card-footer">
                           <Link
                             to={`/companies/${company.id}`}

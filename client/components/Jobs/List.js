@@ -90,6 +90,7 @@ class JobList extends Component {
                           <TagList job={job} />
                         </div>
                       </div>
+                      <div className="card-footer-offset"></div>
                       <footer className="card-footer">
                         <Link to={`/jobs/${id}`} className="card-footer-item">
                           Details
