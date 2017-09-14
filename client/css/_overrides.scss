@@ -133,7 +133,7 @@ blockquote {
   }
 }
 
-.jobs-list, .companies-list {
+.card-flex {
   .columns {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -193,8 +193,7 @@ blockquote {
 }
 
 @media only screen and (max-width: 1024px) {
-  .jobs-list,
-  .companies-list {
+  .card-flex {
     .columns {
       .column {
         -webkit-box-flex: 50%;
@@ -215,8 +214,7 @@ blockquote {
 }
 
 @media only screen and (max-width: 768px) {
-  .jobs-list,
-  .companies-list {
+  .card-flex {
     .columns {
       .column {
         -webkit-box-flex: 100%;
