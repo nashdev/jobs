@@ -19,7 +19,8 @@ import JobEdit from "./components/Jobs/Edit";
 import JobView from "./components/Jobs/View";
 import JobDelete from "./components/Jobs/Delete";
 import PeopleList from "./components/People/List";
-import { Conduct, Terms, Privacy } from "./components/Pages";
+import Conduct from "./components/Pages/Conduct";
+import { Terms, Privacy } from "./components/Pages";
 
 export default function getRoutes(store) {
   const ensureAuthenticated = (nextState, replace) => {
