@@ -133,54 +133,56 @@ blockquote {
   }
 }
 
-.columns {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-flow: row wrap;
-  flex-flow: row wrap;
-  -webkit-box-align: stretch;
-  -ms-flex-align: stretch;
-  align-items: stretch;
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-
-  .column {
-    -webkit-box-flex: 33%;
-    -ms-flex: 33%;
-    flex: 33%;
+.jobs-list, .companies-list {
+  .columns {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
     -webkit-box-align: stretch;
     -ms-flex-align: stretch;
     align-items: stretch;
-    -webkit-box-flex: 0;
-    -ms-flex-positive: 0;
-    flex-grow: 0;
-    -ms-flex-negative: 0;
-    flex-shrink: 0;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
 
-    .card {
-      $card-border-color: $grey-darker;
-      box-shadow: 0 0 1px $grey-light;
-      position: relative;
+    .column {
+      -webkit-box-flex: 33%;
+      -ms-flex: 33%;
+      flex: 33%;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+      align-items: stretch;
+      -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+      flex-grow: 0;
+      -ms-flex-negative: 0;
+      flex-shrink: 0;
 
-      .card-header {
-        box-shadow: none;
-        border-bottom: 1px solid $grey-lighter;
-      }
+      .card {
+        $card-border-color: $grey-darker;
+        box-shadow: 0 0 1px $grey-light;
+        position: relative;
 
-      .card-footer-offset {
-        min-height: 80px;
-      }
-      .card-footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
+        .card-header {
+          box-shadow: none;
+          border-bottom: 1px solid $grey-lighter;
+        }
+
+        .card-footer-offset {
+          min-height: 75px;
+        }
+        .card-footer {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+        }
       }
     }
   }
@@ -191,33 +193,39 @@ blockquote {
 }
 
 @media only screen and (max-width: 1024px) {
-  .columns {
-    .column {
-      -webkit-box-flex: 50%;
-      -ms-flex: 50%;
-      flex: 50%;
-      -webkit-box-flex: 0;
-      -ms-flex-positive: 0;
-      flex-grow: 0;
-      -ms-flex-negative: 0;
-      flex-shrink: 0;
+  .jobs-list,
+  .companies-list {
+    .columns {
+      .column {
+        -webkit-box-flex: 50%;
+        -ms-flex: 50%;
+        flex: 50%;
+        -webkit-box-flex: 0;
+        -ms-flex-positive: 0;
+        flex-grow: 0;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
 
-      .card-footer-offset {
-        min-height: 30px;
+        .card-footer-offset {
+          min-height: 30px;
+        }
       }
     }
   }
 }
 
 @media only screen and (max-width: 768px) {
-  .columns {
-    .column {
-      -webkit-box-flex: 100%;
-      -ms-flex: 100%;
-      flex: 100%;
+  .jobs-list,
+  .companies-list {
+    .columns {
+      .column {
+        -webkit-box-flex: 100%;
+        -ms-flex: 100%;
+        flex: 100%;
 
-      .card-footer-offset {
-        min-height: 20px;
+        .card-footer-offset {
+          min-height: 20px;
+        }
       }
     }
   }

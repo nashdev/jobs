@@ -45,7 +45,7 @@ class JobList extends Component {
           </div>
         </section>
         {this.props.messages && <Messages messages={this.props.messages} />}
-        <section className="section">
+        <section className="section jobs-list">
           <div className="container is-fluid">
             <div className="columns is-multiline">
               {!this.props.jobs.length && <div className="is-loading" />}
