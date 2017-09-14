@@ -7,6 +7,13 @@ class AppFooter extends React.Component {
       <footer className="footer">
         <div className="container is-fluid">
           <div className="content has-text-centered">
+            <p>
+              <a href="/conduct">Code of Conduct</a>{" "}
+              &#8226;{" "}
+              <a href="/privay">Privacy Policy</a>{" "}
+              &#8226;{" "}
+              <a href="/tos">Terms of Service</a>
+            </p>
             &copy; 2017 NashDev Jobs. All Rights Reserved.
             <p>
               Made with ❤️ by the{" "}
