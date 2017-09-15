@@ -65,6 +65,10 @@ __0.0.1__
 
 - Initial release...lots to do.
 
+## Contributing 
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/egdelwonk/nashdev-jobs/. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](CONTRIBUTING.md) code of conduct.
+
 ## License
 
 Copyright (c) 2017
