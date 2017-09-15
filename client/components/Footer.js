@@ -10,7 +10,7 @@ class AppFooter extends React.Component {
             <p>
               <a href="/conduct">Code of Conduct</a>{" "}
               &#8226;{" "}
-              <a href="/privay">Privacy Policy</a>{" "}
+              <a href="/privacy">Privacy Policy</a>{" "}
               &#8226;{" "}
               <a href="/tos">Terms of Service</a>
             </p>
