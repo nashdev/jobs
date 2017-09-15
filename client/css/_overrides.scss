@@ -136,9 +136,31 @@ blockquote {
 .card {
   $card-border-color: $grey-darker;
   box-shadow: 0 0 1px $grey-light;
+  position: relative;
 
   .card-header {
     box-shadow: none;
     border-bottom: 1px solid $grey-lighter;
+  }
+
+  .card-footer-offset {
+    min-height: 75px;
+  }
+  .card-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+}
+
+.footer .content {
+  font-family: $family-sans-serif;
+}
+
+@media only screen and (max-width: 1200px) {
+  .column.is-flex {
+    flex: 50%;
+    flex-grow: 0;
+    flex-shrink: 0;
   }
 }
