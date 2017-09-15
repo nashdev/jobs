@@ -156,3 +156,11 @@ blockquote {
 .footer .content {
   font-family: $family-sans-serif;
 }
+
+@media only screen and (max-width: 1200px) {
+  .column.is-flex {
+    flex: 50%;
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+}

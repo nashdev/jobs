@@ -85,7 +85,7 @@ class CompanyList extends Component {
                 <h5 className="title is-5">
                   {alphaKey} <a name={alphaKey} />
                 </h5>
-                <div className="columns is-multiline is-flex-tablet">
+                <div className="columns is-multiline">
                   {sortBy(alphaGroup, "name").map(company => (
                     <div className="column is-one-third is-flex">
                       <div key={company.id} className="card">
