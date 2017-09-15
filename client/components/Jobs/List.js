@@ -19,6 +19,7 @@ class JobList extends Component {
 
   componentDidMount() {
     this.props.dispatch(getAllJobs(this.props.params.page));
+    
   }
 
   onPageChange(page) {
@@ -28,7 +29,6 @@ class JobList extends Component {
 
   render() {
     const { jobById, companyById } = this.props;
-
     return (
       <div>
         <section className="hero is-medium is-primary is-bold">
@@ -45,16 +45,16 @@ class JobList extends Component {
           </div>
         </section>
         {this.props.messages && <Messages messages={this.props.messages} />}
-        <section className="section card-flex">
+        <section className="section">
           <div className="container is-fluid">
-            <div className="columns is-multiline">
+            <div className="columns is-multiline is-flex-tablet">
               {!this.props.jobs.length && <div className="is-loading" />}
 
               {this.props.jobs.map(id => {
                 const job = jobById[id];
                 const company = companyById[job.company_id];
                 return (
-                  <div className="column is-one-third">
+                  <div className="column is-one-third is-flex">
                     <div className="card" key={job.id}>
                       <header className="card-header">
                         <p className="card-header-title is-capitalized">

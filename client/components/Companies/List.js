@@ -81,13 +81,13 @@ class CompanyList extends Component {
           {!this.props.companies.length && <div className="is-loading" />}
           {Object.entries(companies).map(([alphaKey, alphaGroup]) => {
             return (
-              <section className="section card-flex" key={alphaKey}>
+              <section className="section" key={alphaKey}>
                 <h5 className="title is-5">
                   {alphaKey} <a name={alphaKey} />
                 </h5>
-                <div className="columns is-multiline">
+                <div className="columns is-multiline is-flex-tablet">
                   {sortBy(alphaGroup, "name").map(company => (
-                    <div className="column is-one-third">
+                    <div className="column is-one-third is-flex">
                       <div key={company.id} className="card">
                         <header className="card-header">
                           <p className="card-header-title">
