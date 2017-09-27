@@ -2,14 +2,15 @@ require("dotenv").config({ path: ".env" });
 
 import webpack from "webpack";
 import ManifestPlugin from "webpack-manifest-plugin";
-import autoprefixer from "autoprefixer";
 import path from "path";
 
 export default {
   resolve: {
-    extensions: ["*", ".js", ".jsx", ".json"]
+    modules: ["node_modules", "."],
+    extensions: [".js", ".jsx"]
+    // extensions: ["*", ".js", ".jsx", ".json"]
   },
-  devtool: "eval-source-map", // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
+  devtool: "cheap-module-source-map",
   entry: [
     // must be first entry to properly set public path
     "./client/webpack-public-path",
@@ -40,36 +41,61 @@ export default {
         sassLoader: {
           includePaths: [path.resolve(__dirname, "client", "scss")]
         },
-        context: "/",
-        postcss: () => [autoprefixer]
+        context: "/"
       }
     })
   ],
   module: {
     rules: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loaders: ["babel-loader"] },
-      { test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: "file-loader" },
+      { test: /\.jsx?$/, exclude: /node_modules/, use: ["babel-loader"] },
+      { test: /\.eot(\?v=\d+.\d+.\d+)?$/, use: ["file-loader"] },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "url-loader?limit=10000&mimetype=application/font-woff"
+        use: [
+          {
+            loader: "url-loader",
+            options: { limit: 10000, mimetype: "application/font-woff" }
+          }
+        ]
       },
       {
         test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/,
-        loader: "url-loader?limit=10000&mimetype=application/octet-stream"
+        use: [
+          {
+            loader: "url-loader",
+            options: { limit: 10000, mimetype: "application/octet-stream" }
+          }
+        ]
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url-loader?limit=10000&mimetype=image/svg+xml"
+        use: [
+          {
+            loader: "url-loader",
+            options: { limit: 10000, mimetype: "image/svg+xml" }
+          }
+        ]
       },
-      { test: /\.(jpe?g|png|gif)$/i, loader: "file-loader?name=[name].[ext]" },
-      { test: /\.ico$/, loader: "file-loader?name=[name].[ext]" },
+      {
+        test: /\.(jpe?g|png|gif)$/i,
+        use: [{ loader: "file-loader", options: { name: "[name].[ext]" } }]
+      },
+      {
+        test: /\.ico$/,
+        use: [{ loader: "file-loader", options: { name: "[name].[ext]" } }]
+      },
       {
         test: /(\.css|\.scss|\.sass)$/,
-        loaders: [
+        use: [
           "style-loader",
-          "css-loader?sourceMap",
-          "postcss-loader",
-          "sass-loader?sourceMap"
+          { loader: "css-loader", options: { sourceMap: true } },
+          {
+            loader: "postcss-loader",
+            options: {
+              sourceMap: true
+            }
+          },
+          { loader: "sass-loader", options: { sourceMap: true } }
         ]
       }
     ]

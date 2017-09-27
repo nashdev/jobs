@@ -12,7 +12,9 @@ function generateToken(user) {
     iss: "jobs.nashdev.com",
     sub: user.id,
     iat: moment().unix(),
-    exp: moment().add(7, "days").unix()
+    exp: moment()
+      .add(7, "days")
+      .unix()
   };
   return jwt.sign(payload, process.env.TOKEN_SECRET);
 }
@@ -247,7 +249,7 @@ exports.forgotPost = function(req, res, next) {
           "Please click on the following link, or paste this into your browser to complete the process:\n\n" +
           "http://" +
           req.headers.host +
-          "/reset/" +
+          "/account/reset/" +
           token +
           "\n\n" +
           "If you did not request this, please ignore this email and your password will remain unchanged.\n"

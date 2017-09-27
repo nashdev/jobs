@@ -31,9 +31,7 @@ exports.create = async function(req, res, next) {
   req
     .assert("experience_range", "Please enter a valid experience range.")
     .isInt();
-  req
-    .assert("salary_range", "Please enter a valid salary range.")
-    .isInt()
+  req.assert("salary_range", "Please enter a valid salary range.").isInt();
   req
     .assert(
       "remote_available",
@@ -188,10 +186,12 @@ exports.delete = async function(req, res, next) {
 
 // index
 exports.index = async function(req, res) {
-  const jobs = await Job.forge().orderBy("created_at", "DESC").fetchPage({
-    page: req.query.page || 1,
-    pageSize: req.query.pageSize || 10,
-    withRelated: ["user", "company"]
-  });
+  const jobs = await Job.forge()
+    .orderBy("created_at", "DESC")
+    .fetchPage({
+      page: req.query.page || 1,
+      pageSize: req.query.pageSize || 10,
+      withRelated: ["user", "company"]
+    });
   res.send({ data: jobs, pagination: jobs.pagination });
 };
