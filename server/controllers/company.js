@@ -1,4 +1,6 @@
+const Mapper = require("jsonapi-mapper");
 let Company = require("../models/Company");
+const mapper = new Mapper.Bookshelf(`${process.env.API_URL}/api`);
 
 exports.create = async function(req, res, next) {
   req.assert("name", "Please enter a valid company name").notEmpty();
@@ -16,10 +18,7 @@ exports.create = async function(req, res, next) {
   try {
     const data = Object.assign({}, req.body, { user_id: req.user.id });
     const company = await Company.forge(data).save();
-    res.send({
-      data: company,
-      errors: null
-    });
+    res.send(mapper.map(company, "company"));
   } catch (err) {
     res.status(400).send({
       errors: null,
@@ -53,10 +52,7 @@ exports.update = async function(req, res, next) {
       user_id: req.user.id
     }).save(req.body, { patch: true });
 
-    res.send({
-      data: company,
-      errors: null
-    });
+    res.send(mapper.map(company, "company"));
   } catch (err) {
     res.status(400).send({
       errors: [
@@ -75,10 +71,7 @@ exports.read = async function(req, res, next) {
     const company = await Company.where({ id: req.params.id }).fetch({
       withRelated: ["user", "jobs"]
     });
-    res.send({
-      data: company.toJSON(),
-      errors: null
-    });
+    res.send(mapper.map(company, "company"));
   } catch (err) {
     res.status(400).send({
       errors: [
@@ -97,12 +90,10 @@ exports.delete = async function(req, res, next) {
     const company = await Company.where({
       id: req.params.id,
       user_id: req.user.id
-    }).destroy();
-
-    res.send({
-      data: company.toJSON(),
-      errors: null
-    });
+    }).fetch();
+    res.send(mapper.map(company, "company"));
+    company.destroy();
+    next();
   } catch (err) {
     res.status(400).send({
       errors: [
@@ -122,12 +113,13 @@ exports.index = async function(req, res) {
     .fetchAll({
       withRelated: ["user"]
     });
-  res.send({ data: companies });
+  res.send(mapper.map(companies, "company"));
 };
 
 exports.owned = async function(req, res) {
   const companies = await Company.where({ user_id: req.user.id }).fetchAll({
     withRelated: "user"
   });
-  res.send({ data: companies, errors: null });
+
+  res.send(mapper.map(companies, "company"));
 };

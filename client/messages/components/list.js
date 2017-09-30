@@ -1,15 +1,25 @@
 import React from "react";
+import { store } from "client/store";
+import isEmpty from "lodash/isEmpty";
+import { CLEAR_MESSAGES } from "client/messages/types";
 
 class Messages extends React.Component {
   render() {
-    if (!this.props.messages) {
+    if (isEmpty(this.props.messages)) {
       return null;
     }
+
+    // Clear messages after 3 seconds
+    setTimeout(function() {
+      store.dispatch({
+        type: CLEAR_MESSAGES
+      });
+    }, 4000);
 
     const { success, error, info } = this.props.messages;
 
     return (
-      <div>
+      <div className="messages-container">
         {success && (
           <div role="alert" className="notification is-success">
             <button className="delete" />

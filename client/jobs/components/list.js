@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Pagination from "rc-pagination";
+// import Pagination from "rc-pagination";
 import EN_US from "rc-pagination/lib/locale/en_US";
 import moment from "moment";
 import truncate from "lodash/truncate";
@@ -29,7 +29,21 @@ class JobList extends Component {
 
   render() {
     const { jobById, companyById } = this.props;
-
+    // TODO: Need to figure out how to handle pagination with JSON API links.
+    // Maybe just prev/next?
+    let pagination;
+    // const pagination = (
+    //   <Pagination
+    //     prefixCls="pagination"
+    //     locale={EN_US}
+    //     showTotal={(total, range) =>
+    //       `${range[0]} - ${range[1]} of ${total} items`}
+    //     total={this.props.pagination.rowCount}
+    //     current={this.props.pagination.page}
+    //     pageSize={this.props.pagination.pageSize}
+    //     onChange={this.onPageChange}
+    //   />
+    // );
     return (
       <div>
         <section className="hero is-medium is-primary is-bold">
@@ -107,16 +121,7 @@ class JobList extends Component {
                 );
               })}
             </div>
-            <Pagination
-              prefixCls="pagination"
-              locale={EN_US}
-              showTotal={(total, range) =>
-                `${range[0]} - ${range[1]} of ${total} items`}
-              total={this.props.pagination.rowCount}
-              current={this.props.pagination.page}
-              pageSize={this.props.pagination.pageSize}
-              onChange={this.onPageChange}
-            />
+            {pagination}
           </div>
         </section>
       </div>
@@ -127,7 +132,6 @@ class JobList extends Component {
 const mapStateToProps = state => {
   return {
     messages: state.messages,
-    pagination: state.jobs.pagination,
     jobs: state.jobs.ids,
     jobById: state.jobs.byId,
     companies: state.companies.ids,

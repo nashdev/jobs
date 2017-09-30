@@ -52,3 +52,23 @@
       ); /* IE6-9 */
   }
 }
+
+.messages-container {
+  animation: fadeOut 1s forwards;
+  animation-delay: 3s;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    height: auto;
+  }
+  to {
+    opacity: 0;
+    height: 0;
+  }
+}
+
+.hero.is-primary.is-bold {
+  background-image: linear-gradient(to left, #30cfd0 0%, #330867 100%);
+}

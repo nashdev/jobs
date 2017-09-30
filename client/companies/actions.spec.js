@@ -1,13 +1,14 @@
 import "whatwg-fetch";
+import normalize from "jsonapi-normalizer";
 import configureMockStore from "redux-mock-store";
 import thunk from "redux-thunk";
 const middlewares = [thunk];
 import fetchMock from "fetch-mock";
 const mockStore = configureMockStore(middlewares);
 import {
-  createCompany,
-  createJobs,
-  createUser
+  getCollection,
+  getCompany,
+  createCompany
 } from "client/companies/test-utils";
 
 import * as actions from "client/companies/actions";
@@ -22,9 +23,7 @@ jest.mock("history/createBrowserHistory", () => {
 
 describe("actions", () => {
   it("loadCompanies(): should create an action to load all companies", () => {
-    const companies = {
-      data: [createCompany()]
-    };
+    const companies = normalize(getCollection());
 
     const expectedAction = {
       type: types.LOAD,
@@ -35,9 +34,7 @@ describe("actions", () => {
   });
 
   it("createCompany(): should create an action to create a new company", () => {
-    const company = {
-      data: createCompany()
-    };
+    const company = normalize(createCompany());
 
     const expectedAction = {
       type: types.CREATE,
@@ -50,9 +47,7 @@ describe("actions", () => {
   });
 
   it("readCompany(): should create an action to read a specific company", () => {
-    const company = {
-      data: createCompany()
-    };
+    const company = normalize(getCompany());
 
     const expectedAction = {
       type: types.READ,
@@ -62,9 +57,7 @@ describe("actions", () => {
   });
 
   it("updateCompany(): should create an action to update a specific company", () => {
-    const company = {
-      data: createCompany()
-    };
+    const company = normalize(getCompany());
 
     const expectedAction = {
       type: types.UPDATE,
@@ -77,9 +70,7 @@ describe("actions", () => {
   });
 
   it("deleteCompany(): should create an action to update a specific company", () => {
-    const company = {
-      data: createCompany()
-    };
+    const company = normalize(getCompany());
 
     const expectedAction = {
       type: types.DELETE,
@@ -99,71 +90,12 @@ describe("action creators", () => {
 
   it("getCompany() - should fetch a company and normalize the response", async () => {
     fetchMock.get("/api/companies/1", {
-      body: {
-        data: createCompany(),
-        errors: null
-      }
+      body: getCompany()
     });
 
     const expectedActions = [
       {
-        payload: {
-          entities: {
-            companies: {
-              "1": {
-                created_at: "2017-09-14T16:45:06.572Z",
-                description: "Example Description",
-                id: 1,
-                jobs: [1, 2],
-                location: "Nashville, TN",
-                name: "Example Company",
-                phone: "615-555-5555",
-                size: 10,
-                updated_at: "2017-09-14T16:45:06.572Z",
-                user: 1,
-                user_id: 1
-              }
-            },
-            jobs: {
-              "1": { id: 1, title: "Example Job", user: 1, user_id: 1 },
-              "2": { id: 2, title: "Example Job 2", user: 2, user_id: 2 }
-            },
-            users: {
-              "1": {
-                created_at: "2017-09-14T16:19:07.018Z",
-                email: "user@example.com",
-                facebook: null,
-                github: null,
-                google: null,
-                gravatar: "https://gravatar.com/avatar/md5hash?s=200&d=retro",
-                id: 1,
-                location: "Nashville, TN",
-                name: "Example User",
-                picture: null,
-                twitter: null,
-                updated_at: "2017-09-14T18:17:57.596Z",
-                vk: null,
-                website: "http://jobs.nashdev.com/"
-              },
-              "2": {
-                created_at: "2017-09-14T16:19:07.018Z",
-                email: "user@example.com",
-                facebook: null,
-                github: null,
-                google: null,
-                gravatar: "https://gravatar.com/avatar/md5hash?s=200&d=retro",
-                id: 2,
-                location: "Nashville, TN",
-                picture: null,
-                twitter: null,
-                updated_at: "2017-09-14T18:17:57.596Z",
-                vk: null,
-                website: "http://jobs.nashdev.com/"
-              }
-            }
-          },
-          result: 1
-        },
+        payload: normalize(getCompany()),
         type: types.READ
       }
     ];
@@ -181,102 +113,14 @@ describe("action creators", () => {
   });
 
   it("getAllCompanies() - should fetch a paginated list of companies and normalize the response", async () => {
-    const companies = [
-      createCompany(
-        1,
-        "Example Company",
-        createUser(1, "Example User"),
-        createJobs()
-      ),
-
-      createCompany(
-        2,
-        "Example Company 2",
-        createUser(1, "Example User"),
-        createJobs()
-      )
-    ];
-
     fetchMock.get("/api/companies?page=1&pageSize=10", {
-      body: {
-        data: companies,
-        errors: null
-      }
+      body: getCollection()
     });
 
     const expectedActions = [
       {
         append: false,
-        payload: {
-          entities: {
-            companies: {
-              "1": {
-                created_at: "2017-09-14T16:45:06.572Z",
-                description: "Example Description",
-                id: 1,
-                jobs: [1, 2],
-                location: "Nashville, TN",
-                name: "Example Company",
-                phone: "615-555-5555",
-                size: 10,
-                updated_at: "2017-09-14T16:45:06.572Z",
-                user: 1,
-                user_id: 1
-              },
-              "2": {
-                created_at: "2017-09-14T16:45:06.572Z",
-                description: "Example Description",
-                id: 2,
-                jobs: [1, 2],
-                location: "Nashville, TN",
-                name: "Example Company 2",
-                phone: "615-555-5555",
-                size: 10,
-                updated_at: "2017-09-14T16:45:06.572Z",
-                user: 1,
-                user_id: 1
-              }
-            },
-            jobs: {
-              "1": { id: 1, title: "Example Job", user: 1, user_id: 1 },
-              "2": { id: 2, title: "Example Job 2", user: 2, user_id: 2 }
-            },
-            users: {
-              "1": {
-                created_at: "2017-09-14T16:19:07.018Z",
-                email: "user@example.com",
-                facebook: null,
-                github: null,
-                google: null,
-                gravatar: "https://gravatar.com/avatar/md5hash?s=200&d=retro",
-                id: 1,
-                location: "Nashville, TN",
-                name: "Example User",
-                picture: null,
-                twitter: null,
-                updated_at: "2017-09-14T18:17:57.596Z",
-                vk: null,
-                website: "http://jobs.nashdev.com/"
-              },
-              "2": {
-                created_at: "2017-09-14T16:19:07.018Z",
-                email: "user@example.com",
-                facebook: null,
-                github: null,
-                google: null,
-                gravatar: "https://gravatar.com/avatar/md5hash?s=200&d=retro",
-                id: 2,
-                location: "Nashville, TN",
-                picture: null,
-                twitter: null,
-                updated_at: "2017-09-14T18:17:57.596Z",
-                vk: null,
-                website: "http://jobs.nashdev.com/"
-              }
-            }
-          },
-          result: [1, 2]
-        },
+        payload: normalize(getCollection()),
         type: types.LOAD
       }
     ];
@@ -297,72 +141,15 @@ describe("action creators", () => {
     let company = createCompany(1, "Example Company Updated");
 
     fetchMock.post("/api/companies/1", {
-      body: {
-        data: company,
-        errors: null
-      }
+      body: company
     });
 
     const expectedActions = [
       {
-        messages: { success: [{ msg: "Successfully updated your company." }] },
-        payload: {
-          entities: {
-            companies: {
-              "1": {
-                created_at: "2017-09-14T16:45:06.572Z",
-                description: "Example Description",
-                id: 1,
-                jobs: [1, 2],
-                location: "Nashville, TN",
-                name: "Example Company Updated",
-                phone: "615-555-5555",
-                size: 10,
-                updated_at: "2017-09-14T16:45:06.572Z",
-                user: 1,
-                user_id: 1
-              }
-            },
-            jobs: {
-              "1": { id: 1, title: "Example Job", user: 1, user_id: 1 },
-              "2": { id: 2, title: "Example Job 2", user: 2, user_id: 2 }
-            },
-            users: {
-              "1": {
-                created_at: "2017-09-14T16:19:07.018Z",
-                email: "user@example.com",
-                facebook: null,
-                github: null,
-                google: null,
-                gravatar: "https://gravatar.com/avatar/md5hash?s=200&d=retro",
-                id: 1,
-                location: "Nashville, TN",
-                name: "Example User",
-                picture: null,
-                twitter: null,
-                updated_at: "2017-09-14T18:17:57.596Z",
-                vk: null,
-                website: "http://jobs.nashdev.com/"
-              },
-              "2": {
-                created_at: "2017-09-14T16:19:07.018Z",
-                email: "user@example.com",
-                facebook: null,
-                github: null,
-                google: null,
-                gravatar: "https://gravatar.com/avatar/md5hash?s=200&d=retro",
-                id: 2,
-                location: "Nashville, TN",
-                picture: null,
-                twitter: null,
-                updated_at: "2017-09-14T18:17:57.596Z",
-                vk: null,
-                website: "http://jobs.nashdev.com/"
-              }
-            }
-          },
-          result: 1
+        messages: {
+          success: [{ msg: "Successfully updated your company." }]
         },
+        payload: normalize(company),
         type: types.UPDATE
       }
     ];
@@ -386,22 +173,13 @@ describe("action creators", () => {
 
   it("removeCompany() - should persist a company removal", async () => {
     fetchMock.delete("/api/companies/1", {
-      body: {
-        data: {
-          id: 1
-        },
-        errors: null
-      }
+      body: getCompany()
     });
 
     const expectedActions = [
       {
         type: types.DELETE,
-        payload: {
-          company: {
-            id: 1
-          }
-        },
+        payload: normalize(getCompany()),
         messages: {
           success: [{ msg: "Successfully deleted your company." }]
         }
@@ -421,72 +199,15 @@ describe("action creators", () => {
   });
   it("addCompany() - should persist a company and normalize the response", async () => {
     fetchMock.post("/api/companies", {
-      body: {
-        data: createCompany(),
-        errors: null
-      }
+      body: createCompany()
     });
 
     const expectedActions = [
       {
-        messages: { success: [{ msg: "Successfully created your company." }] },
-        payload: {
-          entities: {
-            companies: {
-              "1": {
-                created_at: "2017-09-14T16:45:06.572Z",
-                description: "Example Description",
-                id: 1,
-                jobs: [1, 2],
-                location: "Nashville, TN",
-                name: "Example Company",
-                phone: "615-555-5555",
-                size: 10,
-                updated_at: "2017-09-14T16:45:06.572Z",
-                user: 1,
-                user_id: 1
-              }
-            },
-            jobs: {
-              "1": { id: 1, title: "Example Job", user: 1, user_id: 1 },
-              "2": { id: 2, title: "Example Job 2", user: 2, user_id: 2 }
-            },
-            users: {
-              "1": {
-                created_at: "2017-09-14T16:19:07.018Z",
-                email: "user@example.com",
-                facebook: null,
-                github: null,
-                google: null,
-                gravatar: "https://gravatar.com/avatar/md5hash?s=200&d=retro",
-                id: 1,
-                location: "Nashville, TN",
-                name: "Example User",
-                picture: null,
-                twitter: null,
-                updated_at: "2017-09-14T18:17:57.596Z",
-                vk: null,
-                website: "http://jobs.nashdev.com/"
-              },
-              "2": {
-                created_at: "2017-09-14T16:19:07.018Z",
-                email: "user@example.com",
-                facebook: null,
-                github: null,
-                google: null,
-                gravatar: "https://gravatar.com/avatar/md5hash?s=200&d=retro",
-                id: 2,
-                location: "Nashville, TN",
-                picture: null,
-                twitter: null,
-                updated_at: "2017-09-14T18:17:57.596Z",
-                vk: null,
-                website: "http://jobs.nashdev.com/"
-              }
-            }
-          },
-          result: 1
+        messages: {
+          success: [{ msg: "Successfully created your company." }]
         },
+        payload: normalize(createCompany()),
         type: types.CREATE
       }
     ];

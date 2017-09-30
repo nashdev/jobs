@@ -105,7 +105,9 @@ app.use(function(req, res, next) {
 
 function wrap(fn) {
   return function(req, res, next) {
-    fn(req, res).then().catch(next);
+    fn(req, res)
+      .then()
+      .catch(next);
   };
 }
 
@@ -284,31 +286,11 @@ if (app.get("env") === "production") {
   });
 }
 
-const server = app.listen(app.get("port"), function() {
+const server = app.listen(app.get("port"), () => {
   console.log(
     `Express (${app.get("env")}) server listening on port ${app.get("port")}`
   );
 });
-
-process.on("SIGINT", function onSigint() {
-  console.info("Got SIGINT. Graceful shutdown ", new Date().toISOString());
-  shutdown();
-});
-
-process.on("SIGTERM", function onSigterm() {
-  console.info("Got SIGTERM. Graceful shutdown ", new Date().toISOString());
-  shutdown();
-});
-
-function shutdown() {
-  server.close(function onServerClosed(err) {
-    if (err) {
-      console.error(err);
-      process.exitCode = 1;
-    }
-    process.exit();
-  });
-}
 
 // Initialize the slack bot
 const bot = require("./services/slack/jobs");

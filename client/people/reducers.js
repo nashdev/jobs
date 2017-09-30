@@ -16,7 +16,7 @@ const ids = (state = [], action) => {
       return action.payload.result;
     case "nashjobs/users/READ":
     case "nashjobs/users/CREATE":
-      return [...state, action.payload.result];
+      return [...state, ...action.payload.result];
     case "nashjobs/users/DELETE":
       return state.filter(c => c != action.payload.user.id);
     default:

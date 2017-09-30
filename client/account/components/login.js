@@ -16,7 +16,13 @@ class Login extends React.Component {
 
   handleLogin(event) {
     event.preventDefault();
-    this.props.dispatch(login(this.state.email, this.state.password));
+    this.props.dispatch(
+      login(
+        this.state.email,
+        this.state.password,
+        this.props.location.state && this.props.location.state.from.pathname
+      )
+    );
   }
 
   handleGithub() {

@@ -1,5 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import { PrivateRoute } from "client/common/routes";
+
 import {
   Login,
   Signup,
@@ -10,7 +12,7 @@ import {
 
 const AccountRoutes = () => (
   <Switch>
-    <Route
+    <PrivateRoute
       exact
       breadcrumbName="My Account"
       path="/account"

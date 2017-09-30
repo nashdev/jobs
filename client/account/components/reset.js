@@ -19,7 +19,7 @@ class Reset extends React.Component {
       resetPassword(
         this.state.password,
         this.state.confirm,
-        this.props.params.token
+        this.props.match.params.token
       )
     );
   }

@@ -1,9 +1,11 @@
 import "whatwg-fetch";
 import configureMockStore from "redux-mock-store";
+import normalize from "jsonapi-normalizer";
 import thunk from "redux-thunk";
 const middlewares = [thunk];
 import fetchMock from "fetch-mock";
 const mockStore = configureMockStore(middlewares);
+import { getCollection, getJob, createJob } from "client/jobs/test-utils";
 
 import * as actions from "client/jobs/actions";
 import * as types from "client/jobs/types";
@@ -17,22 +19,17 @@ jest.mock("history/createBrowserHistory", () => {
 
 describe("actions", () => {
   it("loadJobs(): should create an action to load all jobs", () => {
-    const jobs = {
-      data: []
-    };
+    const jobs = normalize(getCollection());
 
     const expectedAction = {
       type: types.LOAD,
-      payload: jobs,
-      pagination: false
+      payload: jobs
     };
     expect(actions.loadJobs(jobs, false)).toEqual(expectedAction);
   });
 
   it("createJob(): should create an action to create a new job", () => {
-    const job = {
-      data: {}
-    };
+    const job = normalize(createJob());
 
     const expectedAction = {
       type: types.CREATE,
@@ -45,9 +42,7 @@ describe("actions", () => {
   });
 
   it("readJob(): should create an action to read a specific job", () => {
-    const job = {
-      data: {}
-    };
+    const job = normalize(getJob());
 
     const expectedAction = {
       type: types.READ,
@@ -57,9 +52,7 @@ describe("actions", () => {
   });
 
   it("updateJob(): should create an action to update a specific job", () => {
-    const job = {
-      data: {}
-    };
+    const job = normalize(getJob());
 
     const expectedAction = {
       type: types.UPDATE,
@@ -72,9 +65,7 @@ describe("actions", () => {
   });
 
   it("deleteJob(): should create an action to update a specific job", () => {
-    const job = {
-      data: {}
-    };
+    const job = normalize(getJob());
 
     const expectedAction = {
       type: types.DELETE,
@@ -93,45 +84,13 @@ describe("action creators", () => {
   });
   it("getJob() - should fetch a job and normalize the response", async () => {
     fetchMock.get("/api/jobs/1", {
-      body: {
-        data: {
-          id: 1,
-          title: "Example Job",
-          user_id: 1,
-          user: {
-            id: 1,
-            name: "Example User"
-          },
-          company_id: 1,
-          company: {
-            id: 1,
-            name: "Example company"
-          }
-        },
-        errors: null
-      }
+      body: getJob()
     });
 
     const expectedActions = [
       {
         type: types.READ,
-        payload: {
-          entities: {
-            users: { "1": { id: 1, name: "Example User" } },
-            companies: { "1": { id: 1, name: "Example company" } },
-            jobs: {
-              "1": {
-                id: 1,
-                title: "Example Job",
-                user_id: 1,
-                user: 1,
-                company_id: 1,
-                company: 1
-              }
-            }
-          },
-          result: 1
-        }
+        payload: normalize(getJob())
       }
     ];
 
@@ -149,69 +108,13 @@ describe("action creators", () => {
 
   it("getAllJobs() - should fetch a paginated list of jobs and normalize the response", async () => {
     fetchMock.get("/api/jobs?page=1&pageSize=9", {
-      body: {
-        data: [
-          {
-            id: 1,
-            title: "Example Job",
-            user_id: 1,
-            user: {
-              id: 1,
-              name: "Example User"
-            },
-            company_id: 1,
-            company: {
-              id: 1,
-              name: "Example company"
-            }
-          },
-          {
-            id: 2,
-            title: "Example Job 2",
-            user_id: 1,
-            user: {
-              id: 1,
-              name: "Example User"
-            },
-            company_id: 1,
-            company: {
-              id: 1,
-              name: "Example company"
-            }
-          }
-        ],
-        errors: null
-      }
+      body: getCollection()
     });
 
     const expectedActions = [
       {
         type: types.LOAD,
-        payload: {
-          entities: {
-            users: { "1": { id: 1, name: "Example User" } },
-            companies: { "1": { id: 1, name: "Example company" } },
-            jobs: {
-              "1": {
-                id: 1,
-                title: "Example Job",
-                user_id: 1,
-                user: 1,
-                company_id: 1,
-                company: 1
-              },
-              "2": {
-                id: 2,
-                title: "Example Job 2",
-                user_id: 1,
-                user: 1,
-                company_id: 1,
-                company: 1
-              }
-            }
-          },
-          result: [1, 2]
-        }
+        payload: normalize(getCollection())
       }
     ];
 
@@ -229,45 +132,13 @@ describe("action creators", () => {
 
   it("editJob() - should persist a job change and normalize the response", async () => {
     fetchMock.post("/api/jobs/1", {
-      body: {
-        data: {
-          id: 1,
-          title: "Example Job Updated",
-          user_id: 1,
-          user: {
-            id: 1,
-            name: "Example User"
-          },
-          company_id: 1,
-          company: {
-            id: 1,
-            name: "Example company"
-          }
-        },
-        errors: null
-      }
+      body: getJob()
     });
 
     const expectedActions = [
       {
         type: types.UPDATE,
-        payload: {
-          entities: {
-            users: { "1": { id: 1, name: "Example User" } },
-            companies: { "1": { id: 1, name: "Example company" } },
-            jobs: {
-              "1": {
-                id: 1,
-                title: "Example Job Updated",
-                user_id: 1,
-                user: 1,
-                company_id: 1,
-                company: 1
-              }
-            }
-          },
-          result: 1
-        },
+        payload: normalize(getJob()),
         messages: {
           success: [{ msg: "Successfully updated your job." }]
         }
@@ -293,22 +164,13 @@ describe("action creators", () => {
 
   it("removeJob() - should persist a job removal", async () => {
     fetchMock.delete("/api/jobs/1", {
-      body: {
-        data: {
-          id: 1
-        },
-        errors: null
-      }
+      body: getJob()
     });
 
     const expectedActions = [
       {
         type: types.DELETE,
-        payload: {
-          job: {
-            id: 1
-          }
-        },
+        payload: normalize(getJob()),
         messages: {
           success: [{ msg: "Successfully deleted your job." }]
         }
@@ -328,45 +190,13 @@ describe("action creators", () => {
   });
   it("addJob() - should persist a job and normalize the response", async () => {
     fetchMock.post("/api/jobs", {
-      body: {
-        data: {
-          id: 1,
-          company_id: 1,
-          user_id: 1,
-          title: "Example Job",
-          user: {
-            id: 1,
-            name: "Example User"
-          },
-          company: {
-            id: 1,
-            name: "Example Company"
-          }
-        },
-        errors: null
-      }
+      body: createJob()
     });
 
     const expectedActions = [
       {
         type: types.CREATE,
-        payload: {
-          entities: {
-            users: { "1": { id: 1, name: "Example User" } },
-            companies: { "1": { id: 1, name: "Example Company" } },
-            jobs: {
-              "1": {
-                id: 1,
-                title: "Example Job",
-                user_id: 1,
-                user: 1,
-                company_id: 1,
-                company: 1
-              }
-            }
-          },
-          result: 1
-        },
+        payload: normalize(createJob()),
         messages: {
           success: [{ msg: "Successfully created your job." }]
         }

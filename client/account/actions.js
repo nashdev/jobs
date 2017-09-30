@@ -27,8 +27,10 @@ import {
   OAUTH_SUCCESS,
   OAUTH_FAILURE
 } from "client/account/types";
+
 const cookies = new Cookies();
-export function login(email, password) {
+
+export function login(email, password, redirect) {
   return dispatch => {
     dispatch({
       type: CLEAR_MESSAGES
@@ -54,7 +56,11 @@ export function login(email, password) {
               .add(1, "hour")
               .toDate()
           });
-          history.push("/account");
+          if (redirect) {
+            history.push(redirect);
+          } else {
+            history.push("/account");
+          }
         });
       } else {
         return response.json().then(json => {

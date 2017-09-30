@@ -1,6 +1,5 @@
-import { normalize } from "normalizr";
+import normalize from "jsonapi-normalizer";
 import history from "client/common/history";
-import { companyListSchema, companySchema } from "client/schema";
 import Company from "client/companies/services";
 import { LOAD, CREATE, READ, UPDATE, DELETE } from "client/companies/types";
 
@@ -44,35 +43,33 @@ export function deleteCompany(company) {
 
 export function getCompany(id) {
   return dispatch =>
-    Company.read(id).then(({ data }) =>
-      dispatch(readCompany(normalize(data, companySchema)))
-    );
+    Company.read(id).then(data => dispatch(readCompany(normalize(data))));
 }
 
 export function getAllCompanies(page = 1, pageSize = 10) {
   return dispatch =>
-    Company.paginate(page, pageSize).then(({ data }) =>
-      dispatch(loadCompanies(normalize(data, companyListSchema)))
+    Company.paginate(page, pageSize).then(data =>
+      dispatch(loadCompanies(normalize(data)))
     );
 }
 export function getOwnedCompanies() {
   return dispatch =>
-    Company.request("/owned").then(({ data }) =>
-      dispatch(loadCompanies(normalize(data, companyListSchema), true))
+    Company.request("/owned").then(data =>
+      dispatch(loadCompanies(normalize(data), true))
     );
 }
 
 export function editCompany(values) {
   return dispatch =>
-    Company.update(values.id, values).then(({ data }) =>
-      dispatch(updateCompany(normalize(data, companySchema)))
+    Company.update(values.id, values).then(data =>
+      dispatch(updateCompany(normalize(data)))
     );
 }
 
 export function removeCompany(id) {
   return dispatch =>
-    Company.delete(id).then(() => {
-      dispatch(deleteCompany({ company: { id } }));
+    Company.delete(id).then(data => {
+      dispatch(deleteCompany(normalize(data)));
       history.push("/companies");
     });
 }
@@ -80,8 +77,8 @@ export function removeCompany(id) {
 export function addCompany(values) {
   return async dispatch => {
     try {
-      const { data } = await Company.create(values);
-      dispatch(createCompany(normalize(data, companySchema)));
+      const data = await Company.create(values);
+      dispatch(createCompany(normalize(data)));
       history.push("/companies");
     } catch (error) {
       throw error;

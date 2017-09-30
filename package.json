@@ -6,9 +6,11 @@
     "node": "8.1.4"
   },
   "scripts": {
+    "postinstall": "npm run build",
     "start": "NODE_ENV=production node ./server/index.js",
     "start:dev": "npm-run-all --parallel test:watch open:src lint:watch",
-    "open:src": "nodemon --exec 'babel-node server/index.js' --ignore client/ --inspect=0.0.0.0:9229",
+    "open:src":
+      "nodemon --exec 'babel-node server/index.js' --ignore client/ --inspect=0.0.0.0:9229",
     "lint": "esw webpack.config.* client tools --color",
     "lint:watch": "npm run lint -- --watch",
     "clean-dist": "npm run remove-dist && mkdir dist",
@@ -16,12 +18,9 @@
     "prebuild": "npm run clean-dist",
     "build": "babel-node tools/build.js",
     "test": "jest --config jest.config.json",
-    "test:CI": "babel-node tools/testCi.js",
-    "test:cover": "npm run test -- --coverage ",
-    "test:cover:CI": "npm run test:CI -- --coverage && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js",
-    "test:watch": "npm run test -- --watch",
-    "open:cover": "npm run test:cover && opn ./coverage/lcov-report/index.html",
-    "analyze-bundle": "babel-node ./tools/analyzeBundle.js"
+    "test:cover":
+      "npm run test -- --coverage && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js",
+    "test:watch": "npm run test -- --watch"
   },
   "author": "egdelwonk",
   "license": "MIT",
@@ -72,6 +71,8 @@
     "jest": "^21.2.1",
     "jest-cli": "^21.2.1",
     "json-loader": "^0.5.7",
+    "jsonapi-mapper": "^1.0.0-beta.14",
+    "jsonapi-normalizer": "^1.2.0",
     "jsonwebtoken": "^8.0.1",
     "knex": "^0.13.0",
     "mockdate": "^2.0.2",

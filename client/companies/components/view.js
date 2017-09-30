@@ -48,8 +48,8 @@ class CompanyView extends Component {
                     </p>
                   )}
 
-                  {jobs.map(id => {
-                    const job = jobById[id];
+                  {jobs.map(j => {
+                    const job = jobById[j.id];
 
                     return (
                       <div key={job.id}>

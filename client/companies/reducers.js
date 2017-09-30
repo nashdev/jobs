@@ -15,14 +15,14 @@ const ids = (state = [], action) => {
   switch (action.type) {
     case LOAD:
       if (action.append) {
-        return [...state, ...action.payload.result];
+        return [...state, ...action.payload.result.companies];
       }
-      return action.payload.result;
+      return action.payload.result.companies;
     case READ:
     case CREATE:
-      return [...state, action.payload.result];
+      return [...state, ...action.payload.result.companies];
     case DELETE:
-      return state.filter(c => c != action.payload.company.id);
+      return state.filter(c => c != action.payload.result.companies[0]);
     default:
       return state;
   }

@@ -14,21 +14,12 @@ const byId = (state = {}, action) => {
 const ids = (state = [], action) => {
   switch (action.type) {
     case LOAD:
-      return action.payload.result;
+      return action.payload.result.jobs;
     case READ:
     case CREATE:
-      return [...state, action.payload.result];
+      return [...state, ...action.payload.result.jobs];
     case DELETE:
-      return state.filter(c => c != action.payload.job.id);
-    default:
-      return state;
-  }
-};
-
-const pagination = (state = {}, action) => {
-  switch (action.type) {
-    case LOAD:
-      return action.pagination;
+      return state.filter(c => c != action.payload.result.jobs[0]);
     default:
       return state;
   }
@@ -38,6 +29,5 @@ const pagination = (state = {}, action) => {
 
 export default combineReducers({
   byId,
-  ids,
-  pagination
+  ids
 });

@@ -1,11 +1,10 @@
-import { normalize } from "normalizr";
+import normalize from "jsonapi-normalizer";
 import history from "client/common/history";
-import { jobListSchema, jobSchema } from "client/schema";
 import Job from "client/jobs/services";
 import { LOAD, CREATE, READ, UPDATE, DELETE } from "client/jobs/types";
 
-export function loadJobs(jobs, pagination) {
-  return { type: LOAD, payload: jobs, pagination: pagination };
+export function loadJobs(jobs) {
+  return { type: LOAD, payload: jobs };
 }
 
 export function createJob(job) {
@@ -44,29 +43,27 @@ export function deleteJob(job) {
 
 export function getJob(id) {
   return dispatch =>
-    Job.read(id).then(({ data }) =>
-      dispatch(readJob(normalize(data, jobSchema)))
-    );
+    Job.read(id).then(data => dispatch(readJob(normalize(data))));
 }
 
 export function getAllJobs(page = 1, pageSize = 9) {
   return dispatch =>
-    Job.paginate(page, pageSize).then(({ data, pagination }) =>
-      dispatch(loadJobs(normalize(data, jobListSchema), pagination))
+    Job.paginate(page, pageSize).then(data =>
+      dispatch(loadJobs(normalize(data)))
     );
 }
 
 export function editJob(values) {
   return dispatch =>
-    Job.update(values.id, values).then(({ data }) =>
-      dispatch(updateJob(normalize(data, jobSchema)))
+    Job.update(values.id, values).then(data =>
+      dispatch(updateJob(normalize(data)))
     );
 }
 
 export function removeJob(id) {
   return dispatch =>
-    Job.delete(id).then(() => {
-      dispatch(deleteJob({ job: { id } }));
+    Job.delete(id).then(data => {
+      dispatch(deleteJob(normalize(data)));
       // TODO: Figure out how to allow this during tests
       // Maybe set redirect in state and use <Redirect />
       history.push("/jobs");
@@ -75,8 +72,8 @@ export function removeJob(id) {
 
 export function addJob(payload) {
   return dispatch =>
-    Job.create(payload).then(({ data }) => {
-      dispatch(createJob(normalize(data, jobSchema)));
+    Job.create(payload).then(data => {
+      dispatch(createJob(normalize(data)));
       // TODO: Figure out how to allow this during tests
       // Maybe set redirect in state and use <Redirect />
       history.push("/jobs");

@@ -56,7 +56,7 @@ class CompanyList extends Component {
     const companyById = this.props.companyById;
 
     const companies = sortByKeys(
-      groupBy(this.props.companies.map(id => companyById[id]), c =>
+      groupBy(this.props.companies.map(c => companyById[c]), c =>
         c.name.charAt(0).toUpperCase()
       )
     );
@@ -85,6 +85,7 @@ class CompanyList extends Component {
         </section>
         <div className="container is-fluid">
           {!this.props.companies.length && <div className="is-loading" />}
+
           {Object.entries(companies).map(([alphaKey, alphaGroup]) => {
             return (
               <section className="section" key={`alpha_${alphaKey}`}>

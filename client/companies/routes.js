@@ -1,7 +1,8 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { List, Add, Edit, Delete, View } from "client/companies/components";
 import ErrorBoundary from "client/common/components/error-boundary";
+import { PrivateRoute } from "client/common/routes";
 
 const CompanyRoutes = () => (
   <ErrorBoundary>
@@ -12,18 +13,18 @@ const CompanyRoutes = () => (
         breadcrumbName="Company Listings"
         component={List}
       />
-      <Route
+      <PrivateRoute
         exact
         breadcrumbName="Add Company"
         path="/companies/add"
         component={Add}
       />
-      <Route
+      <PrivateRoute
         breadcrumbName="Edit Company"
         path="/companies/:id/edit"
         component={Edit}
       />
-      <Route
+      <PrivateRoute
         breadcrumbName="Delete Company"
         path="/companies/:id/delete"
         component={Delete}

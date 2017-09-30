@@ -90,6 +90,7 @@ exports.signupPost = function(req, res, next) {
       res.send({ token: generateToken(user), user: user });
     })
     .catch(function(err) {
+      console.log(err);
       if (err.code === "ER_DUP_ENTRY" || err.code === "23505") {
         return res.status(400).send({
           msg:
@@ -242,7 +243,7 @@ exports.forgotPost = function(req, res, next) {
       });
       let mailOptions = {
         to: user.email,
-        from: "support@yourdomain.com",
+        from: "support@jobs.nashdev.com",
         subject: "✔ Reset your password on NashDev Jobs",
         text:
           "You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n" +
@@ -295,7 +296,7 @@ exports.resetPost = function(req, res, next) {
           user.set("passwordResetToken", null);
           user.set("passwordResetExpires", null);
           user.save(user.changed, { patch: true }).then(function() {
-            done(err, user.toJSON());
+            done(null, user.toJSON());
           });
         });
     },
@@ -308,7 +309,7 @@ exports.resetPost = function(req, res, next) {
         }
       });
       let mailOptions = {
-        from: "support@yourdomain.com",
+        from: "support@jobs.nashdev.com",
         to: user.email,
         subject: "Your NashDev Jobs password has been changed.",
         text:
