@@ -32,13 +32,6 @@ class Bot {
       );
     });
 
-    // this.rtmClient.on(RTM_CLIENT_EVENTS.RTM_CONNECTION_OPENED, () => {
-    //   this.rtmClient.sendMessage(
-    //     `I'm alive! Deployed v.${pkg.version}`,
-    //     JOBS_CHANNEL
-    //   );
-    // });
-
     this.rtmClient.on(RTM_EVENTS.MESSAGE, message => {
       let user = this.rtmClient.dataStore.getUserById(message.user);
       let text = message.text;

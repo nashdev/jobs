@@ -1,4 +1,4 @@
-/* 
+/*
 THIS NEEDS A TON OF WORK - REFACTOR.
 Dumped this here for reference while live-coding.
 
@@ -184,18 +184,6 @@ module.exports = function() {
 
     bot.post(JOBS_CHANNEL, text);
   });
-
-//   eventEmitter.on("jobs:updated", job => {
-//     let text = `
-//       :awesome: *Job Updated* / @${job.contact_slack} (${job.user.name})
-      
-//       *${job.title}* at *${job.company.name}* in _${job.location}_
-//       Updated: ${moment(job.updated_at).calendar()}
-//       ________________________________________________________________________________
-//       Visit ${process.env.API_URL}/jobs/${job.id} for the full listing.
-//       `;
-//     bot.post(JOBS_CHANNEL, text);
-//   });
 
   // Listen for !whois
   bot.listen(/^!whois\s+(.*)$/i, (msg, args, user) => {
