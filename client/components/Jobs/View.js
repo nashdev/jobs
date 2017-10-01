@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router";
 import { connect } from "react-redux";
-import capitalize from "lodash/capitalize";
 import MarkdownViewer from "../Markdown/Viewer";
 import { getJob } from "../../actions/jobs";
-import Messages from "../Messages";
 import TagList from "./Tags";
 
 class JobView extends Component {

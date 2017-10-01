@@ -27,9 +27,6 @@ class AddJobForm extends Component {
     const {
       error,
       handleSubmit,
-      pristine,
-      reset,
-      submitting,
       addJob,
       companies
     } = this.props;

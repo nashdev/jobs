@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import moment from "moment";
 import MarkdownViewer from "../Markdown/Viewer";
 import { getCompany } from "../../actions/companies";
-import Messages from "../Messages";
 class CompanyView extends Component {
   componentDidMount() {
     const { params } = this.props;

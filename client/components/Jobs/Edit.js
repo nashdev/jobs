@@ -19,7 +19,6 @@ class EditJobForm extends Component {
     const {
       error,
       handleSubmit,
-      submitting,
       editJob,
       initialValues,
       messages,
