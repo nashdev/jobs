@@ -10,9 +10,6 @@ class AddCompanyForm extends Component {
     const {
       error,
       handleSubmit,
-      pristine,
-      reset,
-      submitting,
       addCompany
     } = this.props;
     return (

@@ -28,7 +28,7 @@ const BreadcrumbList = ({ routes }) => {
         "is-active": isLastCrumb(routes, route)
       });
       return (
-        <li className={classes}>
+        <li className={classes} key={route.breadcrumbName}>
           <Link to={routePath}>{route.breadcrumbName}</Link>
         </li>
       );

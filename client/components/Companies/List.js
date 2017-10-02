@@ -87,7 +87,7 @@ class CompanyList extends Component {
                 </h5>
                 <div className="columns is-multiline">
                   {sortBy(alphaGroup, "name").map(company => (
-                    <div className="column is-one-third is-flex">
+                    <div key={company.id} className="column is-one-third is-flex">
                       <div key={company.id} className="card">
                         <header className="card-header">
                           <p className="card-header-title">
@@ -112,7 +112,7 @@ class CompanyList extends Component {
                             </div>
                           </div>
                         </div>
-                        <div className="card-footer-offset"></div>
+                        <div className="card-footer-offset"/>
                         <footer className="card-footer">
                           <Link
                             to={`/companies/${company.id}`}

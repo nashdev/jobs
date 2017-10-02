@@ -19,7 +19,7 @@ class JobList extends Component {
 
   componentDidMount() {
     this.props.dispatch(getAllJobs(this.props.params.page));
-    
+
   }
 
   onPageChange(page) {
@@ -54,7 +54,7 @@ class JobList extends Component {
                 const job = jobById[id];
                 const company = companyById[job.company_id];
                 return (
-                  <div className="column is-one-third is-flex">
+                  <div key={job.id} className="column is-one-third is-flex">
                     <div className="card" key={job.id}>
                       <header className="card-header">
                         <p className="card-header-title is-capitalized">
@@ -90,7 +90,7 @@ class JobList extends Component {
                           <TagList job={job} />
                         </div>
                       </div>
-                      <div className="card-footer-offset"></div>
+                      <div className="card-footer-offset"/>
                       <footer className="card-footer">
                         <Link to={`/jobs/${id}`} className="card-footer-item">
                           Details
