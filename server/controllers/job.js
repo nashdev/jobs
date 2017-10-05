@@ -1,6 +1,8 @@
 const Job = require("../models/Job");
 const events = require("events");
 const eventEmitter = require("../events");
+const Mapper = require("jsonapi-mapper");
+const mapper = new Mapper.Bookshelf(`${process.env.API_URL}/api`);
 
 exports.create = async function(req, res, next) {
   req.assert("company_id", "Please enter a valid company name.").isInt();
@@ -31,9 +33,7 @@ exports.create = async function(req, res, next) {
   req
     .assert("experience_range", "Please enter a valid experience range.")
     .isInt();
-  req
-    .assert("salary_range", "Please enter a valid salary range.")
-    .isInt()
+  req.assert("salary_range", "Please enter a valid salary range.").isInt();
   req
     .assert(
       "remote_available",
@@ -61,13 +61,8 @@ exports.create = async function(req, res, next) {
       withRelated: ["user", "company"]
     });
     eventEmitter.emit("jobs:created", newJob.toJSON());
-
-    res.send({
-      data: newJob,
-      errors: null
-    });
+    res.send(mapper.map(newJob, "job"));
   } catch (err) {
-    console.log("error adding job", err);
     res.status(400).send({
       errors: [
         {
@@ -124,10 +119,7 @@ exports.update = async function(req, res, next) {
 
     eventEmitter.emit("jobs:updated", updatedJob.toJSON());
 
-    res.send({
-      data: updatedJob,
-      errors: null
-    });
+    res.send(mapper.map(updatedJob, "job"));
   } catch (err) {
     res.status(400).send({
       errors: [
@@ -146,10 +138,7 @@ exports.read = async function(req, res, next) {
     const job = await Job.where({ id: req.params.id }).fetch({
       withRelated: ["user", "company"]
     });
-    res.send({
-      data: job.toJSON(),
-      errors: null
-    });
+    res.send(mapper.map(job, "job"));
   } catch (err) {
     res.status(400).send({
       errors: [
@@ -170,10 +159,7 @@ exports.delete = async function(req, res, next) {
       user_id: req.user.id
     }).destroy();
 
-    res.send({
-      data: job.toJSON(),
-      errors: null
-    });
+    res.send(mapper.map(job, "job"));
   } catch (err) {
     res.status(400).send({
       errors: [
@@ -188,10 +174,21 @@ exports.delete = async function(req, res, next) {
 
 // index
 exports.index = async function(req, res) {
-  const jobs = await Job.forge().orderBy("created_at", "DESC").fetchPage({
-    page: req.query.page || 1,
-    pageSize: req.query.pageSize || 10,
-    withRelated: ["user", "company"]
+  const jobs = await Job.forge()
+    .orderBy("created_at", "DESC")
+    .fetchPage({
+      page: req.query.page || 1,
+      pageSize: req.query.pageSize || 10,
+      withRelated: ["user", "company"]
+    });
+
+  const pagination = jobs.pagination;
+  const data = mapper.map(jobs, "job", {
+    pagination: {
+      offset: pagination.page * pagination.pageSize,
+      limit: pagination.pageSize,
+      total: pagination.rowCount
+    }
   });
-  res.send({ data: jobs, pagination: jobs.pagination });
+  res.send(data);
 };

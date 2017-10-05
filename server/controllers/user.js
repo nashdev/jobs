@@ -12,7 +12,9 @@ function generateToken(user) {
     iss: "jobs.nashdev.com",
     sub: user.id,
     iat: moment().unix(),
-    exp: moment().add(7, "days").unix()
+    exp: moment()
+      .add(7, "days")
+      .unix()
   };
   return jwt.sign(payload, process.env.TOKEN_SECRET);
 }
@@ -88,6 +90,7 @@ exports.signupPost = function(req, res, next) {
       res.send({ token: generateToken(user), user: user });
     })
     .catch(function(err) {
+      console.log(err);
       if (err.code === "ER_DUP_ENTRY" || err.code === "23505") {
         return res.status(400).send({
           msg:
@@ -240,14 +243,14 @@ exports.forgotPost = function(req, res, next) {
       });
       let mailOptions = {
         to: user.email,
-        from: "support@yourdomain.com",
+        from: "support@jobs.nashdev.com",
         subject: "✔ Reset your password on NashDev Jobs",
         text:
           "You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n" +
           "Please click on the following link, or paste this into your browser to complete the process:\n\n" +
           "http://" +
           req.headers.host +
-          "/reset/" +
+          "/account/reset/" +
           token +
           "\n\n" +
           "If you did not request this, please ignore this email and your password will remain unchanged.\n"
@@ -293,7 +296,7 @@ exports.resetPost = function(req, res, next) {
           user.set("passwordResetToken", null);
           user.set("passwordResetExpires", null);
           user.save(user.changed, { patch: true }).then(function() {
-            done(err, user.toJSON());
+            done(null, user.toJSON());
           });
         });
     },
@@ -306,7 +309,7 @@ exports.resetPost = function(req, res, next) {
         }
       });
       let mailOptions = {
-        from: "support@yourdomain.com",
+        from: "support@jobs.nashdev.com",
         to: user.email,
         subject: "Your NashDev Jobs password has been changed.",
         text:

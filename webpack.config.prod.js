@@ -15,6 +15,7 @@ const GLOBALS = {
 
 export default {
   resolve: {
+    modules: ["node_modules", "."],
     extensions: ["*", ".js", ".jsx", ".json"]
   },
   devtool: "source-map", // more info:https://webpack.github.io/docs/build-performance.html#sourcemaps and https://webpack.github.io/docs/configuration.html#devtool
@@ -49,8 +50,7 @@ export default {
         sassLoader: {
           includePaths: [path.resolve(__dirname, "client", "scss")]
         },
-        context: "/",
-        postcss: () => [autoprefixer]
+        context: "/"
       }
     })
   ],
@@ -81,7 +81,7 @@ export default {
       {
         test: /(\.css|\.scss|\.sass)$/,
         loader: ExtractTextPlugin.extract(
-          "css-loader?sourceMap!postcss-loader!sass-loader"
+          "css-loader?sourceMap!postcss-loader!sass-loader?sourceMap"
         )
       }
     ]

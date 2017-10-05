@@ -2,6 +2,15 @@
 
 > nashdev slack jobs api
 
+[![Build status: Linux](https://img.shields.io/travis/egdelwonk/nashdev-jobs.svg?style=flat-square)](https://travis-ci.org/egdelwonk/nashdev-jobs)
+[![Dependency Status](https://david-dm.org/egdelwonk/nashdev-jobs.svg?style=flat-square)](https://david-dm.org/egdelwonk/nashdev-jobs)
+[![Coverage Status](https://img.shields.io/coveralls/egdelwonk/nashdev-jobs/master.svg?style=flat-square)](https://coveralls.io/github/egdelwonk/nashdev-jobs?branch=master)
+[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![Contributors](https://img.shields.io/github/contributors/egdelwonk/nashdev-jobs.svg)]()
+[![license](https://img.shields.io/github/license/egdelwonk/nashdev-jobs.svg)]()
+
+
+
 _Note: This initial version was written as part of a live stream at NashJS (7/12/17)... so the code is precarious at best. It is not an endorsement of best practices or code cleanliness. Definitely could use a refactor :stuck_out_tongue:_
 
 ### Running Locally 
