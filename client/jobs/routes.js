@@ -7,35 +7,12 @@ import { PrivateRoute } from "client/common/route-helpers";
 const JobRoutes = () => (
   <ErrorBoundary>
     <Switch>
-      <Route
-        exact
-        path="/jobs"
-        breadcrumbName="Job Listings"
-        component={List}
-      />
-
-      <Route
-        path="/jobs/list/:page"
-        breadcrumbName="Job Listings"
-        component={List}
-      />
-      <PrivateRoute
-        exact
-        breadcrumbName="Add Job"
-        path="/jobs/add"
-        component={Add}
-      />
-      <PrivateRoute
-        breadcrumbName="Edit Job"
-        path="/jobs/:id/edit"
-        component={Edit}
-      />
-      <PrivateRoute
-        breadcrumbName="Delete Job"
-        path="/jobs/:id/delete"
-        component={Delete}
-      />
-      <Route breadcrumbName="Profile" path="/jobs/:id" component={View} />
+      <Route exact path="/jobs" component={List} />
+      <Route path="/jobs/list/:page" component={List} />
+      <PrivateRoute exact path="/jobs/add" component={Add} />
+      <PrivateRoute path="/jobs/:id/edit" component={Edit} />
+      <PrivateRoute path="/jobs/:id/delete" component={Delete} />
+      <Route path="/jobs/:id" component={View} />
     </Switch>
   </ErrorBoundary>
 );

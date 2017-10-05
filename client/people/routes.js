@@ -6,12 +6,7 @@ import ErrorBoundary from "client/common/components/error-boundary";
 const PeopleRoutes = () => (
   <ErrorBoundary>
     <Switch>
-      <Route
-        exact
-        path="/people"
-        breadcrumbName="People Listings"
-        component={List}
-      />
+      <Route exact path="/people" component={List} />
     </Switch>
   </ErrorBoundary>
 );

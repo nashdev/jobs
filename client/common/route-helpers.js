@@ -4,8 +4,7 @@ import { Route, Redirect } from "react-router-dom";
 
 export const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
-    exact
-    path="/companies/add"
+    {...rest}
     render={props => {
       if (store.getState().auth.token) {
         return <Component {...props} />;
