@@ -2,7 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { List, Add, Edit, Delete, View } from "client/jobs/components";
 import ErrorBoundary from "client/common/components/error-boundary";
-import { PrivateRoute } from "client/common/routes";
+import { PrivateRoute } from "client/common/route-helpers";
 
 const JobRoutes = () => (
   <ErrorBoundary>

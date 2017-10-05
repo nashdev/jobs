@@ -6,24 +6,6 @@ import CompanyRoutes from "client/companies/routes";
 import PeopleRoutes from "client/people/routes";
 import PagesRoute from "client/pages/routes";
 import { Home, NotFound } from "client/common/components";
-import { store } from "client/store";
-
-export const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      store.getState().auth.token ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{
-            pathname: "/account/login",
-            state: { from: props.location }
-          }}
-        />
-      )}
-  />
-);
 
 const AppRoutes = () => (
   <Switch>
