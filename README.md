@@ -1,13 +1,17 @@
 # jobs
 
+
+
 > nashdev slack jobs api
 
 [![Build status: Linux](https://img.shields.io/travis/egdelwonk/nashdev-jobs.svg?style=flat-square)](https://travis-ci.org/egdelwonk/nashdev-jobs)
 [![Dependency Status](https://david-dm.org/egdelwonk/nashdev-jobs.svg?style=flat-square)](https://david-dm.org/egdelwonk/nashdev-jobs)
 [![Coverage Status](https://img.shields.io/coveralls/egdelwonk/nashdev-jobs/master.svg?style=flat-square)](https://coveralls.io/github/egdelwonk/nashdev-jobs?branch=master)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-[![Contributors](https://img.shields.io/github/contributors/egdelwonk/nashdev-jobs.svg)]()
-[![license](https://img.shields.io/github/license/egdelwonk/nashdev-jobs.svg)]()
+[![Contributors](https://img.shields.io/github/contributors/egdelwonk/nashdev-jobs.svg)](https://github.com/egdelwonk/nashdev-jobs/graphs/contributors)
+[![license](https://img.shields.io/github/license/egdelwonk/nashdev-jobs.svg)](https://github.com/egdelwonk/nashdev-jobs/blob/master/LICENSE)
+[![Greenkeeper badge](https://badges.greenkeeper.io/egdelwonk/nashdev-jobs.svg)](https://greenkeeper.io/)
+[![Known Vulnerabilities](https://snyk.io/test/github/egdelwonk/nashdev-jobs/badge.svg)](https://snyk.io/test/github/egdelwonk/nashdev-jobs)
 
 
 
