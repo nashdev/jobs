@@ -1,5 +1,7 @@
 # jobs
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/egdelwonk/nashdev-jobs.svg)](https://greenkeeper.io/)
+
 > nashdev slack jobs api
 
 [![Build status: Linux](https://img.shields.io/travis/egdelwonk/nashdev-jobs.svg?style=flat-square)](https://travis-ci.org/egdelwonk/nashdev-jobs)
