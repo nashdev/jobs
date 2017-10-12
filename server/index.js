@@ -9,6 +9,7 @@ let bodyParser = require("body-parser");
 let expressValidator = require("express-validator");
 let exphbs = require("express-handlebars");
 let jwt = require("jsonwebtoken");
+let serialize = require("serialize-javascript");
 
 // Models
 let User = require("./models/User");
@@ -33,7 +34,7 @@ let hbs = exphbs.create({
       return options.inverse(this);
     },
     toJSON: function(object) {
-      return JSON.stringify(object);
+      return serialize(object, { isJSON: true });
     }
   }
 });
