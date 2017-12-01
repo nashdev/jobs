@@ -25,7 +25,7 @@
   "author": "egdelwonk",
   "license": "MIT",
   "dependencies": {
-    "@slack/client": "^3.14.0",
+    "@slack/client": "^3.14.2",
     "autoprefixer": "^7.1.4",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
