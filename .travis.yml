@@ -1,11 +1,16 @@
 language: node_js
 cache: yarn
 node_js:
-  - "8"
+- '8'
 script: npm run test
-before_install: npm install -g greenkeeper-lockfile@1
+before_install:
+# package-lock.json was introduced in npm@5
+- npm install -g npm@5 # skip this if you are using node 9
+- npm install -g greenkeeper-lockfile@1
 before_script: greenkeeper-lockfile-update
 after_script: greenkeeper-lockfile-upload
 after_success:
-  # Send coverage data to coveralls.
-  - npm run test:cover
+- npm run test:cover
+env:
+  global:
+    secure: c7D7GYuYpWmBXTeQ/hlSnt4yKWkHWwN8wMo4yN6UivHRWH3F7iT9YUnP3ZyeuMmpS/fDCUXAfA6oquLU590e5t1LolFiQCiZyQTrHpgplPr9U9lmpOzieOKRNx8R+RMwYdBI/IWJL9TzvztcVwtZzziTv4/qi7TX7scw2l/JD3wr6X5jt5Bdq7k9HmsnT4Wf2Nz5ixW7R/SE5A/sadD9Q6sAw3hq3W4aC7YXA7nx4GKBvGWG3XeGcoB8pe2EYsUANOH6xQIuyBNyzlULRDCE+X3EcOGUXwRupqnR2USkz7cNK8511CPLCZbLxBHZLhgbvV/9OujhMIHIIMFy6YnBrvvI3MeL3U8DN9MWKjDKvwktcFvcJC8fc9zCHXLQ2tdFGOanXntKHcjwSq1v/1byk9gDu4hTlEU4X4LWGUcgoGKCiEm9AreiPP9pIRUOwXWyB//W5+tH4zM0s2wmJLNepsA8OMHFUvZGAUwtz/+tNNjNt8NDKhroZZM9HLiXHiosu+ouyjPG6wt1IONcyIuJzJuP3WPKW91cheTZBjUDM0KK/zJTMrDljxyB8XAarcqhprplyI8X7VPoOVXi04CPQRLoPbMiqtxFTLjsyhk1ilDHtrph+k1e+GMOlmXM9GE8Z+powaImZauDRlaUbejuarpMrc8Q0xT17RH3xt/wR9Y=
