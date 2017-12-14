@@ -9,7 +9,8 @@
     "postinstall": "npm run build",
     "start": "NODE_ENV=production node ./server/index.js",
     "start:dev": "npm-run-all --parallel test:watch open:src lint:watch",
-    "open:src": "nodemon --exec 'babel-node server/index.js' --ignore client/ --inspect=0.0.0.0:9229",
+    "open:src":
+      "nodemon --exec 'babel-node server/index.js' --ignore client/ --inspect=0.0.0.0:9229",
     "lint": "esw webpack.config.* client tools --color",
     "lint:watch": "npm run lint -- --watch",
     "clean-dist": "npm run remove-dist && mkdir dist",
@@ -17,7 +18,8 @@
     "prebuild": "npm run clean-dist",
     "build": "babel-node tools/build.js",
     "test": "jest --config jest.config.json",
-    "test:cover": "npm run test -- --coverage && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js",
+    "test:cover":
+      "npm run test -- --coverage && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js",
     "test:watch": "npm run test -- --watch"
   },
   "author": "egdelwonk",
@@ -120,6 +122,6 @@
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": "http://github.com/egdelwonk/nashdev-jobs"
+    "url": "http://github.com/nashdev/jobs"
   }
 }

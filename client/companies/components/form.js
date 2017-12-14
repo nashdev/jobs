@@ -6,10 +6,7 @@ const logoHelp = () => (
   <span>
     Enhancement: Wouldn't it be cool to display company logos on company
     profiles?{" "}
-    <a
-      href="https://github.com/egdelwonk/nashdev-jobs/issues/9"
-      target="_blank"
-    >
+    <a href="https://github.com/nashdev/jobs/issues/9" target="_blank">
       Implement it.
     </a>
   </span>
@@ -18,10 +15,7 @@ const bannerHelp = () => (
   <span>
     Enhancement: Wouldn't it be cool to display a photo for the banner on
     company profiles?{" "}
-    <a
-      href="https://github.com/egdelwonk/nashdev-jobs/issues/11"
-      target="_blank"
-    >
+    <a href="https://github.com/nashdev/jobs/issues/11" target="_blank">
       Implement it.
     </a>
   </span>
@@ -36,9 +30,7 @@ const descHelp = () => (
     here.
     <br />
     Enhancement: Interested in a Markdown WYSIWYG Editor?{" "}
-    <a href="https://github.com/egdelwonk/nashdev-jobs/issues/17">
-      Implement it.
-    </a>
+    <a href="https://github.com/nashdev/jobs/issues/17">Implement it.</a>
   </span>
 );
 

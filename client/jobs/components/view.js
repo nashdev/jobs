@@ -29,9 +29,7 @@ class JobView extends Component {
                   <h1 className="title">{job.title}</h1>
                   <h2 className="subtitle">
                     at{" "}
-                    <Link to={`/companies/${company.id}`}>
-                      {company.name}
-                    </Link>{" "}
+                    <Link to={`/companies/${company.id}`}>{company.name}</Link>{" "}
                     in {job.location}.
                   </h2>
                 </div>
@@ -67,7 +65,7 @@ class JobView extends Component {
                   <p>
                     This feature has not been added yet. Would you like to{" "}
                     <a
-                      href="https://github.com/egdelwonk/nashdev-jobs/issues/13"
+                      href="https://github.com/nashdev/jobs/issues/13"
                       target="_blank"
                     >
                       implement
@@ -142,30 +140,29 @@ class JobView extends Component {
                   )}
                 </section>
                 {user &&
-                user.id == job.user_id && (
-                  <section className="section">
-                    <h4 className="subtitle is-4">Manage Listing</h4>
-                    <Link
-                      to={`/jobs/${job.id}/edit`}
-                      className="button is-small"
-                    >
-                      <span className="icon is-small">
-                        <i className="fa fa-pencil" />
-                      </span>
-                      <span>Edit</span>
-                    </Link>{" "}
-                    {" "}
-                    <Link
-                      to={`/jobs/${job.id}/delete`}
-                      className="button is-small is-danger"
-                    >
-                      <span className="icon is-small">
-                        <i className="fa fa-remove" />
-                      </span>
-                      <span>Delete</span>
-                    </Link>
-                  </section>
-                )}
+                  user.id == job.user_id && (
+                    <section className="section">
+                      <h4 className="subtitle is-4">Manage Listing</h4>
+                      <Link
+                        to={`/jobs/${job.id}/edit`}
+                        className="button is-small"
+                      >
+                        <span className="icon is-small">
+                          <i className="fa fa-pencil" />
+                        </span>
+                        <span>Edit</span>
+                      </Link>{" "}
+                      <Link
+                        to={`/jobs/${job.id}/delete`}
+                        className="button is-small is-danger"
+                      >
+                        <span className="icon is-small">
+                          <i className="fa fa-remove" />
+                        </span>
+                        <span>Delete</span>
+                      </Link>
+                    </section>
+                  )}
               </aside>
             </div>
           </div>

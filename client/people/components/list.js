@@ -14,10 +14,7 @@ const PeopleList = () => {
         <div className="container is-fluid">
           <p>
             Enhancement: Want to feature developer profiles?
-            <a
-              href="https://github.com/egdelwonk/nashdev-jobs/issues/18"
-              target="_blank"
-            >
+            <a href="https://github.com/nashdev/jobs/issues/18" target="_blank">
               {" "}
               Implement it.
             </a>

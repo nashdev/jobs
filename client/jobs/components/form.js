@@ -88,25 +88,20 @@ const descHelp = () => (
     here.
     <br />
     Enhancement: Interested in a Markdown WYSIWYG Editor?{" "}
-    <a href="https://github.com/egdelwonk/nashdev-jobs/issues/17">
-      Implement it.
-    </a>
+    <a href="https://github.com/nashdev/jobs/issues/17">Implement it.</a>
   </span>
 );
 
 const companyHelp = () => (
   <span>
-    Tip: Don't see your company listed? {" "}
+    Tip: Don't see your company listed?{" "}
     <a href="/companies/add" target="_blank">
       Add a company
     </a>{" "}
     here.
     <br />
     Enhancement: Interested in autocomplete?{" "}
-    <a
-      href="https://github.com/egdelwonk/nashdev-jobs/issues/14"
-      target="_blank"
-    >
+    <a href="https://github.com/nashdev/jobs/issues/14" target="_blank">
       Implement it
     </a>.
   </span>

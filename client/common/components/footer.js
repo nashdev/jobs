@@ -15,17 +15,11 @@ class AppFooter extends React.Component {
             </p>
             <nav>
               Want to help?{" "}
-              <a
-                href="https://github.com/egdelwonk/nashdev-jobs"
-                target="_blank"
-              >
+              <a href="https://github.com/nashdev/jobs" target="_blank">
                 Please Contribute.
               </a>{" "}
               See a problem?{" "}
-              <a
-                href="https://github.com/egdelwonk/nashdev-jobs/issues/"
-                target="_blank"
-              >
+              <a href="https://github.com/nashdev/jobs/issues/" target="_blank">
                 Let us know.
               </a>
             </nav>
