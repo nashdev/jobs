@@ -1,4 +1,4 @@
-FROM node:8.1.4
+FROM node:8.9.3
 
 RUN mkdir -p /opt/app
 
@@ -11,8 +11,6 @@ ENV PORT $PORT
 EXPOSE $PORT 5858 9229
 
 HEALTHCHECK CMD curl -fs http://localhost:$PORT/api/health || exit 1
-
-RUN npm install -g -s --no-progress yarn
 
 WORKDIR /opt/app
 COPY package.json /opt/app
