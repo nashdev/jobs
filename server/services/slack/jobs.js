@@ -20,7 +20,7 @@ const bot = new Bot(process.env.SLACK_API_TOKEN);
 
 async function getUserById(userId) {
   const user = await bot.webClient.users.info(userId);
-  return user;
+  return user.user;
 }
 
 async function getChannels() {
