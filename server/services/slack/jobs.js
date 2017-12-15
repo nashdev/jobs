@@ -18,9 +18,9 @@ const pkg = require("../../../package.json");
 
 const bot = new Bot(process.env.SLACK_API_TOKEN);
 
-async function getUserByName(username) {
-  const users = await bot.webClient.users.list();
-  return users.members.find(u => u.name === username);
+async function getUserById(userId) {
+  const user = await bot.webClient.users.info(userId);
+  return user;
 }
 
 async function getChannels() {
@@ -37,11 +37,12 @@ function filterChannelsByUser(res, userId) {
 }
 
 async function whois(username) {
-  const user = await getUserByName(username);
+  const user = await getUserById(username);
   const channels = await getChannels();
   const userChannels = await filterChannelsByUser(channels, user.id);
-  return `@${user.name} (${user.profile.real_name} — ${user.profile
-    .email}) is a member of ${userChannels.join(" ")}`;
+  return `@${user.name} (${user.profile.real_name} — ${
+    user.profile.email
+  }) is a member of ${userChannels.join(" ")}`;
 }
 
 module.exports = function() {
@@ -111,9 +112,9 @@ module.exports = function() {
         const listings = jobs
           .map(
             job => `
-          - *${job.title}* at *${job.company
-              .name}* in _${job.location}_ / @${job.contact_slack} (${job.user
-              .name}) on ${moment(
+          - *${job.title}* at *${job.company.name}* in _${job.location}_ / @${
+              job.contact_slack
+            } (${job.user.name}) on ${moment(
               job.created_at
             ).fromNow()}. Type: \`!jobs view ${job.id}\` for more details.`
           )
@@ -125,18 +126,17 @@ module.exports = function() {
         *:awesome: NashDev Jobs!*
 
     
-        :newspaper: Showing ${page.page > 1
-          ? page.page * 10 - 10 + 1
-          : 1} - ${page.page * 10 <= page.rowCount
-            ? page.page * 10
-            : page.rowCount} of ${page.rowCount}
+        :newspaper: Showing ${page.page > 1 ? page.page * 10 - 10 + 1 : 1} - ${
+            page.page * 10 <= page.rowCount ? page.page * 10 : page.rowCount
+          } of ${page.rowCount}
         
         ${listings}
 
         Type: \`!jobs list ${page.page + 1}\` to list 10 more;
 
-        Visit ${process.env
-          .API_URL}/jobs/list/${page.page} for the full list of posts.
+        Visit ${process.env.API_URL}/jobs/list/${
+            page.page
+          } for the full list of posts.
       `
         );
       });
@@ -163,8 +163,8 @@ module.exports = function() {
         :newspaper: *${job.title}* at *${job.company.name}* in _${job.location}_
         ${job.description}
         
-        Added: ${moment(job.created_at).format('MM/DD/YY [at] h:mm A')}
-        Updated: ${moment(job.updated_at).format('MM/DD/YY [at] h:mm A')}
+        Added: ${moment(job.created_at).format("MM/DD/YY [at] h:mm A")}
+        Updated: ${moment(job.updated_at).format("MM/DD/YY [at] h:mm A")}
         ________________________________________________________________________________
         Visit ${process.env.API_URL}/jobs/${job.id} for the full listing.
       `
@@ -177,7 +177,7 @@ module.exports = function() {
       :awesome: *New Job Added* / @${job.contact_slack} (${job.user.name})
       
       *${job.title}* at *${job.company.name}* in _${job.location}_
-      Added: ${moment(job.created_at).format('MM/DD/YY [at] h:mm A')}
+      Added: ${moment(job.created_at).format("MM/DD/YY [at] h:mm A")}
       ________________________________________________________________________________
       Visit ${process.env.API_URL}/jobs/${job.id} for the full listing.
       `;
