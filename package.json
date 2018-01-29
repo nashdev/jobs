@@ -63,7 +63,7 @@
     "express-handlebars": "^3.0.0",
     "express-validator": "^4.2.1",
     "extract-text-webpack-plugin": "^3.0.0",
-    "fetch-mock": "^5.12.2",
+    "fetch-mock": "^6.0.0",
     "file-loader": "^1.1.0",
     "history": "^4.7.2",
     "html-webpack-plugin": "^2.30.1",
