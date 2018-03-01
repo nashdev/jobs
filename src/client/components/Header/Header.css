@@ -1,0 +1,114 @@
+@import '../variables.css';
+
+.masthead {
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  min-height: 60px;
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+}
+
+.masthead .brand {
+  text-decoration: none;
+  color: #000;
+  font-weight: 300;
+  font-size: 1.2em;
+  align-self: center;
+}
+
+.masthead .brand span {
+  font-weight: 600;
+  display: inline-block;
+}
+
+.masthead nav {
+  justify-self: right;
+  align-self: center;
+}
+
+nav a {
+  color: #222224;
+  font-size: 1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: 200ms color ease-in-out;
+  letter-spacing: 0.2em;
+}
+nav.inline a {
+  display: inline-block;
+  margin: 0 15px;
+}
+
+nav.inline a::after,
+.masthead .brand span::after {
+  height: 4px;
+  content: '';
+  display: block;
+  top: 15px;
+  position: relative;
+  opacity: 0.5;
+  transition: 200ms top ease-in-out, 200ms opacity ease-in-out,
+    1s background-position ease-in-out, 500ms transform ease-in-out;
+  pointer-events: none;
+}
+.masthead nav.main a:hover::after,
+.masthead .brand span::after {
+  background-image: linear-gradient(-120deg, #89f7fe 0%, #66a6ff 100%);
+  top: 8px;
+  opacity: 1;
+}
+
+.masthead .brand:hover span::after {
+  transform: scale(14.9);
+  background-position: 50px;
+  top: -8px;
+  /* border-top: 1px solid transparent; */
+  /* top: 8px; */
+  /* height: 2px; */
+  opacity: 0.5;
+}
+
+.masthead nav.user {
+  text-align: center;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  border-left: 1px solid #ccc;
+  margin-left: 1rem;
+  padding-left: 1rem;
+  height: 100%;
+}
+
+.masthead nav.user span {
+  display: inline-block;
+  margin-left: 1rem;
+}
+
+.masthead nav.user span svg {
+  margin-right: 0.5rem;
+}
+
+.avatar {
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 100px;
+  padding: 0.25rem;
+  border-color: rgba(0, 0, 0, 0.1);
+  height: 4rem;
+  width: 4rem;
+  transition: 200ms transform ease-in-out, 200ms padding ease-in-out,
+    200ms margin ease-in-out;
+}
+
+.avatar.xSmall {
+  height: 2.5rem;
+  width: 2.5rem;
+}
+
+.avatar:hover {
+  /* padding: 0.05rem;
+  margin: 0.2rem; */
+  transform: scale(1.4);
+}

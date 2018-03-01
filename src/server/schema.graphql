@@ -1,0 +1,165 @@
+scalar Datetime
+
+type User {
+  id: ID!
+  name: String!
+  location: String
+  website: String
+  picture: String
+  slackId: String
+  email: String
+  createdAt: Datetime
+  updatedAt: Datetime
+  companies: [Company!]
+  jobs: [Job!]
+}
+
+type Company {
+  id: ID!
+  name: String!
+  location: String
+  phone: String
+  size: Int
+  description: String
+  createdAt: Datetime!
+  updatedAt: Datetime
+  user: User!
+  jobs: [Job!]
+}
+
+type Contact {
+  slack: String
+  email: String!
+  website: String
+  person: String!
+  phone: String
+}
+
+type Job {
+  id: ID!
+  user: User
+  company: Company
+  title: String!
+  description: String!
+  type: String!
+  recruiter: Boolean!
+  recruiterAgency: String
+  location: String!
+  contact: Contact!
+  experienceRange: Int!
+  salary: Int!
+  remote: Boolean!
+  createdAt: Datetime!
+  updatedAt: Datetime
+}
+
+type Token {
+  token: String!
+  user: User!
+}
+
+# Inputs
+input CreateJobInput {
+  company_id: ID!
+  title: String!
+  description: String!
+  type: String!
+  recruiter: Boolean!
+  recruiter_agency: String
+  location: String!
+  contact_slack: String
+  contact_email: String!
+  contact_website: String
+  contact_person: String!
+  contact_phone: String
+  experience_range: Int!
+  salary_range: Int!
+  remote_available: Boolean!
+}
+
+input EditJobInput {
+  id: ID!
+  company_id: ID!
+  title: String
+  description: String
+  type: String
+  recruiter: Boolean
+  recruiter_agency: String
+  location: String
+  contact_slack: String
+  contact_email: String
+  contact_website: String
+  contact_person: String
+  contact_phone: String
+  experience_range: Int
+  salary_range: Int
+  remote_available: Boolean
+}
+
+input CreateCompanyInput {
+  name: String!
+  location: String
+  phone: String
+  size: Int
+  description: String
+}
+
+input EditCompanyInput {
+  id: ID!
+  name: String
+  location: String
+  phone: String
+  size: Int
+  description: String
+}
+
+input EditUserInput {
+  name: String
+  location: String
+  website: String
+  picture: String
+}
+
+type PaginatedJob {
+  cursor: Datetime!
+  entries: [Job!]!
+}
+
+type PaginatedCompany {
+  cursor: Datetime!
+  entries: [Company!]!
+}
+
+type PaginatedUser {
+  cursor: Datetime!
+  entries: [User!]!
+}
+
+type Query {
+  # Companies
+  companies(cursor: String, limit: Int, filter: String): PaginatedCompany
+  company(id: ID!): Company
+  # Jobs
+  jobs(cursor: String, limit: Int, filter: String): PaginatedJob
+  job(id: ID!): Job
+  # Users
+  me: User
+  users(cursor: String, limit: Int, filter: String): PaginatedUser
+
+  user(id: ID!): User
+  getToken(code: String): Token
+}
+
+type Mutation {
+  # Companies
+  createCompany(company: CreateCompanyInput): Company
+  updateCompany(company: EditCompanyInput): Company
+  deleteCompany(id: ID!): Company
+  # Jobs
+  createJob(job: CreateJobInput): Job
+  updateJob(job: EditJobInput): Job
+  deleteJob(id: ID!): Job
+  # Users
+  updateUser(user: EditUserInput): User
+  deleteUser(id: ID!): User
+}
