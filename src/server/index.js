@@ -99,7 +99,7 @@ app.use(compression());
 // Static Assets
 app.use(
   express.static(path.resolve(__dirname, 'public'), {
-    maxage: 86400000, // One day
+    maxage: '1w',
   }),
 );
 app.set('trust proxy', 'loopback');
