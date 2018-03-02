@@ -13,7 +13,8 @@ export const TYPE_OPTIONS = [
   { label: "Full time", value: "fulltime" },
   { label: "Part time", value: "parttime" },
   { label: "Freelance", value: "freelance" },
-  { label: "Contract", value: "contract" }
+  { label: "Contract", value: "contract" },
+  { label: "Internship", value: "internship" }
 ];
 
 export const EXPERIENCE_OPTIONS = [
