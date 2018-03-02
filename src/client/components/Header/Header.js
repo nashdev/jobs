@@ -53,7 +53,11 @@ class Header extends React.Component {
 
           {!me && (
             <nav className={`${s.user} ${s.inline}`}>
-              <a href="https://slack.com/oauth/authorize?scope=identity.basic,identity.email,identity.team,identity.avatar&client_id=4856680877.249800206455">
+              <a
+                href={`https://slack.com/oauth/authorize?scope=identity.basic,identity.email,identity.team,identity.avatar&client_id=${
+                  process.env.SLACK_CLIENT_ID
+                }`}
+              >
                 <span>
                   <i className="fab fa-slack" data-fa-transform="grow-15" />Sign
                   in with Slack
