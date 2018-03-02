@@ -1,15 +1,16 @@
-import React from "react";
-import { graphql, compose } from "react-apollo";
-import { withRouter, Link } from "react-router-dom";
+import React from 'react';
+import { graphql, compose } from 'react-apollo';
+import { withRouter, Link } from 'react-router-dom';
+import gql from 'graphql-tag';
 
-import gql from "graphql-tag";
+import Spinner from '../../components/Spinner';
 
 class DetailPage extends React.Component {
   render() {
     if (this.props.jobQuery.loading) {
       return (
         <div className="flex w-100 h-100 items-center justify-center pt7">
-          <div>Loading (from {process.env.REACT_APP_GRAPHQL_ENDPOINT})</div>
+          <Spinner />
         </div>
       );
     }
@@ -18,13 +19,13 @@ class DetailPage extends React.Component {
     const action = this._renderAction({
       id: job.id,
       userId: job.user.id,
-      currentUserId: me.id
+      currentUserId: me.id,
     });
 
     return (
       <React.Fragment>
         <h1 className="f3 black-80 fw4 lh-solid">
-          {job.title} /{" "}
+          {job.title} /{' '}
           <Link to={`/company/${job.company.id}`}>{job.company.name}</Link>
         </h1>
         <p className="black-80 fw3">{job.description}</p>
@@ -43,13 +44,13 @@ class DetailPage extends React.Component {
             onClick={() => this.publishDraft(id)}
           >
             Publish
-          </a>{" "}
+          </a>{' '}
           <a
             className="f6 dim br1 ba ph3 pv2 mb2 dib black pointer"
             onClick={() => this.deleteJob(id)}
           >
             Delete
-          </a>{" "}
+          </a>{' '}
           <Link
             to={`/job/${id}/edit`}
             className="f6 dim br1 ba ph3 pv2 mb2 dib black pointer"
@@ -63,16 +64,16 @@ class DetailPage extends React.Component {
 
   deleteJob = async id => {
     await this.props.deleteJob({
-      variables: { id }
+      variables: { id },
     });
-    this.props.history.replace("/");
+    this.props.history.replace('/');
   };
 
   publishDraft = async id => {
     await this.props.publishDraft({
-      variables: { id }
+      variables: { id },
     });
-    this.props.history.replace("/");
+    this.props.history.replace('/');
   };
 }
 
@@ -116,20 +117,18 @@ const DELETE_MUTATION = gql`
 
 export default compose(
   graphql(USER_QUERY, {
-    name: "jobQuery",
-    options: props => {
-      return {
-        variables: {
-          id: props.match.params.id
-        }
-      };
-    }
+    name: 'jobQuery',
+    options: props => ({
+      variables: {
+        id: props.match.params.id,
+      },
+    }),
   }),
   graphql(PUBLISH_MUTATION, {
-    name: "publishDraft"
+    name: 'publishDraft',
   }),
   graphql(DELETE_MUTATION, {
-    name: "deleteJob"
+    name: 'deleteJob',
   }),
-  withRouter
+  withRouter,
 )(DetailPage);

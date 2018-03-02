@@ -34,7 +34,7 @@ class Header extends React.Component {
 
           {me && (
             <nav className={s.user}>
-              <Link to="/dashboard">
+              <Link to="/">
                 <img
                   onClick={() => {
                     Cookies.remove('token');

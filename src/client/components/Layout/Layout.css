@@ -1,8 +1,22 @@
 @import '../variables.css';
 
 :global {
-  * {
+  html {
     box-sizing: border-box;
+  }
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #a2e1ff;
+    border-radius: 0;
+  }
+  ::selection {
+    background: #a2e1ff;
+    color: black;
   }
   body {
     padding: 0;

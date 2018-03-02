@@ -4,10 +4,11 @@ import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './dashboard.css';
+import Spinner from '../../components/Spinner';
 
 const Dashboard = ({ data }) => {
   if (data.loading || !data.me) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
   return (
     <div>

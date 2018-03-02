@@ -5,6 +5,7 @@ import Waypoint from 'react-waypoint';
 import ReactPlaceholder from 'react-placeholder';
 import 'react-placeholder/lib/reactPlaceholder.css';
 
+import Spinner from '../../components/Spinner';
 import User from './list-item';
 
 class UsersPage extends React.Component {
@@ -21,7 +22,7 @@ class UsersPage extends React.Component {
     if (this.props.loading) {
       return (
         <div className="flex w-100 h-100 items-center justify-center pt7">
-          <div>Loading (from {process.env.REACT_APP_GRAPHQL_ENDPOINT})</div>
+          <Spinner />
         </div>
       );
     }
@@ -47,7 +48,7 @@ class UsersPage extends React.Component {
               ready={this.props.loading}
               rows={5}
             >
-              Loading...
+              <Spinner />
             </ReactPlaceholder>
           </div>
         </Waypoint>

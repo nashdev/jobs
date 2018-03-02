@@ -1,12 +1,13 @@
-import React, { Component } from "react";
-import { graphql, compose } from "react-apollo";
-import { withRouter, Link } from "react-router-dom";
-import gql from "graphql-tag";
+import React, { Component } from 'react';
+import { graphql, compose } from 'react-apollo';
+import { withRouter, Link } from 'react-router-dom';
+import gql from 'graphql-tag';
+import Spinner from '../../components/Spinner';
 
 class SearchResults extends Component {
   render() {
     if (this.props.data.loading) {
-      return <div>Loading...</div>;
+      return <Spinner />;
     }
 
     return (
@@ -125,9 +126,9 @@ export default compose(
   graphql(SEARCH_QUERY, {
     options: props => ({
       variables: {
-        term: props.match.params.term
-      }
-    })
+        term: props.match.params.term,
+      },
+    }),
   }),
-  withRouter
+  withRouter,
 )(SearchResults);

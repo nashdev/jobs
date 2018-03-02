@@ -4,13 +4,14 @@ import Avatar from 'react-avatar';
 import gql from 'graphql-tag';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
+import Spinner from '../../components/Spinner';
 import HomeHero from '../../components/Hero/Home';
 import s from './Home.css';
 
 class HomePage extends Component {
   render() {
     if (this.props.data.loading) {
-      return <div>Loading...</div>;
+      return <Spinner />;
     }
 
     return (
@@ -58,6 +59,9 @@ class HomePage extends Component {
                   <Avatar name={x.name} size={60} />
                   <div className="flex-auto">
                     <h2 className="company--name text-pink">{x.name}</h2>
+                    <span className="company--location text-pink">
+                      {x.location}
+                    </span>
                     <span className="job--type ttu">{x.location}</span>
                   </div>
                 </div>
@@ -94,6 +98,7 @@ const HOME_QUERY = gql`
       entries {
         id
         name
+        location
         user {
           id
           name

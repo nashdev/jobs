@@ -1,25 +1,27 @@
-import React from "react";
-import { withRouter } from "react-router-dom";
-import { graphql, compose } from "react-apollo";
-import gql from "graphql-tag";
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { graphql, compose } from 'react-apollo';
+import gql from 'graphql-tag';
+
+import Spinner from '../../components/Spinner';
 
 class CreateJob extends React.Component {
   state = {
     companyId: 0,
-    title: "",
-    description: "",
-    type: "",
+    title: '',
+    description: '',
+    type: '',
     recruiter: false,
-    recruiterAgency: "",
-    location: "",
-    contactSlack: "",
-    contactEmail: "",
-    contactWebsite: "",
-    contactPerson: "",
-    contactPhone: "",
-    experienceRange: "",
-    salaryRange: "",
-    remoteAvailable: false
+    recruiterAgency: '',
+    location: '',
+    contactSlack: '',
+    contactEmail: '',
+    contactWebsite: '',
+    contactPerson: '',
+    contactPhone: '',
+    experienceRange: '',
+    salaryRange: '',
+    remoteAvailable: false,
   };
 
   render() {
@@ -29,7 +31,7 @@ class CreateJob extends React.Component {
     if (this.props.loading) {
       return (
         <div className="flex w-100 h-100 items-center justify-center pt7">
-          <div>Loading (from {process.env.REACT_APP_GRAPHQL_ENDPOINT})</div>
+          <Spinner />
         </div>
       );
     }
@@ -164,11 +166,11 @@ class CreateJob extends React.Component {
           <input
             className={`pa3 bg-black-10 bn ${this.state.title &&
               this.state.description &&
-              "dim pointer"}`}
+              'dim pointer'}`}
             disabled={!this.state.title || !this.state.description}
             type="submit"
             value="Create"
-          />{" "}
+          />{' '}
           <a className="f6 pointer" onClick={this.props.history.goBack}>
             or cancel
           </a>
@@ -194,7 +196,7 @@ class CreateJob extends React.Component {
       contactPhone,
       experienceRange,
       salaryRange,
-      remoteAvailable
+      remoteAvailable,
     } = this.state;
     const { data } = await this.props.createDraftJob({
       variables: {
@@ -212,14 +214,14 @@ class CreateJob extends React.Component {
         contactPhone,
         experienceRange,
         salaryRange,
-        remoteAvailable
-      }
+        remoteAvailable,
+      },
     });
 
     this.props.history.replace(`/job/${data.createJob.id}`, {
       flash: {
-        success: "You created a job!"
-      }
+        success: 'You created a job!',
+      },
     });
   };
 }
@@ -308,12 +310,12 @@ export default compose(
         companies,
         fetchMore,
         refetch,
-        error
+        error,
       };
-    }
+    },
   }),
   graphql(CREATE_DRAFT_MUTATION, {
-    name: "createDraftJob"
+    name: 'createDraftJob',
   }),
-  withRouter
+  withRouter,
 )(CreateJob);

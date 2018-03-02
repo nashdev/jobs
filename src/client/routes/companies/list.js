@@ -1,11 +1,12 @@
-import React from "react";
-import { graphql } from "react-apollo";
-import gql from "graphql-tag";
-import Waypoint from "react-waypoint";
-import ReactPlaceholder from "react-placeholder";
-import "react-placeholder/lib/reactPlaceholder.css";
+import React from 'react';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+import Waypoint from 'react-waypoint';
+import ReactPlaceholder from 'react-placeholder';
+import 'react-placeholder/lib/reactPlaceholder.css';
 
-import CompanyListItem from "./list-item";
+import CompanyListItem from './list-item';
+import Spinner from '../../components/Spinner';
 
 class CompaniesList extends React.Component {
   componentWillReceiveProps(nextProps) {
@@ -18,7 +19,7 @@ class CompaniesList extends React.Component {
     if (this.props.loading) {
       return (
         <div className="flex w-100 h-100 items-center justify-center pt7">
-          <div>Loading (from {process.env.REACT_APP_GRAPHQL_ENDPOINT})</div>
+          <Spinner />
         </div>
       );
     }
@@ -44,7 +45,7 @@ class CompaniesList extends React.Component {
               ready={this.props.loading}
               rows={5}
             >
-              Loading...
+              <Spinner />
             </ReactPlaceholder>
           </div>
         </Waypoint>
@@ -74,11 +75,11 @@ export default graphql(COMPANIES_QUERY, {
       companies,
       cursor,
       refetch,
-      loadMoreEntries: () => {
-        return fetchMore({
+      loadMoreEntries: () =>
+        fetchMore({
           query: COMPANIES_QUERY,
           variables: {
-            cursor: companies.cursor
+            cursor: companies.cursor,
           },
           updateQuery: (previousResult, { fetchMoreResult }) => {
             const newCompanies = fetchMoreResult.companies.entries;
@@ -87,12 +88,11 @@ export default graphql(COMPANIES_QUERY, {
               companies: {
                 __typename: previousResult.companies.__typename,
                 cursor: newCursor,
-                entries: [...previousResult.companies.entries, ...newCompanies]
-              }
+                entries: [...previousResult.companies.entries, ...newCompanies],
+              },
             };
-          }
-        });
-      }
+          },
+        }),
     };
-  }
+  },
 })(CompaniesList);

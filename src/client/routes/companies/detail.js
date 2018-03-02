@@ -1,14 +1,15 @@
-import React from "react";
-import { graphql, compose } from "react-apollo";
-import { withRouter, Link } from "react-router-dom";
-import gql from "graphql-tag";
+import React from 'react';
+import { graphql, compose } from 'react-apollo';
+import { withRouter, Link } from 'react-router-dom';
+import gql from 'graphql-tag';
+import Spinner from '../../components/Spinner';
 
 class CompanyDetail extends React.Component {
   render() {
     if (this.props.companyQuery.loading) {
       return (
         <div className="flex w-100 h-100 items-center justify-center pt7">
-          <div>Loading (from {process.env.REACT_APP_GRAPHQL_ENDPOINT})</div>
+          <Spinner />
         </div>
       );
     }
@@ -17,14 +18,14 @@ class CompanyDetail extends React.Component {
     const action = this._renderAction({
       id: company.id,
       userId: company.user.id,
-      currentUserId: me.id
+      currentUserId: me.id,
     });
     const routerState = this.props.location.state;
     const { flash } = routerState || {};
 
     return (
       <React.Fragment>
-        {" "}
+        {' '}
         {flash &&
           flash.success && (
             <div className="black bg-washed-green pa4 mt4 mb4 mw6 tc f2 f1-m fw4 garamond ttu tracked mt0">
@@ -57,13 +58,13 @@ class CompanyDetail extends React.Component {
             onClick={() => this.publishDraft(id)}
           >
             Publish
-          </a>{" "}
+          </a>{' '}
           <a
             className="f6 dim br1 ba ph3 pv2 mb2 dib black pointer"
             onClick={() => this.deleteCompany(id)}
           >
             Delete
-          </a>{" "}
+          </a>{' '}
           <Link
             to={`/company/${id}/edit`}
             className="f6 dim br1 ba ph3 pv2 mb2 dib black pointer"
@@ -77,16 +78,16 @@ class CompanyDetail extends React.Component {
 
   deleteCompany = async id => {
     await this.props.deleteCompany({
-      variables: { id }
+      variables: { id },
     });
-    this.props.history.replace("/");
+    this.props.history.replace('/');
   };
 
   publishDraft = async id => {
     await this.props.publishDraft({
-      variables: { id }
+      variables: { id },
     });
-    this.props.history.replace("/");
+    this.props.history.replace('/');
   };
 }
 
@@ -130,18 +131,18 @@ const DELETE_MUTATION = gql`
 
 export default compose(
   graphql(COMPANY_QUERY, {
-    name: "companyQuery",
+    name: 'companyQuery',
     options: props => ({
       variables: {
-        id: props.match.params.id
-      }
-    })
+        id: props.match.params.id,
+      },
+    }),
   }),
   graphql(PUBLISH_MUTATION, {
-    name: "publishDraft"
+    name: 'publishDraft',
   }),
   graphql(DELETE_MUTATION, {
-    name: "deleteCompany"
+    name: 'deleteCompany',
   }),
-  withRouter
+  withRouter,
 )(CompanyDetail);

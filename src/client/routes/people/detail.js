@@ -1,21 +1,23 @@
-import React from "react";
-import { graphql, compose } from "react-apollo";
-import { withRouter } from "react-router-dom";
-import gql from "graphql-tag";
+import React from 'react';
+import { graphql, compose } from 'react-apollo';
+import { withRouter } from 'react-router-dom';
+import gql from 'graphql-tag';
+
+import Spinner from '../../components/Spinner';
 
 class DetailPage extends React.Component {
   render() {
     if (this.props.userQuery.loading) {
       return (
         <div className="flex w-100 h-100 items-center justify-center pt7">
-          <div>Loading (from {process.env.REACT_APP_GRAPHQL_ENDPOINT})</div>
+          <Spinner />
         </div>
       );
     }
 
     const { user } = this.props.userQuery;
 
-    let action = this._renderAction(user);
+    const action = this._renderAction(user);
 
     return (
       <React.Fragment>
@@ -35,7 +37,7 @@ class DetailPage extends React.Component {
             onClick={() => this.publishDraft(id)}
           >
             Publish
-          </a>{" "}
+          </a>{' '}
           <a
             className="f6 dim br1 ba ph3 pv2 mb2 dib black pointer"
             onClick={() => this.deleteUser(id)}
@@ -57,16 +59,16 @@ class DetailPage extends React.Component {
 
   deleteUser = async id => {
     await this.props.deleteUser({
-      variables: { id }
+      variables: { id },
     });
-    this.props.history.replace("/");
+    this.props.history.replace('/');
   };
 
   publishDraft = async id => {
     await this.props.publishDraft({
-      variables: { id }
+      variables: { id },
     });
-    this.props.history.replace("/");
+    this.props.history.replace('/');
   };
 }
 
@@ -99,18 +101,18 @@ const DELETE_MUTATION = gql`
 
 export default compose(
   graphql(USER_QUERY, {
-    name: "userQuery",
+    name: 'userQuery',
     options: props => ({
       variables: {
-        id: props.match.params.id
-      }
-    })
+        id: props.match.params.id,
+      },
+    }),
   }),
   graphql(PUBLISH_MUTATION, {
-    name: "publishDraft"
+    name: 'publishDraft',
   }),
   graphql(DELETE_MUTATION, {
-    name: "deleteUser"
+    name: 'deleteUser',
   }),
-  withRouter
+  withRouter,
 )(DetailPage);
