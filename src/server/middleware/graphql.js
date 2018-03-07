@@ -33,7 +33,7 @@ if (!executableSchema) {
   throw new Error('No schema defined');
 }
 
-const reqContext = (req, res) => ({
+const reqContext = req => ({
   ...req,
   dataLoaders: {
     job: Job.getLoaders(),

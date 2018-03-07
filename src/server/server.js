@@ -60,10 +60,10 @@ app.post('/graphql', graphqlBodyParser);
 app.post('/graphql', graphqlUploadHandler);
 // Create a GraphQL HTTP server
 app.post('/graphql', graphqlRequestHandler);
+// GraphQL IDE.
+app.get('/playground', graphqlPlaygroundHandler);
 // Handle slack authentication callback
 app.get('/slack/auth', slackAuthHandler);
-// GraphQL IDE.
-app.get('/graphql/playground', graphqlPlaygroundHandler);
 
 // Server Side Rendering
 app.get('*', ssrHandler);
