@@ -7,8 +7,6 @@ export default (req, res) => {
       res.redirect('/');
     })
     .catch(e => {
-      res.send({
-        error: e.message,
-      });
+      res.redirect(`/slack/login?error=${e.message}`);
     });
 };

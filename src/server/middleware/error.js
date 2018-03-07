@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 import PrettyError from 'pretty-error';
-import { ErrorPageWithoutStyle } from '../../client/routes/error/ErrorPage';
-import errorPageStyle from '../../client/routes/error/ErrorPage.css';
-import Html from '../../client/components/Html';
+import { ErrorPageWithoutStyle } from '../../client/Error/Pages/Error';
+import errorPageStyle from '../../client/Error/Pages/Error.css';
+import Html from '../../client/Common/Layout/Html';
 
 const pe = new PrettyError();
 pe.skipNodeFiles();

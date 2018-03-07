@@ -1,3 +1,4 @@
+import dotenv from 'dotenv';
 import path from 'path';
 import webpack from 'webpack';
 import AssetsPlugin from 'assets-webpack-plugin';
@@ -5,6 +6,8 @@ import nodeExternals from 'webpack-node-externals';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import overrideRules from './lib/overrideRules';
 import pkg from '../package.json';
+
+dotenv.config();
 
 const isDebug = !process.argv.includes('--release');
 const isVerbose = process.argv.includes('--verbose');
@@ -286,7 +289,7 @@ const clientConfig = {
   target: 'web',
 
   entry: {
-    client: ['@babel/polyfill', './src/client/index.js'],
+    client: ['@babel/polyfill', './src/client/client.js'],
   },
 
   plugins: [
@@ -295,6 +298,12 @@ const clientConfig = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
       'process.env.BROWSER': true,
+      // We have to do this hacky split on the client id, because for some reason
+      // when the client id is serialized client side it is loaded as a float and
+      // the precision is lost and the last digits of the client id are lost.
+      // There is probably a better way to handle this, but for now... this works.
+      'process.env.SLACK_CLIENT_ID_PREFIX': process.env.SLACK_CLIENT_ID_PREFIX,
+      'process.env.SLACK_CLIENT_ID_SUFFIX': process.env.SLACK_CLIENT_ID_SUFFIX,
       __DEV__: isDebug,
     }),
 
@@ -367,7 +376,7 @@ const serverConfig = {
   target: 'node',
 
   entry: {
-    server: ['@babel/polyfill', './src/server/index.js'],
+    server: ['@babel/polyfill', './src/server/server.js'],
   },
 
   output: {

@@ -9,9 +9,9 @@ import nodeFetch from 'node-fetch';
 
 import assets from './assets.json'; // eslint-disable-line import/no-unresolved
 import createFetch from '../createFetch';
-import Layout from '../../client/components/Layout';
-import ContextProvider from '../../client/components/Context/ContextProvider';
-import Html from '../../client/components/Html';
+import Layout from '../../client/Common/Layout/Layout';
+import ContextProvider from '../../client/Common/Context/ContextProvider';
+import Html from '../../client/Common/Layout/Html';
 
 export default async (req, res, next) => {
   // Ignore requests to playround, since the middleware calls next()

@@ -1,0 +1,59 @@
+:global {
+  :root {
+    --grid-column-gap: 12px;
+    --grid-column-gutter: 4px;
+    --grid-column-width: 1fr;
+    --grid-columns: 6;
+    --grid-row-gap: 32px;
+    --gutter: 16px;
+  }
+
+  @supports (display: grid) {
+    .container {
+      display: grid;
+      grid-column-gap: var(--grid-column-gap);
+      grid-row-gap: var(--grid-row-gap);
+
+      /* stylelint-disable indentation */
+      grid-template-columns:
+        [full-start]
+        var(--grid-column-gutter)
+        [main-start]
+        repeat(var(--grid-columns), [column-start] var(--grid-column-width))
+        [main-end]
+        var(--grid-column-gutter)
+        [full-end];
+
+      justify-content: center;
+    }
+  }
+
+  @media (min-width: var(--screen-sm-min)) {
+    :root {
+      /* Layout */
+      --grid-column-gap: 24px;
+      --grid-columns: 8;
+      --gutter: 28px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    :root {
+      /* Layout */
+      --grid-column-gap: 24px;
+      --grid-column-gutter: 8px;
+      --grid-columns: 12;
+      --gutter: 32px;
+    }
+  }
+
+  @media (min-width: 1354px) {
+    :root {
+      /* Layout */
+      --grid-column-gap: 30px;
+      --grid-column-gutter: 1fr;
+      --grid-column-width: 80px;
+      --gutter: auto;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+:root {
+  /*
+   * Grid
+   * ======================================================================== */
+  /*
+  
+  
+  /*
+   * Typography
+   * ======================================================================== */
+
+  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+
+  /*
+   * Layout
+   * ======================================================================== */
+
+  --max-content-width: 1000px;
+
+  /*
+   * Media queries breakpoints
+   * ======================================================================== */
+
+  --screen-xs-min: 480px; /* Extra small screen / phone */
+  --screen-sm-min: 768px; /* Small screen / tablet */
+  --screen-md-min: 992px; /* Medium screen / desktop */
+  --screen-lg-min: 1200px; /* Large screen / wide desktop */
+
+  /*
+   * Brand Colors
+   * ======================================================================== */
+
+  --color-secondary: #a2e1ff;
+  --color-secondary-light: #f0f3fa;
+  --color-text-primary: #171a27;
+}
