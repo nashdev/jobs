@@ -80,7 +80,15 @@ export default async (req, res, next) => {
 
       data.scripts.push(assets.client.js);
 
-      const html = <Html content={content} state={initialState} {...data} />;
+      const html = (
+        <Html
+          title="NashDev / Jobs"
+          description="Nashville Developer Jobs"
+          content={content}
+          state={initialState}
+          {...data}
+        />
+      );
 
       res.status(200);
       res.send(`<!doctype html>\n${ReactDOM.renderToStaticMarkup(html)}`);

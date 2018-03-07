@@ -9,7 +9,7 @@ const pe = new PrettyError();
 pe.skipNodeFiles();
 pe.skipPackage('express');
 
-export default (err, req, res) => {
+export default (err, req, res, next) => {
   console.error(pe.render(err));
   const html = ReactDOM.renderToStaticMarkup(
     <Html
@@ -20,6 +20,6 @@ export default (err, req, res) => {
       {ReactDOM.renderToString(<ErrorPageWithoutStyle error={err} />)}
     </Html>,
   );
-  // res.status(err.status || 500);
+  res.status(err.status || 500);
   res.send(`<!doctype html>${html}`);
 };

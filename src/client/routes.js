@@ -16,4 +16,6 @@ const routes = [
   ...Dashboard,
 ];
 
+export const routeNames = routes.map(x => x.path);
+
 export default routes;

@@ -23,6 +23,8 @@ import slackAuthHandler from './middleware/slack';
 import ssrHandler from './middleware/ssr';
 import errorHandler from './middleware/error';
 
+import { routeNames } from '../client/routes';
+
 // Create a new express app;
 const app = express();
 
@@ -66,7 +68,7 @@ app.get('/playground', graphqlPlaygroundHandler);
 app.get('/slack/auth', slackAuthHandler);
 
 // Server Side Rendering
-app.get('*', ssrHandler);
+app.get(routeNames, ssrHandler);
 
 // Default Error fallback handler
 app.use(errorHandler);

@@ -16,7 +16,7 @@ class Html extends React.Component {
     ),
     scripts: PropTypes.arrayOf(PropTypes.string.isRequired),
     content: PropTypes.string.isRequired,
-    state: PropTypes.string.isRequired,
+    state: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
