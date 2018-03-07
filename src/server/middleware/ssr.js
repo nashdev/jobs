@@ -16,7 +16,7 @@ import Html from '../../client/Common/Layout/Html';
 export default async (req, res, next) => {
   // Ignore requests to playround, since the middleware calls next()
   // it will enter our catch all route, here, and we don't want that.
-  if (req.url === '/graphql/playground' || req.url === '/slack/auth') {
+  if (req.url === '/playground' || req.url === '/slack/auth') {
     return next();
   }
   try {
