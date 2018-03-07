@@ -6,12 +6,7 @@
     "node": ">=6.5",
     "npm": ">=3.10"
   },
-  "browserslist": [
-    ">1%",
-    "last 4 versions",
-    "Firefox ESR",
-    "not ie < 9"
-  ],
+  "browserslist": [">1%", "last 4 versions", "Firefox ESR", "not ie < 9"],
   "dependencies": {
     "@babel/core": "7.0.0-beta.39",
     "@babel/node": "7.0.0-beta.39",
@@ -153,7 +148,8 @@
   "scripts": {
     "knex": "babel-node node_modules/.bin/knex",
     "postinstall": "npm run build -- --release",
-    "test": "jest",
+    "test-jest": "jest",
+    "test": "echo \"Error: no test specified\" && exit 0",
     "test-watch": "npm run test --watch --notify",
     "test-cover": "npm run test --coverage",
     "coverage": "npm run test-cover && opn coverage/lcov-report/index.html",
