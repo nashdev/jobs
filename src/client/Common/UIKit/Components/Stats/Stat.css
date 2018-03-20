@@ -1,0 +1,46 @@
+.root:not(.centered) {
+  padding-right: 5px;
+}
+
+.centered {
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.label {
+  display: block;
+  font-size: 0.63rem;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.4);
+  letter-spacing: 1px;
+}
+
+.value {
+  font-size: 2.43rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.highlight .value {
+  color: #047bf8;
+}
+
+.normal .value {
+  font-size: 2.43rem;
+}
+
+.normal .label {
+  font-size: 0.63rem;
+}
+
+.large .value {
+  font-size: 0.9rem;
+}
+
+.large .label {
+  font-size: 0.9rem;
+}

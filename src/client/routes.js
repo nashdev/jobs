@@ -5,6 +5,7 @@ import Jobs from './Jobs/Routes';
 import Companies from './Companies/Routes';
 import Search from './Search/Routes';
 import Dashboard from './Dashboard/Routes';
+import UIKit from './Common/UIKit/Routes';
 
 const routes = [
   ...Home,
@@ -14,6 +15,7 @@ const routes = [
   ...Companies,
   ...Search,
   ...Dashboard,
+  ...UIKit,
 ];
 
 export const routeNames = routes.map(x => x.path);

@@ -1,0 +1,35 @@
+.root {
+  padding-left: 2rem;
+  padding-right: 2rem;
+
+  align-items: center;
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 0;
+}
+
+.smaller {
+  font-size: 0.72rem;
+}
+
+.item {
+}
+
+.item a {
+  padding: 0.2em 1.1em;
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.4);
+  display: block;
+  cursor: pointer;
+}
+
+.item a.active {
+  color: #fff;
+  cursor: default;
+  background-color: #047bf8;
+}
+
+.item a:hover {
+  text-decoration: none;
+}

@@ -1,0 +1,30 @@
+.root {
+  margin-top: 2rem;
+}
+
+.header {
+  padding: 0 2rem 1rem 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.title h5 {
+  font-weight: 500;
+  line-height: 1.2;
+  font-size: 1.25rem;
+  color: #334152;
+  margin: 0;
+}
+
+.actions {
+  flex: 0 0 220px;
+  text-align: right;
+}
