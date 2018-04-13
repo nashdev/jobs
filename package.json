@@ -108,7 +108,7 @@
     "request": "^2.83.0",
     "request-promise-native": "^1.0.5",
     "rimraf": "^2.6.2",
-    "sass-loader": "^6.0.6",
+    "sass-loader": "^7.0.0",
     "serialize-javascript": "^1.4.0",
     "style-loader": "^0.20.1",
     "universal-cookie": "^2.1.0",
