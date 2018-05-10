@@ -9,12 +9,13 @@ Update `Jobs` controller to dispatch events when these actions happen.
 *Maybe use redux/actions for this on the server side? might be fun? meh. idk.*
 
 */
-const Bot = require("./bot");
-const eventEmitter = require("../../events");
+const Bot = require('./bot');
+const eventEmitter = require('../../events');
+
 const JOBS_CHANNEL = process.env.SLACK_JOBS_CHANNEL;
-const moment = require("moment");
-const Job = require("../../models/Job");
-const pkg = require("../../../package.json");
+const moment = require('moment');
+const Job = require('../../models/Job');
+const pkg = require('../../../package.json');
 
 const bot = new Bot(process.env.SLACK_API_TOKEN);
 
@@ -29,23 +30,20 @@ async function getChannels() {
 }
 
 function filterChannelsByUser(res, userId) {
-  return res.channels
-    .filter(c => {
-      return c.members.indexOf(userId) !== -1;
-    })
-    .map(c => `#${c.name}`);
+  return res.channels.filter(c => c.members.indexOf(userId) !== -1).map(c => `#${c.name}`);
 }
 
 async function whois(username) {
   const user = await getUserById(username);
-  const channels = await getChannels();
-  const userChannels = await filterChannelsByUser(channels, user.id);
+  const conversations = await bot.webClient.users.conversations({ user: username });
+  const userChannels = conversations.channels.map(x => x.name_normalized);
+
   return `@${user.name} (${user.profile.real_name} — ${
     user.profile.email
-  }) is a member of ${userChannels.join(" ")}`;
+  }) is a member of ${userChannels.join(' ')}`;
 }
 
-module.exports = function() {
+module.exports = function () {
   // Listen for !jobs
   bot.listen(/^!jobs$/i, (msg, args) => {
     bot.send(
@@ -62,7 +60,7 @@ module.exports = function() {
       :blush: p.s. you can DM @nashjobs and use me privately, if you'd like.
 
       NashDev Jobs API v. ${pkg.version}
-    `
+    `,
     );
   });
 
@@ -74,7 +72,7 @@ module.exports = function() {
       *:awesome: NashDev Jobs!*
 
       :blush: This hasn't been implemented yet. Hang tight!
-    `
+    `,
     );
   });
 
@@ -92,33 +90,31 @@ module.exports = function() {
       3. Add your Job Listing. (${process.env.API_URL}/jobs/add)
       4. ...  
       5. Profit?
-    `
+    `,
     );
   });
 
   // Listen for !jobs list <page>
   bot.listen(/(^!jobs list)\s?(\d+)?$/i, (msg, args) => {
-    let page = parseInt(args[2] || 1);
+    const page = parseInt(args[2] || 1);
     Job.forge()
-      .orderBy("created_at", "DESC")
+      .orderBy('created_at', 'DESC')
       .fetchPage({
         page: page || 1,
         pageSize: 10,
-        withRelated: ["user", "company"]
+        withRelated: ['user', 'company'],
       })
-      .then(jobs => {
+      .then((jobs) => {
         const page = jobs.pagination;
         jobs = jobs.toJSON();
         const listings = jobs
-          .map(
-            job => `
-          - *${job.title}* at *${job.company.name}* in _${job.location}_ / @${
-              job.contact_slack
-            } (${job.user.name}) on ${moment(
-              job.created_at
-            ).fromNow()}. Type: \`!jobs view ${job.id}\` for more details.`
-          )
-          .join("");
+          .map(job => `
+          - *${job.title}* at *${job.company.name}* in _${job.location}_ / @${job.contact_slack} (${
+  job.user.name
+}) on ${moment(job.created_at).fromNow()}. Type: \`!jobs view ${
+  job.id
+}\` for more details.`)
+          .join('');
 
         bot.send(
           msg.user,
@@ -127,30 +123,28 @@ module.exports = function() {
 
     
         :newspaper: Showing ${page.page > 1 ? page.page * 10 - 10 + 1 : 1} - ${
-            page.page * 10 <= page.rowCount ? page.page * 10 : page.rowCount
-          } of ${page.rowCount}
+  page.page * 10 <= page.rowCount ? page.page * 10 : page.rowCount
+} of ${page.rowCount}
         
         ${listings}
 
         Type: \`!jobs list ${page.page + 1}\` to list 10 more;
 
-        Visit ${process.env.API_URL}/jobs/list/${
-            page.page
-          } for the full list of posts.
-      `
+        Visit ${process.env.API_URL}/jobs/list/${page.page} for the full list of posts.
+      `,
         );
       });
   });
 
   // Listen for !jobs view <id>
   bot.listen(/^!jobs view ([0-9]+)$/i, (msg, args) => {
-    let postId = args[1] || null;
+    const postId = args[1] || null;
 
     Job.where({ id: postId })
-      .fetch({ withRelated: ["user", "company"] })
-      .then(job => {
+      .fetch({ withRelated: ['user', 'company'] })
+      .then((job) => {
         if (!job) {
-          bot.send(msg.user, "Sorry. That post could not be found.");
+          bot.send(msg.user, 'Sorry. That post could not be found.');
         }
 
         job = job.toJSON();
@@ -163,21 +157,21 @@ module.exports = function() {
         :newspaper: *${job.title}* at *${job.company.name}* in _${job.location}_
         ${job.description}
         
-        Added: ${moment(job.created_at).format("MM/DD/YY [at] h:mm A")}
-        Updated: ${moment(job.updated_at).format("MM/DD/YY [at] h:mm A")}
+        Added: ${moment(job.created_at).format('MM/DD/YY [at] h:mm A')}
+        Updated: ${moment(job.updated_at).format('MM/DD/YY [at] h:mm A')}
         ________________________________________________________________________________
         Visit ${process.env.API_URL}/jobs/${job.id} for the full listing.
-      `
+      `,
         );
       });
   });
 
-  eventEmitter.on("jobs:created", job => {
-    let text = `
+  eventEmitter.on('jobs:created', (job) => {
+    const text = `
       :awesome: *New Job Added* / @${job.contact_slack} (${job.user.name})
       
       *${job.title}* at *${job.company.name}* in _${job.location}_
-      Added: ${moment(job.created_at).format("MM/DD/YY [at] h:mm A")}
+      Added: ${moment(job.created_at).format('MM/DD/YY [at] h:mm A')}
       ________________________________________________________________________________
       Visit ${process.env.API_URL}/jobs/${job.id} for the full listing.
       `;
@@ -189,13 +183,13 @@ module.exports = function() {
   bot.listen(/^!whois\s+(.*)$/i, (msg, args, user) => {
     // Limit this only to admins.
     if (user.is_admin) {
-      whois(args[1]).then(res => {
+      whois(args[1]).then((res) => {
         bot.send(
           user.id,
           `
           *:mag: WHOIS:*
           ${res}
-        `
+        `,
         );
       });
     }
