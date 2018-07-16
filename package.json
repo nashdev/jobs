@@ -26,7 +26,7 @@
   "license": "MIT",
   "dependencies": {
     "@slack/client": "^3.14.2",
-    "autoprefixer": "^8.0.0",
+    "autoprefixer": "^9.0.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.1",
