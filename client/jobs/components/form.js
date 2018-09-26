@@ -26,9 +26,16 @@ export const EXPERIENCE_OPTIONS = [
 
 export const SALARY_OPTIONS = [
   { value: "", label: "" },
-  { value: 30, label: "$30,000 - $50,000" },
-  { value: 50, label: "$50,000 - $80,000" },
-  { value: 80, label: "$80,000 - $100,000" },
+  { value: 10, label: "$0 - $10,000" },
+  { value: 20, label: "$10,001 - $20,000" },
+  { value: 30, label: "$20,001 - $30,000" },
+  { value: 40, label: "$30,001 - $40,000" },
+  { value: 50, label: "$40,001 - $50,000" },
+  { value: 60, label: "$50,001 - $60,000" },
+  { value: 70, label: "$60,001 - $70,000" },
+  { value: 80, label: "$70,001 - $80,000" },
+  { value: 90, label: "$80,001 - $90,000" },
+  { value: 99, label: "$90,001 - $100,000" },
   { value: 100, label: "$100,000+" }
 ];
 
