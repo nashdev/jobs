@@ -1,0 +1,76 @@
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+  border-bottom: 1px solid #ccc;
+  font-weight: 600;
+  color: #3676d9;
+}
+
+.content p {
+  margin-bottom: 1.3em;
+}
+
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+  margin: 1.414em 0 0.5em;
+  font-weight: inherit;
+  line-height: 1.2;
+  padding: 0.5em 0;
+}
+
+.content h1 {
+  margin-top: 0;
+  font-size: 3.998em;
+}
+
+.content h2 {
+  font-size: 2.827em;
+}
+
+.content h3 {
+  font-size: 1.999em;
+}
+
+.content h4 {
+  font-size: 1.414em;
+}
+
+.content ul,
+.content ol {
+  list-style-position: inside;
+}
+
+.content ul {
+  list-style-type: none;
+}
+
+.content ul li::before {
+  content: "\2022";
+  color: #3676d9;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+}
+
+.content ol {
+  list-style-type: upper-roman;
+}
+
+.content ul li,
+.content ol li {
+  font-size: 14px;
+}
+
+.content blockquote,
+.content pre {
+  margin: 15px 0;
+  padding: 15px;
+  border: 1px solid #ccc;
+}
