@@ -46,6 +46,10 @@ const JobForm = ({
         errors.experienceRange =
           "Please select an experience range for this position.";
       }
+
+      if (values.recruiter && !values.recruiterAgency) {
+        errors.recruiterAgency = "Please enter your recruiter agency name.";
+      }
       return errors;
     }}
     onSubmit={onSubmit}
