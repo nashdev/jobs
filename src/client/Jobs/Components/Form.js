@@ -67,7 +67,6 @@ const JobForm = ({
                 })}
               >
                 <Field name="companyId" id="companyId" component="select">
-                  <option value={0}>---</option>
                   {companies.map((c) => (
                     <option key={c.id} value={c.id}>
                       {c.name}
@@ -207,7 +206,6 @@ const JobForm = ({
                   name="experienceRange"
                   component="select"
                 >
-                  <option value={false}>---</option>
                   <option value="junior">Junior</option>
                   <option value="midlevel">Midlevel</option>
                   <option value="senior">Senior</option>
@@ -232,7 +230,6 @@ const JobForm = ({
                 })}
               >
                 <Field id="salaryRange" name="salaryRange" component="select">
-                  <option value={false}>---</option>
                   {Array(14)
                     .fill(0)
                     .map((_, i) => {
