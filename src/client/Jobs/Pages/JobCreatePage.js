@@ -121,7 +121,7 @@ class CreateJobPage extends React.Component {
                         submitBtnText="Add Job"
                         companies={data.me.companies}
                         initialValues={{
-                          companyId: 0,
+                          companyId: data.me.companies[0].id,
                           title: "",
                           description: DESCRIPTION_TEMPLATE,
                           short_description: "A brief description of your job.",
