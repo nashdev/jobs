@@ -234,6 +234,7 @@ const JobForm = ({
                 })}
               >
                 <Field id="salaryRange" name="salaryRange" component="select">
+                  <option value="Undisclosed">Undisclosed</option>
                   {Array(14)
                     .fill(0)
                     .map((_, i) => {
@@ -250,6 +251,10 @@ const JobForm = ({
                 </Field>
               </div>
             </div>
+            <p className="help">
+              Hint: If you provide salary information, your post will
+              automatically notify everyone in the #jobs channel on Nashdev.
+            </p>
             <ErrorMessage
               name="salaryRange"
               component="p"

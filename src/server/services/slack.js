@@ -30,6 +30,11 @@ class SlackService {
       short_description: shortJobDescription,
     } = job;
 
+    // If the user has not provided salary information,
+    // we will not want to notify the channel.
+    if (job.salary === "Undisclosed") {
+      return;
+    }
     const { slackId } = await UsersRepository.getById(userId);
 
     const {
