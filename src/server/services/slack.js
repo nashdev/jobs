@@ -26,8 +26,8 @@ class SlackService {
       type,
       recruiter,
       salary,
+      remote,
       short_description: shortJobDescription,
-      remote_available: remoteAvailable,
     } = job;
 
     const { slackId } = await UsersRepository.getById(userId);
@@ -60,7 +60,7 @@ class SlackService {
               },
               {
                 title: "Remote Available",
-                value: remoteAvailable ? "Yes" : "No",
+                value: remote ? "Yes" : "No",
                 short: true,
               },
               {
