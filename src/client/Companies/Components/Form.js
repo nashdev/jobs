@@ -42,6 +42,11 @@ const CompanyForm = ({
         errors.size =
           "Please describe the number of people your company employs.";
       }
+
+      if (!Number.isInteger(values.size) || values.size > 3000000) {
+        errors.size =
+          "Please enter a valid size. (No Decimals/Smaller than 3 million)";
+      }
       return errors;
     }}
     onSubmit={onSubmit}
