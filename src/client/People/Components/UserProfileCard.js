@@ -66,7 +66,7 @@ const UserProfileCard = ({
         {
           name: "linkedin",
           handle: linkedin,
-          link: `https://linkedin.com/${linkedin}`,
+          link: `https://linkedin.com/in/${linkedin}`,
         },
       ].map(({ name, handle, link }) => {
         if (!handle) {

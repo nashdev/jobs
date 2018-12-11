@@ -54,7 +54,7 @@ const CompanyProfileCard = ({
         {
           name: "linkedin",
           handle: linkedin,
-          link: `https://linkedin.com/${linkedin}`,
+          link: `https://linkedin.com/company/${linkedin}`,
         },
       ].map(({ name, handle, link }) => {
         if (!handle) {
