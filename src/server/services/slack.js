@@ -84,7 +84,7 @@ class SlackService {
                 type: "button",
                 text: `Apply`,
                 style: "primary",
-                url: `https://jobs.nashdev.com/jobs/${jobId}`,
+                url: `https://jobs.nashdev.com/job/${jobId}`,
               },
             ],
           },
