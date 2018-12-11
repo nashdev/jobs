@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import Avatar from "react-avatar";
 import moment from "moment";
 
-import s from "./PeopleListitem.css";
-
 const PeopleListitem = ({ person }) => {
   const { id, name, picture, createdAt } = person;
 
@@ -21,7 +19,7 @@ const PeopleListitem = ({ person }) => {
       </figure>
       <div className="media-content">
         <div className="content">
-          <p>
+          <p className="is-capitalized">
             <strong>
               <Link to={`/person/${id}`}>{name}</Link>
             </strong>{" "}
