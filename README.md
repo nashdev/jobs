@@ -3,7 +3,7 @@
 > nashdev slack jobs api
 
 [![Build status: Linux](https://img.shields.io/travis/nashdev/jobs.svg?style=flat-square)](https://travis-ci.org/nashdev/jobs)
-[![Dependency Status](https://david-dm.org/nashdev/jobs/graphql.svg?style=flat-square)](https://david-dm.org/nashdev/jobs/graphql)
+[![Dependency Status](https://david-dm.org/nashdev/jobs.svg?style=flat-square)](https://david-dm.org/nashdev/jobs)
 [![Coverage Status](https://img.shields.io/coveralls/nashdev/jobs/master.svg?style=flat-square)](https://coveralls.io/github/nashdev/jobs?branch=master)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Contributors](https://img.shields.io/github/contributors/nashdev/jobs.svg)](https://github.com/nashdev/jobs/graphs/contributors)
