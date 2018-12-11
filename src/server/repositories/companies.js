@@ -58,7 +58,14 @@ class CompaniesRepository {
   }
 
   static async delete(id, userId) {
-    return db
+    // Delete all of the jobs for this company
+    await db
+      .table("jobs")
+      .where({ company_id: id, user_id: userId })
+      .delete();
+
+    // Delete the company
+    return await db
       .table("companies")
       .where({ id, user_id: userId })
       .delete()
