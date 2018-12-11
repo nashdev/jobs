@@ -57,17 +57,19 @@ class CompanyDetailPage extends React.Component {
       }" ?
     `)
     ) {
+      await this.props.deleteCompany({
+        variables: { id: company.id },
+      });
+      this.props.history.replace("/dashboard/companies", {
+        flash: {
+          status: "success",
+          title: "Deleted Company",
+          message: `You have successfully deleted the company "${
+            company.name
+          }".`,
+        },
+      });
     }
-    await this.props.deleteCompany({
-      variables: { id: company.id },
-    });
-    this.props.history.replace("/dashboard/companies", {
-      flash: {
-        status: "success",
-        title: "Deleted Company",
-        message: `You have successfully deleted the company "${company.name}".`,
-      },
-    });
   };
 
   render() {

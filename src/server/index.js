@@ -4,7 +4,6 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import cookieParser from "cookie-parser";
-import manifestHelpers from "express-manifest-helpers";
 import bodyParser from "body-parser";
 
 import {
@@ -12,6 +11,7 @@ import {
   authenticationHandler,
 } from "./middleware/jwt";
 
+import manifestHelpers from "./middleware/manifest";
 import { graphqlRequestHandler } from "./middleware/graphql";
 
 import slackAuthHandler from "./middleware/slack";
