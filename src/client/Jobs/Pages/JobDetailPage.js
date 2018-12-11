@@ -186,6 +186,8 @@ const USER_QUERY = gql`
       salary
       experienceRange
       remote
+      recruiter
+      recruiterAgency
       user {
         id
         name
