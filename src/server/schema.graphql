@@ -1,0 +1,198 @@
+scalar Datetime
+
+directive @isOwner on FIELD | FIELD_DEFINITION
+
+type User {
+  id: ID!
+  name: String
+  slackId: String
+  slackHandle: String
+  location: String
+  website: String
+  picture: String
+  resume: String
+  github: String
+  twitter: String
+  facebook: String
+  linkedin: String
+  available: Boolean
+  public: Boolean
+
+  createdAt: Datetime
+  updatedAt: Datetime
+
+  companies: [Company!]
+  jobs: [Job!]
+}
+
+type Company {
+  id: ID!
+  name: String!
+  location: String
+  phone: String
+  size: Int
+  picture: String
+  banner: String
+  short_description: String
+  description: String
+  github: String
+  twitter: String
+  facebook: String
+  linkedin: String
+  createdAt: Datetime!
+  updatedAt: Datetime
+  user: User!
+  jobs: [Job!]
+}
+
+type Job {
+  id: ID!
+  user: User
+  company: Company
+  title: String!
+  short_description: String
+  description: String!
+  type: String!
+  status: String
+  recruiter: Boolean!
+  recruiterAgency: String
+  location: String!
+  website: String
+  experienceRange: String!
+  salary: String!
+  remote: Boolean!
+  createdAt: Datetime!
+  updatedAt: Datetime
+}
+
+type Token {
+  token: String!
+  user: User!
+}
+
+# Inputs
+input CreateJobInput {
+  company_id: ID!
+  title: String!
+  short_description: String!
+  description: String!
+  type: String!
+  recruiter: Boolean!
+  recruiter_agency: String
+  location: String!
+  website: String
+  experience_range: String!
+  salary_range: String!
+  remote_available: Boolean!
+}
+
+input EditJobInput {
+  id: ID!
+  company_id: ID!
+  title: String
+  description: String
+  short_description: String
+  type: String
+  status: String
+  recruiter: Boolean
+  recruiter_agency: String
+  location: String
+  website: String
+  experience_range: String
+  salary_range: String
+  remote_available: Boolean
+}
+
+input CreateCompanyInput {
+  name: String!
+  location: String
+  phone: String
+  size: Int
+  picture: String
+  banner: String
+  short_description: String
+  description: String
+  twitter: String
+  github: String
+  facebook: String
+  linkedin: String
+}
+
+input EditCompanyInput {
+  id: ID!
+  name: String
+  location: String
+  phone: String
+  size: Int
+  picture: String
+  banner: String
+  short_description: String
+  description: String
+  twitter: String
+  github: String
+  facebook: String
+  linkedin: String
+}
+
+input EditUserInput {
+  name: String!
+  location: String
+  website: String
+  picture: String
+  resume: String
+  github: String
+  twitter: String
+  facebook: String
+  linkedin: String
+  available: Boolean
+  public: Boolean
+}
+
+type PaginatedJob {
+  cursor: Datetime
+  entries: [Job!]!
+}
+
+type PaginatedCompany {
+  cursor: Datetime
+  entries: [Company!]!
+}
+
+type PaginatedUser {
+  cursor: Datetime
+  entries: [User!]!
+}
+
+type Query {
+  # Companies
+  companies(cursor: String, limit: Int, filter: String): PaginatedCompany
+  company(id: ID!): Company
+  # Jobs
+  jobs(cursor: String, limit: Int, filter: String, type: String): PaginatedJob
+  job(id: ID!): Job
+  # Users
+  me: User
+  users(
+    cursor: String
+    limit: Int
+    filter: String
+    availableOnly: Boolean
+  ): PaginatedUser
+
+  user(id: ID!): User
+  getToken(code: String): Token
+}
+
+type Mutation {
+  # Companies
+  createCompany(company: CreateCompanyInput): Company
+  updateCompany(company: EditCompanyInput): Company
+  deleteCompany(id: ID!): Company
+  # Jobs
+  createJob(job: CreateJobInput): Job
+  updateJob(job: EditJobInput): Job
+  deleteJob(id: ID!): Job
+  # Users
+  updateUser(user: EditUserInput): User
+  deleteUser(id: ID!): User
+}

@@ -1,0 +1,25 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "./node_modules/prettier-stylelint/config.js"
+  ],
+  "plugins": [],
+  "ignoreFiles": ["dist"],
+  "rules": {
+    "selector-list-comma-newline-after": null,
+    "selector-pseudo-element-colon-notation": "double",
+    "declaration-block-no-redundant-longhand-properties": [true, {
+      ignoreShorthands: ["flex-flow", "grid-gap"]
+    }],
+    "selector-pseudo-class-no-unknown": [true, {
+      "ignorePseudoClasses": [
+        "global",
+      ]
+    }],
+    "property-no-unknown": [true, {
+      "ignoreProperties": [
+        "composes",
+      ]
+    }],
+  }
+}

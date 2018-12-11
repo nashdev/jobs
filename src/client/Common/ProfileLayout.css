@@ -1,0 +1,38 @@
+.card section {
+  margin-top: 40px;
+  background-color: #fff;
+  padding: 30px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.05), 0 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.time {
+  color: #969ba5;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+h1.title {
+  color: #3b4d6b;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.shortDescription {
+  color: #5d5e61;
+  font-weight: 600;
+  margin-bottom: 40px;
+}
+
+.related {
+  margin-top: 40px;
+}
+
+.related h3 {
+  font-size: 20px;
+  margin: 20px 0;
+}

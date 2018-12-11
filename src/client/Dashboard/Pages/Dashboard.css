@@ -1,0 +1,11 @@
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h3.title {
+  margin-bottom: 40px;
+  color: #3b4d6b;
+  font-size: 28px;
+  font-weight: 600;
+}
