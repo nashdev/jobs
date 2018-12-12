@@ -17,6 +17,93 @@ class SlackService {
     this.channel = process.env.SLACK_JOBS_CHANNEL;
   }
 
+  message = async ({ user, target, args }) => {
+    const userId = user.slackId;
+    const targetUserId = target.user.slackId;
+    const { type } = args;
+    const dm = await this.client.mpim.open({
+      users: `${userId}, ${targetUserId}`,
+    });
+
+    let profileType;
+    let actions = [];
+
+    if (type === "COMPANY") {
+      profileType = `company profile for "${target.company.name}"`;
+      actions = [
+        {
+          type: "button",
+          text: `${user.name}'s profile`,
+          url: `https://jobs.nashdev.com/person/${user.id}`,
+        },
+        {
+          type: "button",
+          text: `${target.user.name}'s profile`,
+          url: `https://jobs.nashdev.com/person/${target.user.id}`,
+        },
+        {
+          type: "button",
+          text: `About ${target.company.name}`,
+          style: "primary",
+          url: `https://jobs.nashdev.com/company/${target.company.id}`,
+        },
+      ];
+    }
+
+    if (type === "PERSON") {
+      profileType = "User Profile";
+      actions = [
+        {
+          type: "button",
+          text: `${user.name}'s profile`,
+          url: `https://jobs.nashdev.com/person/${user.id}`,
+        },
+        {
+          type: "button",
+          text: `${target.user.name}'s Profile`,
+          url: `https://jobs.nashdev.com/person/${target.user.id}`,
+        },
+      ];
+    }
+
+    if (type === "JOB") {
+      profileType = `job listing for "${target.job.title}"`;
+      actions = [
+        {
+          type: "button",
+          text: `${user.name}'s profile`,
+          url: `https://jobs.nashdev.com/person/${user.id}`,
+        },
+        {
+          type: "button",
+          text: `${target.user.name}'s profile`,
+          url: `https://jobs.nashdev.com/person/${target.user.id}`,
+        },
+        {
+          type: "button",
+          text: `Job Details`,
+          style: "primary",
+          url: `https://jobs.nashdev.com/job/${target.job.id}`,
+        },
+      ];
+    }
+
+    await this.client.chat.postMessage({
+      channel: dm.group.id,
+      text: `Hello <@${targetUserId}>! <@${userId}> sent you a message request via your *NashDev/Jobs* ${profileType}.`,
+      attachments: JSON.stringify([
+        {
+          title: "I've started a conversation with both of you. Good luck!",
+          text: "",
+          color: "#74c8ed",
+          actions,
+        },
+      ]),
+    });
+
+    return true;
+  };
+
   notify = async ({ job }) => {
     const {
       id: jobId,
