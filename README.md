@@ -27,14 +27,18 @@ _Note: This initial version was written as part of a live stream at NashJS (7/12
     npm install
     ```
 4.  Copy `.env.example` to `.env` and fill out the values.
+   
+5.  Ensure that your database is up and running.
 
-5.  Start the app
+6.  Run `./node_modules/.bin/knex migrate:latest` to migrate the tables needed for the project.
+
+7.  Start the app
 
     ```
     npm run start
     ```
 
-6.  Once you see `Express server listening on port 3000` in the console, you can View the running app at [http://localhost:3000](http://localhost:3000)
+8.  Once you see `Express server listening on port 3000` in the console, you can View the running app at [http://localhost:3000](http://localhost:3000)
 
 ## Testing
 
