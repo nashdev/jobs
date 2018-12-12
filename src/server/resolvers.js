@@ -138,6 +138,43 @@ const resolvers = {
     // Users
     updateUser: (parent, args, ctx) => UsersService.update(ctx, args),
     deleteUser: (parent, args, ctx) => UsersService.delete(ctx, args),
+
+    // Slack
+    slackMessage: async (parent, args, ctx) => {
+      const user = await UsersService.me(ctx, args);
+      let target;
+
+      if (args.type === "JOB") {
+        const job = await JobsService.load(ctx, args);
+        const targetUser = await UsersService.load(ctx, { id: job.userId });
+        target = {
+          job,
+          user: targetUser,
+        };
+      }
+
+      if (args.type === "COMPANY") {
+        const company = await CompaniesService.load(ctx, args);
+        const targetUser = await UsersService.load(ctx, { id: company.userId });
+        target = {
+          company,
+          user: targetUser,
+        };
+      }
+
+      if (args.type === "PERSON") {
+        const targetUser = await UsersService.load(ctx, args);
+        target = {
+          user: targetUser,
+        };
+      }
+
+      return SlackService.message({
+        user,
+        target,
+        args,
+      });
+    },
   },
 };
 

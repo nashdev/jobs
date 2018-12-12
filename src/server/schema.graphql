@@ -163,6 +163,12 @@ type PaginatedUser {
   entries: [User!]!
 }
 
+enum SlackMessageTarget {
+  COMPANY
+  PERSON
+  JOB
+}
+
 type Query {
   # Companies
   companies(cursor: String, limit: Int, filter: String): PaginatedCompany
@@ -195,4 +201,7 @@ type Mutation {
   # Users
   updateUser(user: EditUserInput): User
   deleteUser(id: ID!): User
+
+  # Slack
+  slackMessage(id: ID!, type: SlackMessageTarget!): Boolean
 }

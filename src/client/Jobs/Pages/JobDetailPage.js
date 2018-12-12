@@ -84,7 +84,7 @@ class JobDetailPage extends React.Component {
         </Helmet>
 
         <ProfileLayout
-          name={job.name}
+          name={job.title}
           createdAt={job.createdAt}
           shortDescription={job.short_description}
           description={job.description}
