@@ -36,6 +36,19 @@ _Note: This initial version was written as part of a live stream at NashJS (7/12
 
 6.  Once you see `Express server listening on port 3000` in the console, you can View the running app at [http://localhost:3000](http://localhost:3000)
 
+## Slack Bot Setup
+
+1. Create a new app https://api.slack.com/apps?new_app=1
+2. Create a bot user
+3. OAuth & Permissions — Scopes:
+   1. `chat:write:user`
+   2. `bot`
+   3. `users.profile:read`
+4. Update your .env file and replace with env vars with the values provided on the app page:
+   1. `SLACK_BOT_TOKEN=''`
+   2. `SLACK_CLIENT_ID=''`
+   3. `SLACK_CLIENT_SECRET=''`
+
 ## Testing
 
 ### Local:
