@@ -20,7 +20,8 @@
     "test": "node scripts/test.js --env=jsdom",
     "test:watch": "npm test --verbose -- --watch",
     "test:update": "npm test -- --updateSnapshot",
-    "test:ci": "npm test -- --updateSnapshot --ci"
+    "test:ci": "npm test -- --updateSnapshot --ci",
+    "setup": "node setup.js"
   },
   "lint-staged": {
     "*.js": [
