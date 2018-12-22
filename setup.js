@@ -1,16 +1,15 @@
 require("dotenv").config();
 require("knex");
 
-const { HOST, USERNAME, PASSWORD } = process.env;
-const DATABASE = "nashjobs";
+const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
 
 const knex = require("knex")({
   client: "pg",
   connection: {
-    host: HOST,
-    user: USERNAME,
-    password: PASSWORD,
-    database: DATABASE,
+    host: DB_HOST,
+    user: DB_USER,
+    password: DB_PASSWORD,
+    database: DB_NAME,
     charset: "utf8",
   },
 });
@@ -21,12 +20,12 @@ const log = (str) => {
 
 const dropDB = () => {
   log("dropping database");
-  knex.raw(`DROP DATABASE IF EXISTS ${DATABASE};`);
+  knex.raw(`DROP DATABASE IF EXISTS ${DB_NAME};`);
 };
 
 const createDB = () => {
   log("creating database");
-  knex.raw(`CREATE DATABASE ${DATABASE};`);
+  knex.raw(`CREATE DATABASE ${DB_NAME};`);
 };
 
 const migrateDB = () => {
@@ -34,7 +33,13 @@ const migrateDB = () => {
   knex.migrate.latest({ directory: "./src/server/database/_migrations" });
 };
 
+const isEnvFilePopulated = DB_NAME && DB_HOST && DB_PASSWORD && DB_USER;
+
 const run = () => {
+  if (!isEnvFilePopulated) {
+    log("no .env file found or missing required info");
+    process.exit(1);
+  }
   Promise.all([dropDB(), createDB(), migrateDB()]).then(() => {
     log("dev database set up");
     process.exit(0);
