@@ -1,4 +1,4 @@
-const Knex = require("knex")
+const Knex = require("knex");
 require("dotenv").config();
 
 const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } = process.env;

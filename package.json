@@ -21,7 +21,7 @@
     "test:watch": "npm test --verbose -- --watch",
     "test:update": "npm test -- --updateSnapshot",
     "test:ci": "npm test -- --updateSnapshot --ci",
-    "setup": "node setup.js"
+    "setup": "node scripts/setup.js"
   },
   "lint-staged": {
     "*.js": [
