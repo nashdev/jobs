@@ -1,29 +1,29 @@
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const babelLoader = {
   test: /\.(js|jsx)$/,
   exclude: /node_modules/,
-  loader: 'babel-loader',
+  loader: "babel-loader",
 };
 
 const cssLoaderClient = {
   test: /\.css$/,
   exclude: /node_modules/,
   use: [
-    'css-hot-loader',
+    "css-hot-loader",
     MiniCssExtractPlugin.loader,
     {
-      loader: 'css-loader',
+      loader: "css-loader",
       options: {
         camelCase: true,
         modules: true,
         importLoaders: 1,
         sourceMap: true,
-        localIdentName: '[name]__[local]--[hash:base64:5]',
+        localIdentName: "[name]__[local]--[hash:base64:5]",
       },
     },
     {
-      loader: 'postcss-loader',
+      loader: "postcss-loader",
       options: {
         sourceMap: true,
       },
@@ -36,16 +36,17 @@ const cssLoaderServer = {
   exclude: /node_modules/,
   use: [
     {
-      loader: 'css-loader/locals',
+      loader: "css-loader",
       options: {
+        exportOnlyLocals: true,
         camelCase: true,
         importLoaders: 1,
         modules: true,
-        localIdentName: '[name]__[local]--[hash:base64:5]',
+        localIdentName: "[name]__[local]--[hash:base64:5]",
       },
     },
     {
-      loader: 'postcss-loader',
+      loader: "postcss-loader",
       options: {
         sourceMap: true,
       },
@@ -55,10 +56,10 @@ const cssLoaderServer = {
 
 const urlLoaderClient = {
   test: /\.(png|jpe?g|gif|svg)$/,
-  loader: require.resolve('url-loader'),
+  loader: require.resolve("url-loader"),
   options: {
     limit: 2048,
-    name: '[name].[hash:8].[ext]',
+    name: "[name].[hash:8].[ext]",
   },
 };
 
@@ -74,9 +75,9 @@ const fileLoaderClient = {
   exclude: [/\.(js|css|mjs|html|json|ejs)$/],
   use: [
     {
-      loader: 'file-loader',
+      loader: "file-loader",
       options: {
-        name: '[name].[hash:8].[ext]',
+        name: "[name].[hash:8].[ext]",
       },
     },
   ],
@@ -86,9 +87,9 @@ const fileLoaderServer = {
   exclude: [/\.(js|css|mjs|html|json|ejs)$/],
   use: [
     {
-      loader: 'file-loader',
+      loader: "file-loader",
       options: {
-        name: '[name].[hash:8].[ext]',
+        name: "[name].[hash:8].[ext]",
         emitFile: false,
       },
     },
@@ -97,7 +98,7 @@ const fileLoaderServer = {
 
 const svgLoaderClient = {
   test: /\.svg$/,
-  loader: 'svg-inline-loader',
+  loader: "svg-inline-loader",
 };
 
 const svgLoaderServer = {
@@ -111,14 +112,17 @@ const svgLoaderServer = {
 const externalCssLoaderClient = {
   test: /\.css$/,
   include: /node_modules/,
-  use: [MiniCssExtractPlugin.loader, 'css-loader'],
+  use: [MiniCssExtractPlugin.loader, "css-loader"],
 };
 
 // Server build needs a loader to handle external .css files
 const externalCssLoaderServer = {
   test: /\.css$/,
   include: /node_modules/,
-  loader: 'css-loader/locals',
+  loader: "css-loader",
+  options: {
+    exportOnlyLocals: true,
+  },
 };
 
 const client = [
