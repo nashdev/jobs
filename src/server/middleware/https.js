@@ -1,7 +1,7 @@
 const shouldRedirect = (req) =>
   !req.secure &&
   req.get("x-forwarded-proto") !== "https" &&
-  process.env.NODE_ENV !== "development";
+  process.env.NODE_ENV === "production";
 
 export default (req, res, next) => {
   if (shouldRedirect) {
