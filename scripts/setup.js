@@ -1,4 +1,5 @@
 const Knex = require("knex");
+const Utils = require("./utils");
 require("dotenv").config();
 
 const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
@@ -19,8 +20,8 @@ const knexFactory = (opts = {}) => {
   return Knex(knexOpts);
 };
 
-const log = (str) => {
-  process.stderr.write(`${str} \n`);
+const log = (str, level = "info") => {
+  Utils.logMessage(str, level);
 };
 
 const dropDB = async (knex) => {
@@ -64,7 +65,8 @@ const run = async () => {
     log("dev database set up");
     process.exit(0);
   } catch (error) {
-    log("Error setting up db", error);
+    log("Error setting up db", "error");
+    log(error, "error");
     process.exit(1);
   }
 };
