@@ -20,6 +20,7 @@ import errorHandler from "./middleware/error";
 
 import serverRender from "./render";
 import paths from "../../config/paths";
+import ensureRequiredEnvVars from "./envCheck";
 
 require("dotenv").config();
 
@@ -97,6 +98,9 @@ app.get("/error", (req, res, next) => {
 app.get("/health-check", (req, res) => {
   res.json({ success: true });
 });
+
+// Throw if we are missing required environment variables
+ensureRequiredEnvVars(process.env);
 
 // Create the server
 const server = createServer(app);
