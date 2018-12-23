@@ -28,13 +28,19 @@ _Note: This initial version was written as part of a live stream at NashJS (7/12
     ```
 4.  Copy `.env.example` to `.env` and fill out the values.
 
-5.  Start the app
+5. Set up the development database
+
+    ```
+    npm run setup
+    ```
+
+6.  Start the app
 
     ```
     npm run start
     ```
 
-6.  Once you see `Express server listening on port 3000` in the console, you can View the running app at [http://localhost:3000](http://localhost:3000)
+7.  Once you see `Express server listening on port 3000` in the console, you can View the running app at [http://localhost:3000](http://localhost:3000)
 
 ## Slack Bot Setup
 
