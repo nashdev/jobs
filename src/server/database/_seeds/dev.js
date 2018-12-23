@@ -1,9 +1,14 @@
-
 exports.seed = (knex, Promise) => {
-  return Promise.all([
-    knex("users").del().then(),
-    knex("jobs").del().then(),
-    knex("companies").del().then(),
+  Promise.all([
+    knex("users")
+      .del()
+      .then(),
+    knex("jobs")
+      .del()
+      .then(),
+    knex("companies")
+      .del()
+      .then(),
     knex("users").insert([
       {
         id: 1,
