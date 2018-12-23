@@ -1,49 +1,72 @@
+const Knex = require("knex")
 require("dotenv").config();
-require("knex");
 
 const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
 
-const knex = require("knex")({
-  client: "pg",
-  connection: {
-    host: DB_HOST,
-    user: DB_USER,
-    password: DB_PASSWORD,
-    database: DB_NAME,
-    charset: "utf8",
-  },
-});
+const knexFactory = (opts = {}) => {
+  const dbName = opts.dbName || "postgres";
+  const knexOpts = {
+    client: "pg",
+    connection: {
+      host: DB_HOST,
+      user: DB_USER,
+      password: DB_PASSWORD,
+      database: dbName,
+      charset: "utf8",
+    },
+  };
+
+  return Knex(knexOpts);
+};
 
 const log = (str) => {
   process.stderr.write(`${str} \n`);
 };
 
-const dropDB = () => {
+const dropDB = async (knex) => {
   log("dropping database");
-  knex.raw(`DROP DATABASE IF EXISTS ${DB_NAME};`);
+  await knex.raw(`DROP DATABASE IF EXISTS ${DB_NAME};`);
 };
 
-const createDB = () => {
+const createDB = async (knex) => {
   log("creating database");
-  knex.raw(`CREATE DATABASE ${DB_NAME};`);
+  await knex.raw(`CREATE DATABASE ${DB_NAME};`);
 };
 
-const migrateDB = () => {
+const migrateDB = async (knex) => {
   log("migrating database");
-  knex.migrate.latest({ directory: "./src/server/database/_migrations" });
+  await knex.migrate.latest({ directory: "./src/server/database/_migrations" });
+};
+
+const resetDB = async () => {
+  const knex = knexFactory();
+  await dropDB(knex);
+  await createDB(knex);
+  knex.destroy();
+};
+
+const primeDB = async () => {
+  const knex = knexFactory({ dbName: DB_NAME });
+  await migrateDB(knex);
 };
 
 const isEnvFilePopulated = DB_NAME && DB_HOST && DB_PASSWORD && DB_USER;
 
-const run = () => {
+const run = async () => {
   if (!isEnvFilePopulated) {
     log("no .env file found or missing required info");
     process.exit(1);
   }
-  Promise.all([dropDB(), createDB(), migrateDB()]).then(() => {
+
+  try {
+    await resetDB();
+    await primeDB();
     log("dev database set up");
     process.exit(0);
-  });
+  } catch (error) {
+    log("Error setting up db", error);
+    process.exit(1);
+  }
 };
 
 run();
