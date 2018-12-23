@@ -42,6 +42,11 @@ const migrateDB = async (knex) => {
   await knex.migrate.latest({ directory: "./src/server/database/_migrations" });
 };
 
+const seedDB = async (knex) => {
+  log("seeding database");
+  await knex.seed.run({ directory: "./src/server/database/_seeds" });
+};
+
 const resetDB = async () => {
   const knex = knexFactory();
   await dropDB(knex);
@@ -52,6 +57,7 @@ const resetDB = async () => {
 const primeDB = async () => {
   const knex = knexFactory({ dbName: DB_NAME });
   await migrateDB(knex);
+  await seedDB(knex);
 };
 
 const isEnvFilePopulated = DB_NAME && DB_HOST && DB_PASSWORD && DB_USER;
