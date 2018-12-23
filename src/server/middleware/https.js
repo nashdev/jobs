@@ -4,7 +4,7 @@ const shouldRedirect = (req) =>
   process.env.NODE_ENV === "production";
 
 export default (req, res, next) => {
-  if (shouldRedirect) {
+  if (shouldRedirect(req)) {
     return res.redirect(`https://${req.get("host")}${req.url}`);
   }
   return next();
