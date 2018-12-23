@@ -23,6 +23,10 @@ const log = (str, level = "info") => {
   Utils.logMessage(str, level);
 };
 
+const logError = (str) => {
+  log(str, "error");
+};
+
 const dropDB = async (knex) => {
   log("dropping database");
   await knex.raw(`DROP DATABASE IF EXISTS ${DB_NAME};`);
@@ -54,7 +58,7 @@ const isEnvFilePopulated = DB_NAME && DB_HOST && DB_PASSWORD && DB_USER;
 
 const run = async () => {
   if (!isEnvFilePopulated) {
-    log("no .env file found or missing required info");
+    logError("no .env file found or missing required info");
     process.exit(1);
   }
 
@@ -64,8 +68,8 @@ const run = async () => {
     log("dev database set up");
     process.exit(0);
   } catch (error) {
-    log("Error setting up db", "error");
-    log(error, "error");
+    logError("Error setting up db");
+    logError(error);
     process.exit(1);
   }
 };
