@@ -4,8 +4,7 @@ require("dotenv").config();
 
 const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
 
-const knexFactory = (opts = {}) => {
-  const dbName = opts.dbName || "postgres";
+const knexFactory = ({ dbName = "postgres" } = {}) => {
   const knexOpts = {
     client: "pg",
     connection: {
