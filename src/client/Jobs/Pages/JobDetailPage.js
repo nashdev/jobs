@@ -98,7 +98,7 @@ class JobDetailPage extends React.Component {
           </ProfileLayout.Position>
 
           <ProfileLayout.Position position="sidebar">
-            <CompanyProfileCard {...job.company} />
+            <CompanyProfileCard {...job.company} applyLink={job.website} />
 
             <section
               className="field is-grouped is-grouped-multiline"
@@ -188,6 +188,7 @@ const USER_QUERY = gql`
       remote
       recruiter
       recruiterAgency
+      website
       user {
         id
         name

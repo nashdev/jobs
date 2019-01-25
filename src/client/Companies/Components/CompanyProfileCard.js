@@ -14,6 +14,8 @@ const CompanyProfileCard = ({
   linkedin,
   github,
   facebook,
+  applyLink = null,
+  allowSlackMessage = false,
 }) => (
   <div className={s.container}>
     <Avatar name={name} src={null} size={128} round className={s.avatar} />
@@ -24,15 +26,41 @@ const CompanyProfileCard = ({
     <span className={s.location}>{location}</span>
     <p className={s.description}>{short_description}</p>
 
-    <p className={s.message}>
-      <a className="button">
-        <span className={cn("icon", s.icon)}>
-          <i className="fab fa-slack" />
-        </span>
+    {allowSlackMessage && (
+      <p className={s.message}>
+        <a
+          className="button"
+          href="/"
+          onClick={(e) => {
+            e.preventDefault();
+            alert("This will be implemented soon. Check back again later.");
+          }}
+        >
+          <span className={cn("icon", s.icon)}>
+            <i className="fab fa-slack" />
+          </span>
 
-        <span>Message on Slack</span>
-      </a>
-    </p>
+          <span>Message on Slack</span>
+        </a>
+      </p>
+    )}
+
+    {applyLink && (
+      <p className={s.message}>
+        <a
+          className="button"
+          href={applyLink}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span className={cn("icon", s.icon)}>
+            <i className="fas fa-file-contract" />
+          </span>
+
+          <span>Apply</span>
+        </a>
+      </p>
+    )}
 
     <div className={s.social}>
       {[
