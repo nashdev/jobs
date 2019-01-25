@@ -5,6 +5,7 @@ import cors from "cors";
 import path from "path";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
+import https from "./middleware/https";
 
 import {
   errorHandler as jwtErrorHandler,
@@ -19,6 +20,7 @@ import errorHandler from "./middleware/error";
 
 import serverRender from "./render";
 import paths from "../../config/paths";
+import ensureRequiredEnvVars from "./envCheck";
 
 require("dotenv").config();
 
@@ -29,6 +31,9 @@ const app = express();
  * Define our middleware.
  *
  */
+
+// Redirect all non-HTTPS request to HTTPS unless development mode
+app.use(https);
 
 // Enable CORs
 app.use(cors());
@@ -93,6 +98,9 @@ app.get("/error", (req, res, next) => {
 app.get("/health-check", (req, res) => {
   res.json({ success: true });
 });
+
+// Throw if we are missing required environment variables
+ensureRequiredEnvVars(process.env);
 
 // Create the server
 const server = createServer(app);

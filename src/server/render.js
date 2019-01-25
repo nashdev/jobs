@@ -11,10 +11,13 @@ import Layout from "../shared/components/Layout/Layout";
 import createFetch from "../shared/utils/createFetch";
 import Html from "./components/HTML";
 
+const baseFetchURL =
+  process.env.API_HOST || `http://127.0.0.1:${process.env.PORT || 3000}`;
+
 const serverRenderer = () => (req, res, next) => {
   try {
     const fetch = createFetch(nodeFetch, {
-      baseUrl: `http://127.0.0.1:${process.env.PORT || 3000}`,
+      baseUrl: baseFetchURL,
       cookie: req.headers.cookie,
     });
 
