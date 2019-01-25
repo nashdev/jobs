@@ -114,6 +114,7 @@ class SlackService {
       recruiter,
       salary,
       remote,
+      website,
       short_description: shortJobDescription,
     } = job;
 
@@ -174,9 +175,14 @@ class SlackService {
               },
               {
                 type: "button",
+                text: `Job Details`,
+                url: `https://jobs.nashdev.com/job/${jobId}`,
+              },
+              {
+                type: "button",
                 text: `Apply`,
                 style: "primary",
-                url: `https://jobs.nashdev.com/job/${jobId}`,
+                url: website || `https://jobs.nashdev.com/job/${jobId}`,
               },
             ],
           },
