@@ -105,7 +105,7 @@
     "js-cookie": "^2.2.0",
     "jsonwebtoken": "^8.4.0",
     "knex": "^0.16.3",
-    "lint-staged": "^7.2.0",
+    "lint-staged": "^8.1.4",
     "mini-css-extract-plugin": "^0.4.1",
     "moment": "^2.22.2",
     "node-fetch": "^2.2.0",
