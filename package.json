@@ -138,7 +138,7 @@
     "react-placeholder": "^3.0.1",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-waypoint": "^8.1.0",
+    "react-waypoint": "^9.0.0",
     "regenerator-runtime": "^0.12.1",
     "rimraf": "^2.6.2",
     "stats-webpack-plugin": "^0.7.0",
