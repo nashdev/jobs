@@ -1,4 +1,5 @@
 import { WebClient } from "@slack/client";
+import { fallbackHttpConfig } from "apollo-link-http-common";
 import CompaniesRepository from "../repositories/companies";
 import UsersRepository from "../repositories/users";
 
@@ -131,62 +132,118 @@ class SlackService {
     } = await CompaniesRepository.getById(companyId);
 
     try {
-      return await this.client.chat.postMessage({
+      await this.client.chat.postMessage({
         channel: this.channel,
-        link_names: true,
-        text: `<@${slackId}> posted a new job on Nashdev/Jobs.`,
-        attachments: JSON.stringify([
+        blocks: [
           {
-            title,
-            text: shortJobDescription,
-            color: "#74c8ed",
-            fields: [
+            type: "section",
+            text: {
+              type: "plain_text",
+              text: "A new job was posted on jobs.nashdev.com",
+            },
+          },
+          {
+            type: "context",
+            elements: [
               {
-                title: "Job Type",
-                value: FILTER_MAP[type],
-                short: true,
-              },
-              {
-                title: "Salary",
-                value: salary,
-                short: true,
-              },
-              {
-                title: "Remote Available",
-                value: remote ? "Yes" : "No",
-                short: true,
-              },
-              {
-                title: "Using Recruiter",
-                value: recruiter ? "Yes" : "No",
-                short: true,
+                type: "mrkdwn",
+                text: `Added by <@${slackId}>`,
               },
             ],
           },
           {
-            title: `About ${name}`,
-            text: shortCompanyDescription,
-            color: "#3060f0",
-            actions: [
+            type: "divider",
+          },
+          {
+            type: "section",
+            text: {
+              type: "mrkdwn",
+              text: `*<https://jobs.nashdev.com/job/${jobId}|${title}>*\n${name}`,
+            },
+            accessory: {
+              type: "button",
+              text: {
+                type: "plain_text",
+                text: "Apply",
+              },
+              url: `https://jobs.nashdev.com/job/${jobId}`,
+            },
+          },
+
+          {
+            type: "divider",
+          },
+          {
+            type: "section",
+            fields: [
+              {
+                type: "mrkdwn",
+                text: `*Job Type:*\n${FILTER_MAP[type]}`,
+              },
+              {
+                type: "mrkdwn",
+                text: `*Remote Available:*\n${remote ? "Yes" : "No"}`,
+              },
+              {
+                type: "mrkdwn",
+                text: `*Salary:*\n${salary}`,
+              },
+              {
+                type: "mrkdwn",
+                text: `*Using Recruiter:*\n${recruiter ? "Yes" : "No"}`,
+              },
+            ],
+          },
+          {
+            type: "divider",
+          },
+          {
+            type: "section",
+            text: {
+              type: "mrkdwn",
+              text: `*Job Details:*\n${shortJobDescription}`,
+            },
+          },
+          {
+            type: "section",
+            text: {
+              type: "mrkdwn",
+              text: `*About ${name}:*\n${shortCompanyDescription}`,
+            },
+          },
+          {
+            type: "divider",
+          },
+          {
+            type: "actions",
+            elements: [
               {
                 type: "button",
-                text: `Learn more about ${name}`,
+                text: {
+                  type: "plain_text",
+                  text: `About ${name}`,
+                },
                 url: `https://jobs.nashdev.com/company/${companyId}`,
               },
               {
                 type: "button",
-                text: `Job Details`,
+                text: {
+                  type: "plain_text",
+                  text: "Learn More",
+                },
                 url: `https://jobs.nashdev.com/job/${jobId}`,
               },
               {
                 type: "button",
-                text: `Apply`,
-                style: "primary",
+                text: {
+                  type: "plain_text",
+                  text: "Apply",
+                },
                 url: website || `https://jobs.nashdev.com/job/${jobId}`,
               },
             ],
           },
-        ]),
+        ],
       });
     } catch (error) {
       console.error("Error sending slack message", error);
