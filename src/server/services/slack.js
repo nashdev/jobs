@@ -208,7 +208,7 @@ class SlackService {
             type: "section",
             text: {
               type: "mrkdwn",
-              text: `*About ${name}:*\n${shortCompanyDescription}`,
+              text: `*About ${name}:*\n${shortCompanyDescription || "N/A"}`,
             },
           },
           {
