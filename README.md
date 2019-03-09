@@ -46,7 +46,7 @@ _Note: This initial version was written as part of a live stream at NashJS (7/12
 
 1. Create a new app https://api.slack.com/apps?new_app=1
 2. Create a bot user
-3. Add the following permissions to the Features > OAuth & Permissions — Scopes section on your created Slack app:
+3. Go to the Features > OAuth & Permissions section, scroll down to "Scopes", and copy and paste each of the following permissions, one at a time, into the "Select Permission Scopes" field.  The related permission should then be highlighted for you to select and add:
    1. `chat:write:user`
    2. `bot`
    3. `users.profile:read`
