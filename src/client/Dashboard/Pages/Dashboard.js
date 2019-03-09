@@ -1,10 +1,9 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { Query, Mutation, ApolloConsumer } from "react-apollo";
-import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import gql from "graphql-tag";
-import cn from "classnames";
+// import cn from "classnames";
 import Helmet from "react-helmet";
 
 import s from "./Dashboard.css";
