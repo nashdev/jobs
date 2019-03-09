@@ -61,6 +61,13 @@ _Note: This initial version was written as part of a live stream at NashJS (7/12
 
 Simply run `npm test` and all your tests in the `test/` directory will be run.
 
+## Contributions
+
+If you would like to contribute, you can check out all open issues/feature requests or submit your own on our [issues](https://github.com/nashdev/jobs/issues) page (look for "enhancement" and "help wanted" labels). If you find an issue you would like to work on, you can complete the following steps to submit a pull request:
+1. Fork the repository
+2. Complete feature inside forked repository
+3. Submit pull request to our `master` branch
+
 ## Changelog
 
 **0.0.1**
