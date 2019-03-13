@@ -28,8 +28,6 @@ _Note: This initial version was written as part of a live stream at NashJS (7/12
     ```
 4.  Copy `.env.example` to `.env` and fill out the values.
    
-5.  Ensure that your database is up and running.
-
 5. Set up the development database
 
     ```
