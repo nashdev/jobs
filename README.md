@@ -44,22 +44,29 @@ _Note: This initial version was written as part of a live stream at NashJS (7/12
 
 ## Slack Bot Setup
 
-1. Create a new app https://api.slack.com/apps?new_app=1
-2. Create a bot user
-3. OAuth & Permissions — Scopes:
+1. Create a new app by navigating to https://api.slack.com/apps?new_app=1.  You will need to log in to one of your Slack Workspaces so that the app can be added to it, and, if possible, you should choose one where you are an Owner or Admin, as you will have to approve the app being attached to that Workspace.
+2. Create a Bot User by going to "Features > Bot Users" and entering a display name and default username and then saving.
+3. Go to the "Features > OAuth & Permissions" section, scroll down to "Scopes", and copy and paste each of the following permissions, one at a time, into the "Select Permission Scopes" field.  The related permission should then be highlighted for you to select and add to your list of Scopes:
    1. `chat:write:user`
    2. `bot`
    3. `users.profile:read`
-4. Update your .env file and replace with env vars with the values provided on the app page:
-   1. `SLACK_BOT_TOKEN=''`
-   2. `SLACK_CLIENT_ID=''`
-   3. `SLACK_CLIENT_SECRET=''`
+4. Update the following values in your .env file with the newly generated values now provided on the indicated pages of your new Slack app:
+   1. `SLACK_BOT_TOKEN=''` ("OAuth & Permissions")
+   2. `SLACK_CLIENT_ID=''` ("Basic Information")
+   3. `SLACK_CLIENT_SECRET=''` ("Basic Information")
 
 ## Testing
 
 ### Local:
 
 Simply run `npm test` and all your tests in the `test/` directory will be run.
+
+## Contributions
+
+If you would like to contribute, you can check out all open issues/feature requests or submit your own on our [Issues](https://github.com/nashdev/jobs/issues) page (look for "enhancement" and "help wanted" labels). If you find an issue you would like to work on, you can complete the following steps to submit a pull request:
+1. Fork the repository
+2. Add any code changes inside the forked repository
+3. Submit pull request to our `master` branch
 
 ## Changelog
 
