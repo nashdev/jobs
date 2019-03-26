@@ -99,7 +99,7 @@ const CompanyProfileCard = ({
               rel="noopener noreferrer"
               onClick={(e) => {
                 e.preventDefault();
-                alert("This will be implemented soon. Check back again later.");
+                window.open(link, "_blank");
               }}
             >
               <span>@{handle}</span>
