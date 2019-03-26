@@ -93,15 +93,7 @@ const CompanyProfileCard = ({
             <span className={cn("icon", s.icon)}>
               <i className={cn("fab", [`fa-${name}`])} />
             </span>
-            <a
-              className={s.handle}
-              href={link}
-              rel="noopener noreferrer"
-              onClick={(e) => {
-                e.preventDefault();
-                window.open(link, "_blank");
-              }}
-            >
+            <a className={s.handle} href={link} rel="noopener noreferrer" target="_blank">
               <span>@{handle}</span>
             </a>
           </p>
