@@ -42,18 +42,28 @@ _Note: This initial version was written as part of a live stream at NashJS (7/12
 
 7.  Once you see `Express server listening on port 3000` in the console, you can View the running app at [http://localhost:3000](http://localhost:3000)
 
-## Slack Bot Setup
+## Slack Integration
 
 1. Create a new app by navigating to https://api.slack.com/apps?new_app=1.  You will need to log in to one of your Slack Workspaces so that the app can be added to it, and, if possible, you should choose one where you are an Owner or Admin, as you will have to approve the app being attached to that Workspace.
-2. Create a Bot User by going to "Features > Bot Users" and entering a display name and default username and then saving.
-3. Go to the "Features > OAuth & Permissions" section, scroll down to "Scopes", and copy and paste each of the following permissions, one at a time, into the "Select Permission Scopes" field.  The related permission should then be highlighted for you to select and add to your list of Scopes:
+2. Click on 'Basic Information' and add the 'Client ID' and 'Client Secret' to the `.env` file.
+    1. `SLACK_CLIENT_ID=''` ("Basic Information > Client ID")
+    2. `SLACK_CLIENT_SECRET=''` ("Basic Information > Client Secret")
+
+#### Slack OAuth Setup
+
+1. Go to the "Features > OAuth & Permissions" and click "Add New Redirect URLs".
+2. Add the value `http://localhost:3000/slack/auth` as a redirect URL.
+
+#### Slack Bot Setup
+
+1. Create a Bot User by going to "Features > Bot Users" and entering a display name and default username and then saving.
+2. Go to the "Features > OAuth & Permissions" section, click "Install App to Workplace".
+2. Next, scroll down to "Scopes", and copy and paste each of the following permissions, one at a time, into the "Select Permission Scopes" field.  The related permission should then be highlighted for you to select and add to your list of Scopes:
    1. `chat:write:user`
    2. `bot`
    3. `users.profile:read`
-4. Update the following values in your .env file with the newly generated values now provided on the indicated pages of your new Slack app:
-   1. `SLACK_BOT_TOKEN=''` ("OAuth & Permissions")
-   2. `SLACK_CLIENT_ID=''` ("Basic Information")
-   3. `SLACK_CLIENT_SECRET=''` ("Basic Information")
+3. Update the SLACK_BOT_TOKEN in your .env file with the newly generated values now provided on the indicated pages of your new Slack app:
+   1. `SLACK_BOT_TOKEN=''` ("OAuth & Permissions > Bot User OAuth Access Token")
 
 ## Testing
 
