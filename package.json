@@ -114,7 +114,7 @@
     "postcss-apply": "^0.11.0",
     "postcss-assets": "^5.0.0",
     "postcss-calc": "^6.0.1",
-    "postcss-custom-media": "^7.0.4",
+    "postcss-custom-media": "7.0.7",
     "postcss-custom-properties": "^8.0.8",
     "postcss-flexbugs-fixes": "^4.1.0",
     "postcss-import": "^12.0.0",
