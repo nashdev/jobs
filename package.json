@@ -119,7 +119,7 @@
     "postcss-flexbugs-fixes": "^4.1.0",
     "postcss-import": "^12.0.0",
     "postcss-loader": "^3.0.0",
-    "postcss-normalize": "^7.0.1",
+    "postcss-normalize": "^8.0.1",
     "prettier": "^1.14.0",
     "prettier-eslint-cli": "^4.7.1",
     "prettier-stylelint": "^0.4.2",
