@@ -139,7 +139,7 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-waypoint": "^8.1.0",
-    "regenerator-runtime": "^0.12.1",
+    "regenerator-runtime": "^0.13.3",
     "rimraf": "^2.6.2",
     "stats-webpack-plugin": "^0.7.0",
     "stylelint": "^9.5.0",
