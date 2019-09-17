@@ -69,7 +69,7 @@
     "compression": "^1.7.3",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
-    "cross-env": "^5.2.0",
+    "cross-env": "^6.0.0",
     "css-hot-loader": "^1.4.1",
     "css-loader": "^2.0.1",
     "dataloader": "^1.4.0",
