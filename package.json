@@ -64,7 +64,7 @@
     "babel-plugin-inline-react-svg": "^1.0.0",
     "body-parser": "^1.18.3",
     "body-parser-graphql": "^1.1.0",
-    "chalk": "^2.4.1",
+    "chalk": "^3.0.0",
     "classnames": "^2.2.6",
     "compression": "^1.7.3",
     "cookie-parser": "^1.4.3",
