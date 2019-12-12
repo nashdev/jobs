@@ -71,7 +71,7 @@
     "cors": "^2.8.4",
     "cross-env": "^5.2.0",
     "css-hot-loader": "^1.4.1",
-    "css-loader": "^2.0.1",
+    "css-loader": "^3.3.2",
     "dataloader": "^1.4.0",
     "dotenv": "^6.0.0",
     "dotenv-webpack": "^1.5.7",
