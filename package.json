@@ -127,7 +127,7 @@
     "prop-types": "^15.6.2",
     "query-string": "^6.2.0",
     "react": "^16.5.0",
-    "react-apollo": "^2.3.2",
+    "react-apollo": "^3.1.4",
     "react-avatar": "^3.4.6",
     "react-dev-utils": "^7.0.0",
     "react-dom": "^16.5.0",
