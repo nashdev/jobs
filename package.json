@@ -95,7 +95,7 @@
     "graphql": "^14.0.2",
     "graphql-import": "^0.7.1",
     "graphql-iso-date": "^3.6.1",
-    "graphql-playground-middleware-express": "^1.7.8",
+    "graphql-playground-middleware-express": "^1.7.13",
     "graphql-tag": "^2.10.0",
     "graphql-tools": "^4.0.3",
     "heroku-ssl-redirect": "0.0.4",
