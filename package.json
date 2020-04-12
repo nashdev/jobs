@@ -125,7 +125,7 @@
     "prettier-stylelint": "^0.4.2",
     "pretty-error": "^2.1.1",
     "prop-types": "^15.6.2",
-    "query-string": "^6.2.0",
+    "query-string": "^6.12.1",
     "react": "^16.5.0",
     "react-apollo": "^2.3.2",
     "react-avatar": "^3.4.6",
