@@ -128,7 +128,7 @@
     "query-string": "^6.2.0",
     "react": "^16.5.0",
     "react-apollo": "^2.3.2",
-    "react-avatar": "^3.4.6",
+    "react-avatar": "^3.9.3",
     "react-dev-utils": "^7.0.0",
     "react-dom": "^16.5.0",
     "react-ga": "^2.5.6",
