@@ -74,7 +74,7 @@
     "css-loader": "^2.0.1",
     "dataloader": "^1.4.0",
     "dotenv": "^6.0.0",
-    "dotenv-webpack": "^1.5.7",
+    "dotenv-webpack": "^1.8.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.6.0",
     "eslint": "^5.6.0",
