@@ -109,7 +109,7 @@
     "mini-css-extract-plugin": "^0.4.1",
     "moment": "^2.22.2",
     "node-fetch": "^2.2.0",
-    "nodemon": "^1.18.7",
+    "nodemon": "^2.0.4",
     "pg": "^7.6.1",
     "postcss-apply": "^0.11.0",
     "postcss-assets": "^5.0.0",
