@@ -142,7 +142,7 @@
     "regenerator-runtime": "^0.12.1",
     "rimraf": "^2.6.2",
     "stats-webpack-plugin": "^0.7.0",
-    "stylelint": "^9.5.0",
+    "stylelint": "^13.5.0",
     "stylelint-config-standard": "^18.2.0",
     "svg-inline-loader": "^0.8.0",
     "url-loader": "^1.0.1",
