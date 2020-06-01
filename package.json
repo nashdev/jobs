@@ -135,7 +135,7 @@
     "react-helmet": "^5.2.0",
     "react-markdown-renderer": "^1.4.0",
     "react-modal": "^3.6.1",
-    "react-placeholder": "^3.0.1",
+    "react-placeholder": "^4.0.2",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-waypoint": "^8.1.0",
